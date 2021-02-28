@@ -19,6 +19,8 @@ First, install `mackup` with [homebrew](https://github.com/Homebrew/brew).
 brew install mackup
 ```
 
+Then you can clone the repository and set mackup up to symlink local files to this repository folder.
+
 ```sh
 git clone https://github.com/martinbjeldbak/dotfiles.git
 mackup restore
