@@ -1,0 +1,74 @@
+# Shortcuts
+alias gs="g s"
+alias ls='lsd'
+
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
+# Get week number
+alias week='date +%V'
+
+# IP addresses
+alias whatismyip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en0"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# View HTTP traffic
+# alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+# alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+
+# OS X has no `md5sum`, so use `md5` as a fallback
+command -v md5sum > /dev/null || alias md5sum="md5"
+
+# OS X has no `sha1sum`, so use `shasum` as a fallback
+command -v sha1sum > /dev/null || alias sha1sum="shasum"
+
+# Get shasum 256
+alias sha256="shasum -a 256"
+
+# Empty the Trash on all mounted volumes and the main HDD
+# Also, clear Apple’s System Logs to improve shell startup speed
+alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+
+# Lock the screen (when going AFK)
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+# Make rake work with zsh
+#alias rake="noglob rake"
+#alias mvim='mvim --remote-silent'
+alias vim='nvim'
+#alias archey='archey -c'
+#alias bx='bundle exec'
+#alias hist='history  | grep -m 10'
+#alias top='htop'
+
+pygmentizeHTML() {
+  pygmentize -O full -f html $1 > "$1".html
+}
+alias pygmentizeHTML=pygmentizeHTML
+
+dotPNG() {
+  dot -Tpng $1.dot -o $1.png
+}
+alias dotPNG=dotPNG
+
+tarFolder() {
+  tar -zcf $1.tar.gz "$1"
+}
+alias tarFolder=tarFolder
+
+alias bne='curl wttr.in/brisbane'
+# alias cat='bat'
+alias ping='prettyping --nolegend'
+
+# eval `gdircolors ~/.solarized-dark.dircolors`
+# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+alias ls='gls --color=auto --group-directories-first'
+
+# ZSH online help
+# unalias run-help
+# alias run-help
+# HELPDIR=/usr/local/share/zsh/help
+
+# https://github.com/pyenv/pyenv/issues/106
+alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
