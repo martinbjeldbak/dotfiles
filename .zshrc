@@ -31,16 +31,12 @@ export LANG=en_AU.UTF-8
 
 export EDITOR='vim'
 
-path+=('/Users/madsenm1/Library/Python/3.8/bin')
-export PATH
-
-export http_proxy="localhost:3128"
-export https_proxy="localhost:3128"
-
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source $HOME/Library/Python/3.8/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
+
+source .aliases
 
 alias vim=nvim
 alias cat=bat

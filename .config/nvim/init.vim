@@ -131,3 +131,9 @@ nnoremap <C-b>     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
 nnoremap <C-p>     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
 nnoremap <Leader>m    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
 xnoremap <Leader>m "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
