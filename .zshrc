@@ -1,102 +1,69 @@
-#uzmodload zsh/zprof
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
-source ~/.aliases
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="agnoster"
 
-# Git credentials
-GIT_AUTHOR_NAME="Martin Bjeldbak Madsen"
-GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
-GIT_AUTHOR_EMAIL="me@martinbjeldbak.com"
-GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
 
-git config --global user.name "$GIT_AUTHOR_NAME"
-git config --global user.email "$GIT_AUTHOR_EMAIL"
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
 
-export EDITOR='nvim'
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+source $ZSH/oh-my-zsh.sh
 
+# User configuration
 
-# Fix C-h binding for tmux and vim-tmux-navigator
-# https://github.com/christoomey/vim-tmux-navigator/issues/61
-# infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
-# tic $TERM.ti
+# You may need to manually set your language environment
+export LANG=en_AU.UTF-8
 
-# Load zplug
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
+export EDITOR='vim'
 
-# Load various lib files
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "plugins/colored-man-pages", from:oh-my-zsh, defer:3
-zplug "plugins/zsh-agent", from:oh-my-zsh
+path+=('/Users/madsenm1/Library/Python/3.8/bin')
+export PATH
 
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/colorize", from:oh-my-zsh
+export http_proxy="localhost:3128"
+export https_proxy="localhost:3128"
 
-# Ruby
-zplug "plugins/rbenv", from:oh-my-zsh
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source $HOME/Library/Python/3.8/bin/virtualenvwrapper.sh
 
-# Python
-zplug "plugins/pyenv", from:oh-my-zsh
-
-eval "$(pyenv virtualenv-init -)"
-
-# Node
-
-zplug "lukechilds/zsh-nvm"
-zplug "plugins/ssh-agent", from:oh-my-zsh
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-history-substring-search"
-
-# OS specific plugins
-# CURRENT_OS=`uname`
-# if [[ $CURRENT_OS == 'Darwin' ]]; then
-  zplug "lib/*", from:oh-my-zsh
-#fi
-
-# zsh-syntax-highlighting must be the last plugin sourced
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
-
-# Zsh theme
-#zplug mafredri/zsh-async, from:github, defer:0
-#zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
-zplug romkatv/powerlevel10k, use:powerlevel10k.zsh-theme
-
-zplug load
-
-# added by travis gem
-[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export PATH="/usr/local/sbin:$PATH"
-export PATH="$PATH:/Users/martin/.dotnet/tools"
-export PATH="/Users/martin/.ebcli-virtual-env/executables:$PATH"
+alias vim=nvim
+alias cat=bat
+alias gs='git status'
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-export SSH_AUTH_SOCK=/Users/martin/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+export FZF_DEFAULT_COMMAND='fd --type f'
+# Fzf Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
 
-# eval "$(direnv hook zsh)"
-# eval "$(gpg-agent --daemon)"
-eval "$(pipenv --completion)"
+# Fzf Key bindings
+# ------------
+source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 
+# Support switching JDK versions https://github.com/AdoptOpenJDK/homebrew-openjdk#switch-between-different-jdk-versions
+jdk() {
+        version=$1
+        export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+        java -version
+ }
 
-# zprof
-
-# To customize prompt, run `p9k_configure` or edit ~/.p10k.zsh.
-source ~/.p10k.zsh
-
-source <(navi widget zsh)
-
-# Google Cloud Platform sourcing
-# source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-# source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
-
-ulimit -S -n 2048
+export JAVA_HOME=$(/usr/libexec/java_home -v"1.8");
