@@ -9,13 +9,17 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdcommenter'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'elzr/vim-json'
+Plug 'vim-test/vim-test'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
+Plug 'tpope/vim-commentary'
 
 " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
@@ -132,8 +136,19 @@ nnoremap <C-p>     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR
 nnoremap <Leader>m    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
 xnoremap <Leader>m "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
 
+let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --no-messages -g \!"* *"'
+
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" Neoterm and vim-test
+let test#strategy = "neovim" "neoterm
+map <leader>a :w<CR>:TestSuite<CR>
+map <leader>f :w<CR>:TestFile<CR>
+map <leader>r :w<CR>:TestNearest<CR>
+map <leader>l :w<CR>:TestLast<CR>
+map <leader>v :w<CR>:TestVisit<CR>
+
