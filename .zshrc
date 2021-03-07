@@ -47,6 +47,10 @@ source $HOME/.aliases
 
 alias vim=nvim
 alias cat=bat
+
+# See https://github.com/yuki-yano/fzf-preview.vim
+$FZF_PREVIEW_PREVIEW_BAT_THEME = 'Solarized (dark)'
+
 alias gs='git status'
 
 export NVM_DIR="$HOME/.nvm"
