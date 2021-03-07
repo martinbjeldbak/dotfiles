@@ -136,8 +136,11 @@ nnoremap <C-p>     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR
 nnoremap <Leader>m    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
 xnoremap <Leader>m "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
 
-let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --no-messages -g \!"* *"'
+let g:fzf_preview_filelist_command = 'rg --files --ignore-case --hidden --follow --no-messages -g \!"* *"'
+let g:fzf_preview_command = 'bat --color=always --plain {-1}'
 
+" Use vim-devicons
+let g:fzf_preview_use_dev_icons = 1
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -152,3 +155,6 @@ map <leader>r :w<CR>:TestNearest<CR>
 map <leader>l :w<CR>:TestLast<CR>
 map <leader>v :w<CR>:TestVisit<CR>
 
+" https://github.com/neoclide/coc.nvim/issues/617
+" disable mapping to not break coc.nvim (I don't even use them anyways)
+let g:endwise_no_mappings = 1
