@@ -12,6 +12,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line if you want to change the command execution time
@@ -38,10 +39,13 @@ export LANG=en_AU.UTF-8
 
 export EDITOR='nvim'
 
+path+=('$HOME/Library/Python/3.8/bin')
+export PATH
+
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source $HOME/Library/Python/3.8/bin/virtualenvwrapper.sh
 
 source $HOME/.aliases
 
@@ -70,7 +74,7 @@ jdk() {
 
 export JAVA_HOME=$(/usr/libexec/java_home -v"1.8");
 
-eval "$(rbenv init -)"
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+eval "$(rbenv init -)"
