@@ -36,7 +36,7 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 export LANG=en_AU.UTF-8
 
-export EDITOR='vim'
+export EDITOR='nvim'
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
