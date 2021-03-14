@@ -1,6 +1,6 @@
 # Shortcuts
 alias gs="g s"
-alias ls='lsd'
+alias ls='exa'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
@@ -58,14 +58,7 @@ tarFolder() {
 alias tarFolder=tarFolder
 
 alias bne='curl wttr.in/brisbane'
-# alias cat='bat'
 alias ping='prettyping --nolegend'
-
-# eval `gdircolors ~/.solarized-dark.dircolors`
-# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-alias ls='gls --color=auto --group-directories-first'
-
-# ZSH online help
-# unalias run-help
-# alias run-help
-# HELPDIR=/usr/local/share/zsh/help
+alias vim=nvim
+alias cat=bat
+alias gs='git status'
