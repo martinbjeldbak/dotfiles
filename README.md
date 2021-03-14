@@ -1,6 +1,6 @@
 # Martin's dotfiles
 
-![Screenshot of shell prompt](https://user-images.githubusercontent.com/823316/109407002-39cc2680-79c9-11eb-9507-8d8a863bd46d.png)
+![Screenshot of shell prompt](https://user-images.githubusercontent.com/823316/111058538-01553e00-84db-11eb-926b-19c809c0c3c0.png)
 
 This project contains my important dotfiles, backed up using [ira/mackup](https://github.com/lra/mackup) tool.
 Previously, I had these files backed up to iCloud. Now they are on git for easier version control. Inspired by [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).
