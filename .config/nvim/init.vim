@@ -131,7 +131,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 """ end coc config
 
 "" fzf plugin
-nnoremap <C-b>     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+nnoremap <C-b>     :<C-u>CocCommand fzf-preview.Buffers<CR>
 nnoremap <C-p>     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
 nnoremap <Leader>m    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
 xnoremap <Leader>m "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
