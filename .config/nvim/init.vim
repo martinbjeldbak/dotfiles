@@ -12,7 +12,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdcommenter'
 
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 Plug 'vim-test/vim-test'
 Plug 'sheerun/vim-polyglot'
@@ -23,7 +22,8 @@ Plug 'tpope/vim-commentary'
 
 " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
-Plug 'overcache/NeoSolarized'
+" Theme
+Plug 'arcticicestudio/nord-vim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -34,9 +34,8 @@ syntax enable
 
 set undofile
 
-colorscheme NeoSolarized
-set background=dark
-let g:airline_theme='solarized'
+colorscheme nord
+let g:airline_theme='nord'
 let g:airline_powerline_fonts = 1
 
 set number
