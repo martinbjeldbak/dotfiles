@@ -3,7 +3,7 @@
   "workbench.colorTheme": "Nord",
   "workbench.iconTheme": "material-icon-theme",
   "terminal.integrated.shell.linux": "zsh",
-  "editor.fontFamily": "SF Mono",
+  "editor.fontFamily": "MesloLGS NF",
 "editor.fontLigatures": true,
   "editor.insertSpaces": true,
   "editor.renderWhitespace": "none",
@@ -67,5 +67,7 @@
   ],
   "diffEditor.ignoreTrimWhitespace": false,
 "workbench.editor.enablePreview": false,
-"editor.fontSize": 13
+"editor.fontSize": 13,
+"editor.suggestSelection": "first",
+"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }
