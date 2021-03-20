@@ -42,6 +42,7 @@ let g:lightline = {
       \ }
 
 set number
+set list " show whitespace
 
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
@@ -133,13 +134,14 @@ nmap <leader>f  <Plug>(coc-format-selected)
 """ end coc config
 
 "" fzf plugin
+
+let g:fzf_preview_filelist_command = 'rg --files --ignore-case --hidden --follow --no-messages -g \!"* *"'
+let g:fzf_preview_command = 'bat --color=always --plain {-1}'
 nnoremap <C-b>     :<C-u>CocCommand fzf-preview.Buffers<CR>
 nnoremap <C-p>     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
 nnoremap <Leader>m    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
 xnoremap <Leader>m "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
 
-let g:fzf_preview_filelist_command = 'rg --files --ignore-case --hidden --follow --no-messages -g \!"* *"'
-let g:fzf_preview_command = 'bat --color=always --plain {-1}'
 
 " Use vim-devicons
 let g:fzf_preview_use_dev_icons = 1
