@@ -11,7 +11,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdcommenter'
 
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
+
+Plug 'tpope/vim-surround'
 
 Plug 'vim-test/vim-test'
 Plug 'sheerun/vim-polyglot'
@@ -35,8 +37,9 @@ syntax enable
 set undofile
 
 colorscheme nord
-let g:airline_theme='nord'
-let g:airline_powerline_fonts = 1
+let g:lightline = {
+      \ 'colorscheme': 'nord',
+      \ }
 
 set number
 
