@@ -51,7 +51,7 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 source $HOME/Library/Python/3.8/bin/virtualenvwrapper.sh
 
 # See https://github.com/yuki-yano/fzf-preview.vim
-export FZF_PREVIEW_PREVIEW_BAT_THEME='Solarized (dark)'
+export FZF_PREVIEW_PREVIEW_BAT_THEME='Nord'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
