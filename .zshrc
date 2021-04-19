@@ -47,11 +47,11 @@ export PATH
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source $HOME/Library/Python/3.8/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=$HOME/.pyenv/shims/python
+source $HOME/.pyenv/versions/3.9.4/bin/virtualenvwrapper_lazy.sh
 
 # See https://github.com/yuki-yano/fzf-preview.vim
-export FZF_PREVIEW_PREVIEW_BAT_THEME='Solarized (dark)'
+export FZF_PREVIEW_PREVIEW_BAT_THEME='Nord'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
@@ -83,3 +83,4 @@ export JAVA_HOME=$(/usr/libexec/java_home -v"1.8");
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval "$(rbenv init -)"
+eval "$(pyenv init -)"
