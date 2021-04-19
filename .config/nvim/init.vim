@@ -135,6 +135,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 
 "" fzf plugin
 
+let g:fzf_preview_default_fzf_options = { '--reverse': v:false, '--preview-window': 'wrap' }
 let g:fzf_preview_filelist_command = 'rg --files --ignore-case --hidden --follow --no-messages -g \!"* *"'
 let g:fzf_preview_command = 'bat --color=always --plain {-1}'
 nnoremap <C-b>     :<C-u>CocCommand fzf-preview.Buffers<CR>
