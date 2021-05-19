@@ -48,6 +48,7 @@ export PATH
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 export VIRTUALENVWRAPPER_PYTHON=$HOME/.pyenv/shims/python
+export VIRTUALENVWRAPPER_SCRIPT=$HOME/.pyenv/versions/3.9.4/bin/virtualenvwrapper.sh
 source $HOME/.pyenv/versions/3.9.4/bin/virtualenvwrapper_lazy.sh
 
 # See https://github.com/yuki-yano/fzf-preview.vim
