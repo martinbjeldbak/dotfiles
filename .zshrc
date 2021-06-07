@@ -86,4 +86,4 @@ export JAVA_HOME=$(/usr/libexec/java_home -v"1.8");
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval "$(rbenv init -)"
-eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
