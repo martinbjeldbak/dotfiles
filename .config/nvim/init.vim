@@ -147,11 +147,6 @@ xnoremap <Leader>m "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r
 " Use vim-devicons
 let g:fzf_preview_use_dev_icons = 1
 
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
 " Neoterm and vim-test
 let test#strategy = "neovim" "neoterm
 map <leader>a :w<CR>:TestSuite<CR>
@@ -163,3 +158,8 @@ map <leader>v :w<CR>:TestVisit<CR>
 " https://github.com/neoclide/coc.nvim/issues/617
 " disable mapping to not break coc.nvim (I don't even use them anyways)
 let g:endwise_no_mappings = 1
+
+nnoremap <C-h> :wincmd h<CR>
+nnoremap <C-j> :wincmd j<CR>
+nnoremap <C-k> :wincmd k<CR>
+nnoremap <C-l> :wincmd l<CR>
