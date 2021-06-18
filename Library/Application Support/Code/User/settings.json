@@ -20,7 +20,11 @@
     "log": true,
     "spec/examples.txt": true,
     "stripe-mock-server.log": true,
-    "public": true
+    "public": true,
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
   },
   "ruby.lint": {
     "reek": true,
@@ -69,5 +73,6 @@
 "workbench.editor.enablePreview": false,
 "editor.fontSize": 13,
 "editor.suggestSelection": "first",
-"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+"workbench.editor.untitled.hint": "hidden"
 }

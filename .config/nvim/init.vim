@@ -163,3 +163,7 @@ nnoremap <C-h> :wincmd h<CR>
 nnoremap <C-j> :wincmd j<CR>
 nnoremap <C-k> :wincmd k<CR>
 nnoremap <C-l> :wincmd l<CR>
+
+" https://www.reddit.com/r/vim/comments/cr8lh5/how_to_create_proper_folding_for_vimnvim/
+set foldmethod=indent
+set foldlevelstart=20
