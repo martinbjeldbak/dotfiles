@@ -45,12 +45,6 @@ export EDITOR='nvim'
 path+=('$HOME/Library/Python/3.8/bin')
 export PATH
 
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-export VIRTUALENVWRAPPER_PYTHON=$HOME/.pyenv/shims/python
-export VIRTUALENVWRAPPER_SCRIPT=$HOME/.pyenv/versions/3.9.4/bin/virtualenvwrapper.sh
-source $HOME/.pyenv/versions/3.9.4/bin/virtualenvwrapper_lazy.sh
-
 # See https://github.com/yuki-yano/fzf-preview.vim
 export FZF_PREVIEW_PREVIEW_BAT_THEME='Nord'
 
@@ -90,11 +84,6 @@ case `uname` in
 
     ;;
   Linux)
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
     ;;
 esac
-
-eval "$(pyenv init --path)"
-
 
