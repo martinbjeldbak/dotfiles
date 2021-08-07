@@ -11,6 +11,7 @@ tap "homebrew/services"
 tap "nektos/tap"
 tap "puma/puma"
 
+brew "asdf"
 brew "readline"
 brew "ansible"
 brew "awscli"
@@ -36,8 +37,6 @@ brew "neovim"
 brew "postgresql"
 brew "postgresql@11", restart_service: true
 brew "prettyping"
-brew "ruby-build"
-brew "rbenv"
 brew "reattach-to-user-namespace"
 brew "redis", restart_service: true
 brew "ripgrep"
