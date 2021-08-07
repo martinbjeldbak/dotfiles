@@ -49,7 +49,8 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
-let g:python3_host_prog = '/Users/madsenm1/.virtualenvs/py3nvim/bin/python'
+let g:python_host_prog = '~/.asdf/shims/python2'
+let g:python3_host_prog = '~/.asdf/shims/python3'
 let g:NERDTreeGitStatusUseNerdFonts = 1
 
 let mapleader = ","
