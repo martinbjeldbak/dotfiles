@@ -31,7 +31,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting tmux)
+plugins=(git zsh-syntax-highlighting tmux asdf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -61,29 +61,40 @@ export NVM_DIR="$HOME/.nvm"
 export FZF_DEFAULT_COMMAND='fd --type f'
 # Fzf Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
 
-# Fzf Key bindings
-# ------------
-source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 
 # Google Cloud completions
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-
-# Support switching JDK versions https://github.com/AdoptOpenJDK/homebrew-openjdk#switch-between-different-jdk-versions
-jdk() {
-        version=$1
-        export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
-        java -version
- }
-
-export JAVA_HOME=$(/usr/libexec/java_home -v"1.8");
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-eval "$(rbenv init -)"
+case `uname` in
+  Darwin) # MacOS
+    # Support switching JDK versions https://github.com/AdoptOpenJDK/homebrew-openjdk#switch-between-different-jdk-versions
+    jdk() {
+      version=$1
+      export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+      java -version
+    }
+
+    export JAVA_HOME=$(/usr/libexec/java_home -v"1.8");
+
+    export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+
+    [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
+    # Fzf Key bindings
+    # ------------
+    source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+
+    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
+    ;;
+  Linux)
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    ;;
+esac
+
 eval "$(pyenv init --path)"
+
+
