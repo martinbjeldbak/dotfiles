@@ -162,7 +162,7 @@
 	gpgsign = true
 [gui]
 [gpg]
-	program = /usr/local/MacGPG2/bin/gpg2
+	program = gpg
 [color]
 	ui = true
 [color "diff-highlight"]
