@@ -15,6 +15,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'itchyny/lightline.vim'
 
 Plug 'tpope/vim-surround'
+Plug 'mhinz/vim-startify'
 
 Plug 'vim-test/vim-test'
 Plug 'sheerun/vim-polyglot'
@@ -169,3 +170,5 @@ nnoremap <C-l> :wincmd l<CR>
 " https://www.reddit.com/r/vim/comments/cr8lh5/how_to_create_proper_folding_for_vimnvim/
 set foldmethod=indent
 set foldlevelstart=20
+
+let g:github_enterprise_urls = ['https://github.service.anz']
