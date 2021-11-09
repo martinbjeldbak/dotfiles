@@ -31,7 +31,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting tmux asdf)
+plugins=(git zsh-syntax-highlighting tmux asdf fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -42,20 +42,10 @@ export LANG=en_AU.UTF-8
 
 export EDITOR='nvim'
 
-path+=('$HOME/Library/Python/3.8/bin')
-export PATH
-
 # See https://github.com/yuki-yano/fzf-preview.vim
 export FZF_PREVIEW_PREVIEW_BAT_THEME='Nord'
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
 export FZF_DEFAULT_COMMAND='fd --type f'
-# Fzf Auto-completion
-# ---------------
-
 
 # Google Cloud completions
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -74,16 +64,13 @@ case `uname` in
 
     export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
-    [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
-    # Fzf Key bindings
-    # ------------
-    source "/usr/local/opt/fzf/shell/key-bindings.zsh"
-
     source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
     source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
+    path+=("/usr/local/opt/curl/bin")
     ;;
   Linux)
     ;;
 esac
 
+export PATH
