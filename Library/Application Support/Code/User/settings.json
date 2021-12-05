@@ -1,16 +1,12 @@
-// Place your settings in this file to overwrite the default settings
 {
-  "workbench.colorTheme": "Nord",
   "workbench.iconTheme": "material-icon-theme",
-  "terminal.integrated.shell.linux": "zsh",
   "editor.fontFamily": "MesloLGS NF",
-"editor.fontLigatures": true,
+  "editor.fontLigatures": true,
   "editor.insertSpaces": true,
   "editor.renderWhitespace": "none",
   "terminal.integrated.scrollback": 5000,
   "explorer.autoReveal": false,
   "files.insertFinalNewline": true,
-  "telemetry.enableTelemetry": false,
   "files.exclude": {
     "node_modules": true,
     "coverage": true,
@@ -35,20 +31,13 @@
     "ruby-lint": true
   },
   "files.trimTrailingWhitespace": true,
-  "telemetry.enableCrashReporter": false,
-  "editor.rulers": [
-    100
-  ],
+  "editor.rulers": [100],
   "window.title": "${activeEditorMedium}${separator}${folderName}",
   "editor.minimap.enabled": false,
   "workbench.startupEditor": "newUntitledFile",
   "git.enableCommitSigning": true,
   "workbench.sideBar.location": "right",
   "material-icon-theme.showUpdateMessage": false,
-  "gitlens.advanced.messages": {
-    "suppressShowKeyBindingsNotice": true,
-    "suppressUpdateNotice": true
-  },
   "yaml.format.enable": true,
   "git.enableSmartCommit": true,
   "[json]": {
@@ -57,22 +46,19 @@
   "window.zoomLevel": 0,
   "git.confirmSync": false,
   "git.autofetch": true,
-  "terminal.integrated.shell.osx": "/bin/zsh",
   "explorer.confirmDragAndDrop": false,
   "debug.onTaskErrors": "debugAnyway",
   "gitlens.currentLine.enabled": false,
   "gitlens.hovers.currentLine.over": "line",
   "gitlens.codeLens.enabled": false,
   "appService.showSavePrompt": false,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "vue"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "vue"],
   "diffEditor.ignoreTrimWhitespace": false,
-"workbench.editor.enablePreview": false,
-"editor.fontSize": 13,
-"editor.suggestSelection": "first",
-"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-"workbench.editor.untitled.hint": "hidden"
+  "workbench.editor.enablePreview": false,
+  "editor.fontSize": 13,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "workbench.editor.untitled.hint": "hidden",
+  "editor.tabSize": 2,
+  "workbench.colorTheme": "Nord"
 }
