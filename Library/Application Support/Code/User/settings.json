@@ -60,5 +60,8 @@
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "workbench.editor.untitled.hint": "hidden",
   "editor.tabSize": 2,
-  "workbench.colorTheme": "Nord"
+  "workbench.colorTheme": "Nord",
+  "explorer.confirmDelete": false,
+  "workbench.settings.openDefaultKeybindings": true,
+  "redhat.telemetry.enabled": true
 }

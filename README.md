@@ -50,3 +50,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 ### Nord Theme
 
 Depending on OS, install the [Nord theme](https://www.nordtheme.com/) for related apps, such as GNOME Terminal (iTerm settings included in these dotfiles under `Library/`).
+
+### Fonts
+
+Depending on OS setting up the dotfiles on, install the MesloLGS Nerd Fonts as per https://github.com/romkatv/powerlevel10k#manual-font-installation
