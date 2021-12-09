@@ -22,6 +22,24 @@
     "**/.settings": true,
     "**/.factorypath": true
   },
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "u"
+      ],
+      "commands": [
+        "undo"
+      ]
+    },
+    {
+      "before": [
+        "C-r"
+      ],
+      "commands": [
+        "redo"
+      ]
+    }
+  ],
   "ruby.lint": {
     "reek": true,
     "rubocop": true,
@@ -31,12 +49,13 @@
     "ruby-lint": true
   },
   "files.trimTrailingWhitespace": true,
-  "editor.rulers": [100],
+  "editor.rulers": [
+    100
+  ],
   "window.title": "${activeEditorMedium}${separator}${folderName}",
   "editor.minimap.enabled": false,
   "workbench.startupEditor": "newUntitledFile",
   "git.enableCommitSigning": true,
-  "workbench.sideBar.location": "right",
   "material-icon-theme.showUpdateMessage": false,
   "yaml.format.enable": true,
   "git.enableSmartCommit": true,
@@ -52,7 +71,11 @@
   "gitlens.hovers.currentLine.over": "line",
   "gitlens.codeLens.enabled": false,
   "appService.showSavePrompt": false,
-  "eslint.validate": ["javascript", "javascriptreact", "vue"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "vue"
+  ],
   "diffEditor.ignoreTrimWhitespace": false,
   "workbench.editor.enablePreview": false,
   "editor.fontSize": 13,
@@ -63,5 +86,6 @@
   "workbench.colorTheme": "Nord",
   "explorer.confirmDelete": false,
   "workbench.settings.openDefaultKeybindings": true,
-  "redhat.telemetry.enabled": true
+  "redhat.telemetry.enabled": true,
+  "github-enterprise.uri": "github.service.anz"
 }
