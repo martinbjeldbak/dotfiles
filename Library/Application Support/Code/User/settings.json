@@ -63,5 +63,6 @@
   "workbench.colorTheme": "Nord",
   "explorer.confirmDelete": false,
   "workbench.settings.openDefaultKeybindings": true,
-  "redhat.telemetry.enabled": true
+  "redhat.telemetry.enabled": true,
+  "gitlens.hovers.enabled": false
 }
