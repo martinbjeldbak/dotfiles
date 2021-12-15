@@ -90,5 +90,6 @@
   "github-enterprise.uri": "github.service.anz",
   "workbench.preferredDarkColorTheme": "Nord",
   "window.autoDetectColorScheme": true,
-  "workbench.fontAliasing": "auto"
+  "workbench.fontAliasing": "auto",
+  "gitlens.hovers.enabled": false
 }
