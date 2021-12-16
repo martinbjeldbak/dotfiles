@@ -87,5 +87,6 @@
   "explorer.confirmDelete": false,
   "workbench.settings.openDefaultKeybindings": true,
   "redhat.telemetry.enabled": true,
-  "github-enterprise.uri": "github.service.anz"
+  "github-enterprise.uri": "github.service.anz",
+  "terminal.integrated.allowChords": false
 }
