@@ -83,10 +83,14 @@
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "workbench.editor.untitled.hint": "hidden",
   "editor.tabSize": 2,
-  "workbench.colorTheme": "Nord",
+  "workbench.colorTheme": "Default Light+",
   "explorer.confirmDelete": false,
   "workbench.settings.openDefaultKeybindings": true,
   "redhat.telemetry.enabled": true,
   "github-enterprise.uri": "github.service.anz",
-  "terminal.integrated.allowChords": false
+  "terminal.integrated.allowChords": false,
+  "workbench.preferredDarkColorTheme": "Nord",
+  "window.autoDetectColorScheme": true,
+  "workbench.fontAliasing": "auto",
+  "gitlens.hovers.enabled": false
 }
