@@ -46,8 +46,10 @@
     "ruby": true,
     "fasterer": true,
     "debride": true,
-    "ruby-lint": true
+    "ruby-lint": true,
   },
+  "ruby.format": "rubocop",
+  "ruby.useLanguageServer": true,
   "files.trimTrailingWhitespace": true,
   "editor.rulers": [
     100
@@ -80,16 +82,16 @@
   "workbench.editor.enablePreview": false,
   "editor.fontSize": 13,
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "workbench.editor.untitled.hint": "hidden",
   "editor.tabSize": 2,
   "workbench.colorTheme": "Default Light+",
   "explorer.confirmDelete": false,
   "workbench.settings.openDefaultKeybindings": true,
-  "redhat.telemetry.enabled": true,
   "github-enterprise.uri": "github.service.anz",
   "workbench.preferredDarkColorTheme": "Nord",
   "window.autoDetectColorScheme": true,
   "workbench.fontAliasing": "auto",
-  "gitlens.hovers.enabled": false
+  "gitlens.hovers.enabled": false,
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.chktex.enabled": true,
 }
