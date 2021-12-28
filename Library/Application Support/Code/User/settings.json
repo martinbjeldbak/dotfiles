@@ -88,6 +88,7 @@
   "explorer.confirmDelete": false,
   "workbench.settings.openDefaultKeybindings": true,
   "github-enterprise.uri": "github.service.anz",
+  "terminal.integrated.allowChords": false,
   "workbench.preferredDarkColorTheme": "Nord",
   "window.autoDetectColorScheme": true,
   "workbench.fontAliasing": "auto",
