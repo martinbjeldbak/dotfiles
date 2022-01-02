@@ -162,7 +162,7 @@
 	gpgsign = true
 [gui]
 [gpg]
-	program = gpg
+	program = /usr/bin/gpg
 [color]
 	ui = true
 [color "diff-highlight"]
@@ -194,3 +194,5 @@
     file-decoration-style = none
 [pull]
 	rebase = false
+[init]
+	defaultBranch = main
