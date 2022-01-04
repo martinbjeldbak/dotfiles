@@ -140,8 +140,8 @@
 
 [user]
 	name = Martin Bjeldbak Madsen
-	email = me@martinbjeldbak.com
-	signingkey = 2B8CD9E1
+	email = martin.madsen@anz.com
+	signingkey = 5A2F8438842037996C66B8EF5797AFAA475ED88D
 	useconfigonly = true
 [filter "media"]
 	required = true
@@ -162,7 +162,7 @@
 	gpgsign = true
 [gui]
 [gpg]
-	program = gpg
+	program = /usr/local/bin/gpg
 [color]
 	ui = true
 [color "diff-highlight"]
@@ -194,3 +194,5 @@
     file-decoration-style = none
 [pull]
 	rebase = false
+[init]
+	defaultBranch = main
