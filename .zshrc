@@ -31,11 +31,14 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting tmux asdf fzf)
+plugins=(git zsh-syntax-highlighting tmux asdf fzf ripgrep gh terraform kubectl kubectx helm golang)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+RPS1='$(kubectx_prompt_info)'
+RPROMPT='$(tf_prompt_info)'
 
 # You may need to manually set your language environment
 export LANG=en_AU.UTF-8
