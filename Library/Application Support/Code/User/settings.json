@@ -1,6 +1,6 @@
 {
   "workbench.iconTheme": "material-icon-theme",
-  "editor.fontFamily": "MesloLGS NF",
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
   "editor.fontLigatures": true,
   "editor.insertSpaces": true,
   "editor.renderWhitespace": "none",
@@ -80,7 +80,7 @@
   ],
   "diffEditor.ignoreTrimWhitespace": false,
   "workbench.editor.enablePreview": false,
-  "editor.fontSize": 11,
+  "editor.fontSize": 15,
   "editor.suggestSelection": "first",
   "workbench.editor.untitled.hint": "hidden",
   "editor.tabSize": 2,
