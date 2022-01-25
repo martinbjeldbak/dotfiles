@@ -54,7 +54,8 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
+# Source: https://github.com/zsh-users/zsh-syntax-highlighting/issues/295#issuecomment-214581607
+# Improve paste performance
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 case `uname` in
