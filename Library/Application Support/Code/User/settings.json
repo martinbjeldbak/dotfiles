@@ -1,6 +1,6 @@
 {
   "workbench.iconTheme": "material-icon-theme",
-  "editor.fontFamily": "MesloLGS NF",
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
   "editor.fontLigatures": true,
   "editor.insertSpaces": true,
   "editor.renderWhitespace": "none",
@@ -27,7 +27,7 @@
   },
   "[erb]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "aliariff.vscode-erb-beautify",
+    "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
   },
   "vim.normalModeKeyBindingsNonRecursive": [
     {
@@ -53,7 +53,7 @@
     "ruby": true,
     "fasterer": true,
     "debride": true,
-    "ruby-lint": true,
+    "ruby-lint": true
   },
   "ruby.format": "rubocop",
   "ruby.useLanguageServer": true,
@@ -107,7 +107,7 @@
   "gitlens.hovers.enabled": false,
   "latex-workshop.view.pdf.viewer": "tab",
   "latex-workshop.chktex.enabled": true,
-  //"go.goroot": "/Users/martin/.asdf/installs/golang/1.17.5/go",
+  //"go.goroot": "/Users/martin/.asdf/installs/golang/1.17.5/go",,
   "[go]": {
     "editor.insertSpaces": false,
     "editor.formatOnSave": true,
@@ -118,4 +118,9 @@
   },
   "go.formatTool": "gofmt",
   "go.lintTool": "golangci-lint",
+  "[proto3]": {
+    "editor.defaultFormatter": "zxh404.vscode-proto3"
+  },
+  "sysl.tool.binaryPath": "sysl",
+  "redhat.telemetry.enabled": false
 }
