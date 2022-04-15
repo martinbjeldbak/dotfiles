@@ -91,12 +91,11 @@
     "vue"
   ],
   "diffEditor.ignoreTrimWhitespace": false,
-  "workbench.editor.enablePreview": false,
   "editor.fontSize": 15,
   "editor.suggestSelection": "first",
   "workbench.editor.untitled.hint": "hidden",
   "editor.tabSize": 2,
-  "workbench.colorTheme": "Default Light+",
+  "workbench.colorTheme": "Nord",
   "explorer.confirmDelete": false,
   "workbench.settings.openDefaultKeybindings": true,
   "github-enterprise.uri": "github.service.anz",
@@ -122,5 +121,6 @@
     "editor.defaultFormatter": "zxh404.vscode-proto3"
   },
   "sysl.tool.binaryPath": "sysl",
-  "redhat.telemetry.enabled": false
+  "redhat.telemetry.enabled": false,
+  "editor.bracketPairColorization.enabled": true
 }
