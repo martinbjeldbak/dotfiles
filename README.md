@@ -11,7 +11,7 @@ Previously, I had these files backed up to iCloud. Now they are on git for easie
 
 You can clone the repository wherever you want. I keep it in `~/Projects/dotfiles`. If you use a different directory, change the `.mackup.cfg` config to point to this directory.
 
-First, install `mackup` with [homebrew](https://github.com/Homebrew/brew) and [`oh-my-zsh`](https://ohmyz.sh).
+First, install `mackup` with [homebrew](https://github.com/Homebrew/brew), [`oh-my-zsh`](https://ohmyz.sh), and the [powerlevel10k](https://github.com/romkatv/powerlevel10k#oh-my-zsh) ZSH theme.
 
 ```sh
 brew install mackup

@@ -1,4 +1,4 @@
-tap "adoptopenjdk/openjdk"
+
 tap "apparition47/tap"
 tap "heroku/brew"
 tap "homebrew/bundle"
@@ -61,9 +61,6 @@ brew "nektos/tap/act"
 brew "puma/puma/puma-dev"
 
 cask "adobe-acrobat-reader"
-cask "adoptopenjdk13"
-cask "adoptopenjdk14"
-cask "adoptopenjdk8"
 cask "aerial"
 cask "alfred"
 cask "arq"

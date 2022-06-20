@@ -122,5 +122,9 @@
   },
   "sysl.tool.binaryPath": "sysl",
   "redhat.telemetry.enabled": false,
-  "editor.bracketPairColorization.enabled": true
+  "editor.bracketPairColorization.enabled": true,
+  "git.branchProtection": [
+    "master",
+    "main"
+  ]
 }
