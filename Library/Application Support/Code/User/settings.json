@@ -83,7 +83,6 @@
   "debug.onTaskErrors": "debugAnyway",
   "gitlens.currentLine.enabled": false,
   "gitlens.hovers.currentLine.over": "line",
-  "gitlens.codeLens.enabled": false,
   "appService.showSavePrompt": false,
   "eslint.validate": [
     "javascript",
@@ -126,5 +125,9 @@
   "git.branchProtection": [
     "master",
     "main"
-  ]
+  ],
+  "terminal.external.osxExec": "iTerm.app",
+  "github.gitProtocol": "ssh",
+  "vim.easymotion": true,
+  "gitlens.codeLens.enabled": false,
 }
