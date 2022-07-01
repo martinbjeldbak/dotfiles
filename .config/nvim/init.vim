@@ -1,4 +1,4 @@
-call plug#begin(stdpath('data') . '/plugged')
+call plug#begin()
 
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons'
 
