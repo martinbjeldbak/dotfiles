@@ -26,7 +26,6 @@
     "*.html.erb": "erb"
   },
   "[erb]": {
-    "editor.formatOnSave": true,
     "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
   },
   "vim.normalModeKeyBindingsNonRecursive": [
@@ -76,7 +75,7 @@
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 1,
   "git.confirmSync": false,
   "git.autofetch": true,
   "explorer.confirmDragAndDrop": false,
@@ -94,12 +93,12 @@
   "editor.suggestSelection": "first",
   "workbench.editor.untitled.hint": "hidden",
   "editor.tabSize": 2,
-  "workbench.colorTheme": "Nord",
+  "workbench.colorTheme": "One Dark Pro",
   "explorer.confirmDelete": false,
   "workbench.settings.openDefaultKeybindings": true,
   "github-enterprise.uri": "github.service.anz",
   "terminal.integrated.allowChords": false,
-  "workbench.preferredDarkColorTheme": "Nord",
+  "workbench.preferredDarkColorTheme": "One Dark Pro",
   "window.autoDetectColorScheme": true,
   "workbench.fontAliasing": "auto",
   "gitlens.hovers.enabled": false,
@@ -108,11 +107,10 @@
   //"go.goroot": "/Users/martin/.asdf/installs/golang/1.17.5/go",,
   "[go]": {
     "editor.insertSpaces": false,
-    "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
     },
-    "editor.suggest.snippetsPreventQuickSuggestions": false
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
   },
   "go.formatTool": "gofmt",
   "go.lintTool": "golangci-lint",
@@ -130,4 +128,16 @@
   "github.gitProtocol": "ssh",
   "vim.easymotion": true,
   "gitlens.codeLens.enabled": false,
+  "editor.largeFileOptimizations": false,
+  "vs-kubernetes": {
+    "vs-kubernetes.crd-code-completion": "disabled"
+  },
+  "window.commandCenter": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "telemetry.telemetryLevel": "off",
+  "go.toolsManagement.autoUpdate": true,
+  "workbench.sideBar.location": "right",
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
 }
