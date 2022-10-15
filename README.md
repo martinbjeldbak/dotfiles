@@ -14,7 +14,7 @@ You can clone the repository wherever you want. I keep it in `~/Projects/dotfile
 First, install `mackup` with [homebrew](https://github.com/Homebrew/brew), [`oh-my-zsh`](https://ohmyz.sh), and the [powerlevel10k](https://github.com/romkatv/powerlevel10k#oh-my-zsh) ZSH theme.
 
 ```sh
-brew install mackup
+brew install git zsh mackup exa neovim
 ```
 
 Then you can clone the repository and set mackup up to symlink local files to this repository folder.
@@ -37,6 +37,13 @@ cd ~
 mackup restore
 ```
 
+## Neovim
+
+After installing neovim, let's install vim-plug as per below instructions
+
+https://github.com/junegunn/vim-plug#installation
+
+
 ### Oh My Zsh
 
 Ensure `zsh` is installed on the operating system via a package manager, i.e. apt or brew, then follow the [installation instructions](https://ohmyz.sh/#install) at Oh My Zsh.
@@ -47,10 +54,10 @@ Then install custom Oh My Zsh plugins, such as [zsh-syntax-highlighting](https:/
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
-### Nord Theme
+### Theme
 
-Depending on OS, install the [Nord theme](https://www.nordtheme.com/) for related apps, such as GNOME Terminal (iTerm settings included in these dotfiles under `Library/`).
+Currently I'm loving the OneDark theme at https://github.com/joshdick/onedark.vim and have set up this in vim, but it should also be configured for the terminal.
 
 ### Fonts
 
-Depending on OS setting up the dotfiles on, install the MesloLGS Nerd Fonts as per https://github.com/romkatv/powerlevel10k#manual-font-installation
+Depending on OS setting up the dotfiles on, install the JetBrains Mono Nerd Fonts as per https://github.com/romkatv/powerlevel10k#manual-font-installation

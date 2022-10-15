@@ -5,6 +5,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# set PATH so it includes user's private ~/.local/bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+
 source $HOME/.aliases
 source $HOME/.exports
 
@@ -31,15 +36,14 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux asdf fzf ripgrep gh terraform kubectl kubectx helm golang )
+plugins=(git tmux asdf fzf ripgrep gh terraform helm golang )
 
 source $ZSH/oh-my-zsh.sh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
 
-RPS1='$(kubectx_prompt_info)'
-RPROMPT='$(tf_prompt_info)'
+#RPS1='$(kubectx_prompt_info)'
+#RPROMPT='$(tf_prompt_info)'
 
 ### History
 # Source: https://github.com/craigjperry2/dotfiles/blob/aa77ddcbde63bf3a0a61a2c218bf36f8e146a3c9/dotfiles/zshrc#L44
@@ -77,6 +81,9 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 case `uname` in
   Darwin) # MacOS
+
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
     # Support switching JDK versions https://github.com/AdoptOpenJDK/homebrew-openjdk#switch-between-different-jdk-versions
     jdk() {
       version=$1
@@ -95,8 +102,7 @@ case `uname` in
     path+=("/usr/local/opt/curl/bin")
     ;;
   Linux)
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    ;;
+    source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 esac
 
 export PATH
