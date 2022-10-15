@@ -22,7 +22,7 @@ Plug 'tpope/vim-commentary'
 Plug 'fatih/vim-go'
 
 " Theme
-Plug 'joshdick/onedark.vim'
+Plug 'navarasu/onedark.nvim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -43,7 +43,10 @@ let g:lightline = {
       \   'gitbranch': 'FugitiveHead'
       \ },
       \ }
-colorscheme onedark
+
+lua <<EOF
+require('onedark').load()
+EOF
 
 " Lightline shows this
 set noshowmode
