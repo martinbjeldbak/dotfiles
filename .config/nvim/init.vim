@@ -8,6 +8,10 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " for go-vim :GoDecls
+
+Plug 'ThePrimeagen/vim-be-good' " be better at vim
+
 Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdcommenter'
 
@@ -23,9 +27,11 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
 Plug 'tpope/vim-commentary'
 
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'AndrewRadev/splitjoin.vim'
 
 " Theme
+Plug 'joshdick/onedark.vim' " only for the lighline theme
 Plug 'navarasu/onedark.nvim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -33,7 +39,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 call plug#end()
 
 " Installed coc plugins
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-html', 'coc-docker', 'coc-go', 'coc-jedi', 'coc-markdownlint', 'coc-solargraph', 'coc-yaml', 'coc-tsserver', 'coc-prettier', 'coc-explorer', 'coc-snippets']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-html', 'coc-docker', 'coc-jedi', 'coc-markdownlint', 'coc-solargraph', 'coc-yaml', 'coc-tsserver', 'coc-prettier', 'coc-explorer', 'coc-snippets']
 
 set termguicolors
 syntax enable
@@ -127,7 +133,7 @@ set nowritebackup
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=100
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -329,7 +335,10 @@ set foldlevelstart=20
 
 let g:github_enterprise_urls = ['https://github.service.anz']
 
-"" coc-go
-
-"" Add missing imports on save
-autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+" vim-go
+let g:go_fmt_command = "goimports"
+let g:go_metalinter_autosave = 1
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
+" https://github.com/fatih/vim-go/wiki/Tutorial
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
