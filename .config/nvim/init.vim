@@ -32,6 +32,9 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 
 call plug#end()
 
+" Installed coc plugins
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-html', 'coc-docker', 'coc-go', 'coc-jedi', 'coc-markdownlint', 'coc-solargraph', 'coc-yaml', 'coc-tsserver', 'coc-prettier', 'coc-explorer', 'coc-snippets']
+
 set termguicolors
 syntax enable
 
@@ -239,11 +242,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{nvim_treesitter#statusline(90)}
-
 " Mappings for CoCList
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
@@ -262,8 +260,6 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-html', 'coc-docker', 'coc-go', 'coc-jedi', 'coc-markdownlint', 'coc-solargraph', 'coc-yaml', 'coc-tsserver', 'coc-prettier', 'coc-explorer', 'coc-snippets']
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -272,6 +268,35 @@ endfunction
 """ end coc config
 
 "" fuzzy finder plugin
+lua <<EOF
+
+-- Source https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#file-and-text-search-in-hidden-files-and-directories
+local telescope = require("telescope")
+local telescopeConfig = require("telescope.config")
+
+-- Clone the default Telescope configuration
+local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+
+-- I want to search in hidden/dot files.
+table.insert(vimgrep_arguments, "--hidden")
+-- I don't want to search in the `.git` directory.
+table.insert(vimgrep_arguments, "--glob")
+table.insert(vimgrep_arguments, "!.git/*")
+
+telescope.setup({
+	defaults = {
+		-- `hidden = true` is not supported in text grep commands.
+		vimgrep_arguments = vimgrep_arguments,
+	},
+	pickers = {
+		find_files = {
+			-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+			find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
+		},
+	},
+})
+EOF
+
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
