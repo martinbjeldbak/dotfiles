@@ -43,6 +43,12 @@ After installing neovim, let's install vim-plug as per below instructions
 
 https://github.com/junegunn/vim-plug#installation
 
+Then install language parsers for [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)
+
+```vim
+:TSInstall bash css comment dockerfile gitignore go html java javascript jsonnet json jsonc latex make markdown proto python regex rego ruby scss sql typescript vim yaml
+```
+
 
 ### Oh My Zsh
 
