@@ -2,9 +2,11 @@ call plug#begin()
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Telescope.nvim and plugins
 Plug 'nvim-lua/plenary.nvim' 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
@@ -304,13 +306,17 @@ telescope.setup({
 		},
 	},
 })
+
+-- load after setup function
+require('telescope').load_extension('fzf')
 EOF
 
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
+nnoremap <leader>fr <cmd>lua require('telescope.builtin').resume()<cr>
+nnoremap <leader>fp <cmd>lua require('telescope.builtin').pickers()<cr>
 
 " Neoterm and vim-test
 " let test#strategy = "neovim" "neoterm
