@@ -41,7 +41,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 call plug#end()
 
 " Installed coc plugins
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-html', 'coc-docker', 'coc-jedi', 'coc-markdownlint', 'coc-solargraph', 'coc-yaml', 'coc-tsserver', 'coc-prettier', 'coc-explorer', 'coc-snippets']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-html', 'coc-docker', 'coc-jedi', 'coc-markdownlint', 'coc-solargraph', 'coc-yaml', 'coc-tsserver', 'coc-prettier', 'coc-explorer', 'coc-snippets', 'coc-diagnostic', 'coc-eslint']
 
 set termguicolors
 syntax enable
@@ -124,6 +124,7 @@ map L $
 
 nmap <leader>w :w!<CR>
 nmap <leader>wq :wq!<CR>
+nmap <leader>bd :bd<CR>
 
 " TextEdit might fail if hidden is not set.
 set hidden
