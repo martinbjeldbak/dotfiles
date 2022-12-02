@@ -1,6 +1,6 @@
 # Shortcuts
 alias gs="g s"
-alias ls='exa'
+alias ls='exa --icons'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
@@ -62,3 +62,4 @@ alias ping='prettyping --nolegend'
 alias vim=nvim
 alias cat=bat
 alias gs='git status'
+alias ll='exa -l --icons --no-user --group-directories-first  --time-style long-iso'

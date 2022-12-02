@@ -10,7 +10,6 @@ if [ -d "$HOME/.local/bin" ] ; then
   PATH="$HOME/.local/bin:$PATH"
 fi
 
-source $HOME/.aliases
 source $HOME/.exports
 
 # Path to your oh-my-zsh installation.
@@ -108,3 +107,6 @@ esac
 export PATH
 
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+
+# Override any oh-my-zsh aliases
+source $HOME/.aliases
