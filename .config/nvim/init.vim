@@ -41,7 +41,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 call plug#end()
 
 " Installed coc plugins
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-html', 'coc-docker', 'coc-jedi', 'coc-markdownlint', 'coc-solargraph', 'coc-yaml', 'coc-tsserver', 'coc-prettier', 'coc-explorer', 'coc-snippets', 'coc-diagnostic', 'coc-eslint']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-html', 'coc-docker', 'coc-jedi', 'coc-markdownlint', 'coc-solargraph', 'coc-yaml', 'coc-tsserver', 'coc-prettier', 'coc-explorer', 'coc-snippets', 'coc-go', 'coc-diagnostic', 'coc-eslint']
 
 set termguicolors
 syntax enable
@@ -356,3 +356,6 @@ autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 " https://github.com/fatih/vim-go/wiki/Tutorial
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
+" Source: https://github.com/fatih/vim-go/issues/2923
+let g:go_def_mapping_enabled=0  " let coc.nvim handle
+	let g:go_gopls_enabled=1 " still needed for GoInfo hover (g:go_auto_type_info)
