@@ -295,10 +295,16 @@ table.insert(vimgrep_arguments, "--hidden")
 table.insert(vimgrep_arguments, "--glob")
 table.insert(vimgrep_arguments, "!.git/*")
 
-telescope.setup({
+require('telescope').setup {
 	defaults = {
 		-- `hidden = true` is not supported in text grep commands.
 		vimgrep_arguments = vimgrep_arguments,
+    mappings = {
+      i = {
+        ["<M-Down>"] = "cycle_history_next",
+        ["<M-Up>"] = "cycle_history_prev",
+      }
+    }
 	},
 	pickers = {
 		find_files = {
@@ -306,14 +312,15 @@ telescope.setup({
 			find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
 		},
 	},
-})
+}
 
 -- load after setup function
 require('telescope').load_extension('fzf')
 EOF
 
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').grep_string({ shorten_path = true, word_match = "-w", only_sort_text = true, search = '' })<cr>
+nnoremap <leader>fz <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').resume()<cr>
