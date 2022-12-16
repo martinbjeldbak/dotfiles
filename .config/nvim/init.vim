@@ -9,6 +9,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " for go-vim :GoDecls
 
