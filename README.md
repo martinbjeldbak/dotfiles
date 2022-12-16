@@ -67,3 +67,7 @@ Currently I'm loving the OneDark theme at https://github.com/joshdick/onedark.vi
 ### Fonts
 
 Depending on OS setting up the dotfiles on, install the JetBrains Mono Nerd Fonts as per https://github.com/romkatv/powerlevel10k#manual-font-installation
+
+### Tmux
+
+Install tmux-plugin-manager following https://github.com/tmux-plugins/tpm#installation
