@@ -9,6 +9,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " for go-vim :GoDecls
@@ -190,7 +191,7 @@ function! ShowDocumentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -289,6 +290,7 @@ local telescopeConfig = require("telescope.config")
 
 -- Clone the default Telescope configuration
 local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+local lga_actions = require("telescope-live-grep-args.actions")
 
 -- I want to search in hidden/dot files.
 table.insert(vimgrep_arguments, "--hidden")
@@ -313,15 +315,24 @@ require('telescope').setup {
 			find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
 		},
 	},
+  extensions = {
+      mappings = { -- extend mappings
+        i = {
+          ["<C-k>"] = lga_actions.quote_prompt(),
+          ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+        },
+      },
+  },
 }
 
 -- load after setup function
 require('telescope').load_extension('fzf')
+require("telescope").load_extension("live_grep_args")
 EOF
 
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').grep_string({ shorten_path = true, word_match = "-w", only_sort_text = true, search = '' })<cr>
-nnoremap <leader>fz <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fz <cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').resume()<cr>
