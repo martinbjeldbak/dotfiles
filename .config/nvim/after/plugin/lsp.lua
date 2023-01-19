@@ -10,17 +10,9 @@ lsp.ensure_installed({
 	'html',
 })
 
-
--- Fix Undefined global 'vim'
-lsp.configure('sumneko_lua', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-})
+-- configure lua language server for neovim
+-- see :help lsp-zero.nvim_workspace()
+lsp.nvim_workspace()
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}

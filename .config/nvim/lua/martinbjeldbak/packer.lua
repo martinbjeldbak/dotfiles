@@ -7,11 +7,13 @@ return require('packer').startup(function(use)
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
 
-	use {
+    use('nvim-telescope/telescope-fzf-native.nvim', { run = 'make' })
+	use({
 		'nvim-telescope/telescope.nvim', tag = '0.1.1',
 		-- or                            , branch = '0.1.x',
 		requires = { {'nvim-lua/plenary.nvim'} }
-	}
+	})
+
 
 	use({
 		'rose-pine/neovim',
@@ -26,7 +28,10 @@ return require('packer').startup(function(use)
 	use('theprimeagen/harpoon')
 	use('mbbill/undotree')
 	use('tpope/vim-fugitive')
-
+	use('tpope/vim-rhubarb')
+	use('tpope/vim-surround')
+	use('tpope/vim-commentary')
+    use('iamcco/markdown-preview.nvim', { run = 'cd app && yarn install', cmd = 'MarkdownPreview'})
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
@@ -53,5 +58,10 @@ return require('packer').startup(function(use)
 
     use('folke/zen-mode.nvim')
     use('eandrju/cellular-automaton.nvim')
+
+    use({
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    })
 end)
 
