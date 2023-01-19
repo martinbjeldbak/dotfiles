@@ -39,9 +39,10 @@ mackup restore
 
 ## Neovim
 
-After installing neovim, let's install vim-plug as per below instructions
+After installing neovim, let's install packer.nvim as per below instructions
 
-https://github.com/junegunn/vim-plug#installation
+https://github.com/wbthomason/packer.nvim
+
 
 Then install language parsers for [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)
 
