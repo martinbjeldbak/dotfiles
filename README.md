@@ -39,9 +39,10 @@ mackup restore
 
 ## Neovim
 
-After installing neovim, let's install vim-plug as per below instructions
+After installing neovim, let's install packer.nvim as per below instructions
 
-https://github.com/junegunn/vim-plug#installation
+https://github.com/wbthomason/packer.nvim
+
 
 Then install language parsers for [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)
 
@@ -67,3 +68,7 @@ Currently I'm loving the OneDark theme at https://github.com/joshdick/onedark.vi
 ### Fonts
 
 Depending on OS setting up the dotfiles on, install the JetBrains Mono Nerd Fonts as per https://github.com/romkatv/powerlevel10k#manual-font-installation
+
+### Tmux
+
+Install tmux-plugin-manager following https://github.com/tmux-plugins/tpm#installation
