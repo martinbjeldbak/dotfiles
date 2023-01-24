@@ -32,6 +32,7 @@ return require('packer').startup(function(use)
 	use('tpope/vim-surround')
 	use('tpope/vim-commentary')
     use('iamcco/markdown-preview.nvim', { run = 'cd app && yarn install', cmd = 'MarkdownPreview'})
+    use("b0o/schemastore.nvim")
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',

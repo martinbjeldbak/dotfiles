@@ -10,6 +10,15 @@ lsp.ensure_installed({
 	'html',
 })
 
+lsp.configure('jsonls', {
+    settings = {
+        json = {
+            schemas = require('schemastore').json.schemas(),
+            validate = { enable = true },
+        },
+    },
+})
+
 -- configure lua language server for neovim
 -- see :help lsp-zero.nvim_workspace()
 lsp.nvim_workspace()
