@@ -8,6 +8,8 @@ lsp.ensure_installed({
 	'tsserver',
 	'sumneko_lua',
 	'html',
+    'bashls',
+    'yamlls',
 })
 
 -- See https://github.com/b0o/SchemaStore.nvim/pull/10 for simplification
