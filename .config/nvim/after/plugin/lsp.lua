@@ -11,6 +11,30 @@ lsp.ensure_installed({
     'gopls',
 })
 
+-- See https://github.com/b0o/SchemaStore.nvim/pull/10 for simplification
+local json_schemas = require('schemastore').json.schemas {}
+local yaml_schemas = {}
+vim.tbl_map(function(schema)
+  yaml_schemas[schema.url] = schema.fileMatch
+end, json_schemas)
+
+lsp.configure('jsonls', {
+    settings = {
+        json = {
+            schemas = json_schemas,
+            validate = { enable = true },
+        },
+    },
+})
+
+lsp.configure('yamlls', {
+    settings = {
+        yaml = {
+            schemas = yaml_schemas
+        }
+    }
+})
+
 -- configure lua language server for neovim
 -- see :help lsp-zero.nvim_workspace()
 lsp.nvim_workspace()

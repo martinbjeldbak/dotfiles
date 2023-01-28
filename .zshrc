@@ -81,7 +81,11 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 case `uname` in
   Darwin) # MacOS
 
-    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    if [[ $(arch) == 'arm64' ]]; then # M1
+        source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    else
+        source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    fi
 
     # Support switching JDK versions https://github.com/AdoptOpenJDK/homebrew-openjdk#switch-between-different-jdk-versions
     jdk() {

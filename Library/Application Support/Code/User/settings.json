@@ -75,7 +75,6 @@
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "window.zoomLevel": 1,
   "git.confirmSync": false,
   "git.autofetch": true,
   "explorer.confirmDragAndDrop": false,
@@ -140,4 +139,5 @@
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
+  "window.zoomLevel": -2,
 }
