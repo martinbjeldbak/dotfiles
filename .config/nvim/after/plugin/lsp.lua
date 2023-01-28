@@ -8,6 +8,7 @@ lsp.ensure_installed({
 	'tsserver',
 	'sumneko_lua',
 	'html',
+    'gopls',
 })
 
 -- configure lua language server for neovim
