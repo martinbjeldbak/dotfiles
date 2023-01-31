@@ -10,6 +10,7 @@ lsp.ensure_installed({
 	'html',
     'bashls',
     'yamlls',
+    'gopls',
 })
 
 -- See https://github.com/b0o/SchemaStore.nvim/pull/10 for simplification
