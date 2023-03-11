@@ -6,7 +6,7 @@ lsp.preset('recommended')
 
 lsp.ensure_installed({
 	'tsserver',
-	'lua_lsp',
+	'lua_ls',
 	'html',
     'bashls',
     'yamlls',
