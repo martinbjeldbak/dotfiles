@@ -24,6 +24,14 @@ return require('packer').startup(function(use)
 		end
 	})
 
+    use({
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons',
+        },
+        tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    })
+
 	use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
 	use('theprimeagen/harpoon')
 	use('mbbill/undotree')
@@ -64,5 +72,7 @@ return require('packer').startup(function(use)
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     })
+    use('fatih/vim-go', { run = ':GoUpdateBinaries' })
+    use('buoto/gotests-vim')
 end)
 
