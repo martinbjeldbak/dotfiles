@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
 	use('mbbill/undotree')
 	use('tpope/vim-fugitive')
 	use('tpope/vim-rhubarb')
+	use('tyru/open-browser.vim') -- support :GBrowse, see https://github.com/tpope/vim-rhubarb/issues/62
 	use('tpope/vim-surround')
 	use('tpope/vim-commentary')
     use('iamcco/markdown-preview.nvim', { run = 'cd app && yarn install', cmd = 'MarkdownPreview'})

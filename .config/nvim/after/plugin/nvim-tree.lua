@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>t", vim.cmd.NvimTreeToggle)
+vim.keymap.set("n", "C-t", vim.cmd.NvimTreeToggle)
 vim.keymap.set("n", "<leader>f", vim.cmd.NvimTreeFindFile)
 
 require("nvim-tree").setup({
