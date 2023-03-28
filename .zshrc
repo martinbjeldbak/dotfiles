@@ -10,6 +10,8 @@ if [ -d "$HOME/.local/bin" ] ; then
   PATH="$HOME/.local/bin:$PATH"
 fi
 
+PATH="$HOME/.yarn/bin:$PATH"
+
 source $HOME/.exports
 
 # Path to your oh-my-zsh installation.
