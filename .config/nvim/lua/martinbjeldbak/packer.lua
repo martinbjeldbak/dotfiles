@@ -43,6 +43,7 @@ return require('packer').startup(function(use)
     use('iamcco/markdown-preview.nvim', { run = 'cd app && yarn install', cmd = 'MarkdownPreview'})
     use("b0o/schemastore.nvim")
     use("christoomey/vim-tmux-navigator")
+    use("edkolev/tmuxline.vim")
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
