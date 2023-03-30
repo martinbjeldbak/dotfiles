@@ -1,5 +1,8 @@
 vim.filetype.add {
     extension = {
-        tfvars = 'terraform'
+        tfvars = 'terraform',
+    },
+    filename = {
+        ['Kustomization'] = "yaml"
     }
 }
