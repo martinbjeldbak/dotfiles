@@ -13,6 +13,8 @@ alias whatismyip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
+alias r="bin/rspec"
+
 # View HTTP traffic
 # alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 # alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
@@ -42,22 +44,8 @@ alias vim='nvim'
 #alias hist='history  | grep -m 10'
 #alias top='htop'
 
-pygmentizeHTML() {
-  pygmentize -O full -f html $1 > "$1".html
-}
-alias pygmentizeHTML=pygmentizeHTML
-
-dotPNG() {
-  dot -Tpng $1.dot -o $1.png
-}
-alias dotPNG=dotPNG
-
-tarFolder() {
-  tar -zcf $1.tar.gz "$1"
-}
-alias tarFolder=tarFolder
-
 alias bne='curl wttr.in/brisbane'
+alias mel='curl wttr.in/melbourne'
 alias ping='prettyping --nolegend'
 alias vim=nvim
 alias cat=bat
