@@ -47,6 +47,8 @@ return require('packer').startup(function(use)
     use("b0o/schemastore.nvim")
     use("christoomey/vim-tmux-navigator")
 
+    use("f-person/auto-dark-mode.nvim")
+
 	use {
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v1.x',
