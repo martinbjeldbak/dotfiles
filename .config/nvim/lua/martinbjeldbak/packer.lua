@@ -7,7 +7,8 @@ return require('packer').startup(function(use)
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
 
-    use('nvim-telescope/telescope-fzf-native.nvim', { run = 'make' })
+    use({'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' })
+
 	use({
 		'nvim-telescope/telescope.nvim', tag = '0.1.1',
 		-- or                            , branch = '0.1.x',
@@ -31,6 +32,8 @@ return require('packer').startup(function(use)
         },
         tag = 'nightly' -- optional, updated every week. (see issue #1193)
     })
+
+    use('tpope/vim-rails')
 
 	use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
 	use('theprimeagen/harpoon')
