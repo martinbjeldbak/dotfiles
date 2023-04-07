@@ -44,7 +44,11 @@ return require('packer').startup(function(use)
 	use('tyru/open-browser.vim') -- support :GBrowse, see https://github.com/tpope/vim-rhubarb/issues/62
 	use('tpope/vim-surround')
 	use('tpope/vim-commentary')
-    use('iamcco/markdown-preview.nvim', { run = 'cd app && yarn install', cmd = 'MarkdownPreview'})
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
+
     use("b0o/schemastore.nvim")
     use("christoomey/vim-tmux-navigator")
     use("edkolev/tmuxline.vim")
