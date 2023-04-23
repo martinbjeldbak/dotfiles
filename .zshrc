@@ -10,6 +10,8 @@ if [ -d "$HOME/.local/bin" ] ; then
   PATH="$HOME/.local/bin:$PATH"
 fi
 
+PATH="$HOME/.yarn/bin:$PATH"
+
 source $HOME/.exports
 
 # Path to your oh-my-zsh installation.
@@ -21,6 +23,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel10k/powerlevel10k"
+
+BAT_THEME="gruvbox-light"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -64,9 +68,6 @@ setopt HIST_VERIFY               # Don't execute immediately upon history expans
 export LANG=en_AU.UTF-8
 
 export EDITOR='nvim'
-
-# See https://github.com/yuki-yano/fzf-preview.vim
-export FZF_PREVIEW_PREVIEW_BAT_THEME='Nord'
 
 export FZF_DEFAULT_COMMAND='fd --type f'
 
