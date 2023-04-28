@@ -30,7 +30,6 @@ return require('packer').startup(function(use)
         requires = {
             'nvim-tree/nvim-web-devicons',
         },
-        tag = 'nightly' -- optional, updated every week. (see issue #1193)
     })
 
     use('tpope/vim-rails')
@@ -57,11 +56,16 @@ return require('packer').startup(function(use)
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v1.x',
+		branch = 'v2.x',
 		requires = {
 			-- LSP Support
 			{'neovim/nvim-lspconfig'},             -- Required
-			{'williamboman/mason.nvim'},           -- Optional
+            {                                      -- Optional
+              'williamboman/mason.nvim',
+               run = function()
+                 pcall(vim.cmd, 'MasonUpdate')
+               end,
+            },
 			{'williamboman/mason-lspconfig.nvim'}, -- Optional
 
 			-- Autocompletion
@@ -78,6 +82,7 @@ return require('packer').startup(function(use)
 		}
 	}
 
+    use('folke/twilight.nvim')
     use('folke/zen-mode.nvim')
     use('eandrju/cellular-automaton.nvim')
 
