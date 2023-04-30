@@ -61,6 +61,8 @@ Then install custom Oh My Zsh plugins, such as [zsh-syntax-highlighting](https:/
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
+Set up catppuccin syntax highlighting following <https://github.com/catppuccin/zsh-syntax-highlighting>
+
 ### Theme
 
 Currently I'm loving the OneDark theme at https://github.com/joshdick/onedark.vim and have set up this in vim, but it should also be configured for the terminal.
@@ -71,4 +73,4 @@ Depending on OS setting up the dotfiles on, install the JetBrains Mono Nerd Font
 
 ### Tmux
 
-Install tmux-plugin-manager following https://github.com/tmux-plugins/tpm#installation
+Install `tmux-plugin-manager` following https://github.com/tmux-plugins/tpm#installation

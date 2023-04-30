@@ -16,14 +16,14 @@ return require('packer').startup(function(use)
 	})
 
 
-	use({
-		'rose-pine/neovim',
-		as = 'rose-pine',
-		config = function()
-			require("rose-pine").setup()
-			vim.cmd('colorscheme rose-pine')
-		end
-	})
+    -- theming
+    use({
+        "catppuccin/nvim",
+        as = "catppuccin",
+        config = function ()
+            vim.cmd.colorscheme "catppuccin"
+        end
+    })
 
     use({
         'nvim-tree/nvim-tree.lua',

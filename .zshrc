@@ -39,7 +39,7 @@ BAT_THEME="gruvbox-light"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux asdf fzf ripgrep gh terraform helm golang kubectl docker docker-compose gcloud history mvn macos jira z)
+plugins=(git tmux asdf fzf ripgrep gh terraform helm golang kubectl docker docker-compose gcloud history mvn macos jira z zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -106,6 +106,7 @@ case `uname` in
     path+=("/usr/local/opt/curl/bin")
     ;;
   Linux)
+    source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
     source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 esac
 
