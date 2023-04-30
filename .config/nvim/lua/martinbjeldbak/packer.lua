@@ -53,6 +53,25 @@ return require('packer').startup(function(use)
 
     use("f-person/auto-dark-mode.nvim")
 
+    use({
+        'j-hui/fidget.nvim',
+        config = function()
+            require("fidget").setup({
+                -- setup colorscheme for catppuccin
+                window = {
+                    blend = 0,
+                }
+            })
+        end
+    })
+
+    use({
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require("gitsigns").setup({})
+        end
+    })
+
 	use {
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v2.x',
