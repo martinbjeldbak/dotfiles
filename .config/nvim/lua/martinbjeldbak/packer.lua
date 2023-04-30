@@ -26,6 +26,26 @@ return require('packer').startup(function(use)
     })
 
     use({
+        'glepnir/dashboard-nvim',
+        event = 'VimEnter',
+        config = function()
+            require('dashboard').setup {
+                -- config
+            }
+        end,
+        requires = {'nvim-tree/nvim-web-devicons'}
+    })
+
+    use({
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup()
+        end
+    })
+
+    use({
         'nvim-tree/nvim-tree.lua',
         requires = {
             'nvim-tree/nvim-web-devicons',
@@ -68,7 +88,7 @@ return require('packer').startup(function(use)
     use({
         'lewis6991/gitsigns.nvim',
         config = function()
-            require("gitsigns").setup({})
+            require("gitsigns").setup()
         end
     })
 
@@ -76,15 +96,15 @@ return require('packer').startup(function(use)
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v2.x',
 		requires = {
-			-- LSP Support
-			{'neovim/nvim-lspconfig'},             -- Required
             {                                      -- Optional
               'williamboman/mason.nvim',
                run = function()
                  pcall(vim.cmd, 'MasonUpdate')
                end,
             },
-			{'williamboman/mason-lspconfig.nvim'}, -- Optional
+			{'williamboman/mason-lspconfig.nvim'},
+			-- LSP Support
+			{'neovim/nvim-lspconfig'},
 
 			-- Autocompletion
 			{'hrsh7th/nvim-cmp'},         -- Required
@@ -106,7 +126,14 @@ return require('packer').startup(function(use)
 
     use({
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        config = function()
+            require('lualine').setup {
+                options = {
+                    theme = "catppuccin"
+                }
+            }
+        end
     })
     use('fatih/vim-go', { run = ':GoUpdateBinaries' })
     use('buoto/gotests-vim')
