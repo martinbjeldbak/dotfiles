@@ -24,7 +24,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-BAT_THEME="gruvbox-light"
+BAT_THEME="Catppuccin-mocha"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.

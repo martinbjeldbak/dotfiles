@@ -51,3 +51,5 @@ alias vim=nvim
 alias cat=bat
 alias gs='git status'
 alias ll='exa -l --icons --no-user --group-directories-first  --time-style long-iso'
+
+alias mvn='docker run -it --rm -v "$HOME/.m2":/root/.m2 -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.8.7-eclipse-temurin-11 mvn'
