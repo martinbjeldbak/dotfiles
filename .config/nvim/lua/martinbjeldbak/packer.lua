@@ -15,22 +15,38 @@ return require('packer').startup(function(use)
 		requires = { {'nvim-lua/plenary.nvim'} }
 	})
 
+    -- theming
+    use({
+        "catppuccin/nvim",
+        as = "catppuccin",
+        config = function ()
+            vim.cmd.colorscheme "catppuccin"
+        end
+    })
 
-	use({
-		'rose-pine/neovim',
-		as = 'rose-pine',
-		config = function()
-			require("rose-pine").setup()
-			vim.cmd('colorscheme rose-pine')
-		end
-	})
+    use({
+        'glepnir/dashboard-nvim',
+        event = 'VimEnter',
+        config = function()
+            require('dashboard').setup({})
+        end,
+        requires = {'nvim-tree/nvim-web-devicons'}
+    })
+
+    use({
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup()
+        end
+    })
 
     use({
         'nvim-tree/nvim-tree.lua',
         requires = {
             'nvim-tree/nvim-web-devicons',
         },
-        tag = 'nightly' -- optional, updated every week. (see issue #1193)
     })
 
     use('tpope/vim-rails')
@@ -51,18 +67,41 @@ return require('packer').startup(function(use)
 
     use("b0o/schemastore.nvim")
     use("christoomey/vim-tmux-navigator")
-    use("edkolev/tmuxline.vim")
 
     use("f-person/auto-dark-mode.nvim")
 
+    use({
+        'j-hui/fidget.nvim',
+        config = function()
+            require("fidget").setup({
+                -- setup colorscheme for catppuccin
+                window = {
+                    blend = 0,
+                }
+            })
+        end
+    })
+
+    use({
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require("gitsigns").setup()
+        end
+    })
+
 	use {
 		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v1.x',
+		branch = 'v2.x',
 		requires = {
+            {                                      -- Optional
+              'williamboman/mason.nvim',
+               run = function()
+                 pcall(vim.cmd, 'MasonUpdate')
+               end,
+            },
+			{'williamboman/mason-lspconfig.nvim'},
 			-- LSP Support
-			{'neovim/nvim-lspconfig'},             -- Required
-			{'williamboman/mason.nvim'},           -- Optional
-			{'williamboman/mason-lspconfig.nvim'}, -- Optional
+			{'neovim/nvim-lspconfig'},
 
 			-- Autocompletion
 			{'hrsh7th/nvim-cmp'},         -- Required
@@ -78,12 +117,26 @@ return require('packer').startup(function(use)
 		}
 	}
 
+    -- Linting support
+    use({
+        'jose-elias-alvarez/null-ls.nvim',
+        requires = { "nvim-lua/plenary.nvim" },
+    })
+
+    use('folke/twilight.nvim')
     use('folke/zen-mode.nvim')
     use('eandrju/cellular-automaton.nvim')
 
     use({
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        config = function()
+            require('lualine').setup {
+                options = {
+                    theme = "catppuccin"
+                }
+            }
+        end
     })
     use('fatih/vim-go', { run = ':GoUpdateBinaries' })
     use('buoto/gotests-vim')

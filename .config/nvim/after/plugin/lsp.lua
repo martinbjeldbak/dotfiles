@@ -13,8 +13,7 @@ lsp.ensure_installed({
     'gopls',
 })
 
--- See https://github.com/b0o/SchemaStore.nvim/pull/10 for simplification
-local json_schemas = require('schemastore').json.schemas {}
+local json_schemas = vim.list_extend({}, require('schemastore').json.schemas { })
 local yaml_schemas = {}
 vim.tbl_map(function(schema)
   yaml_schemas[schema.url] = schema.fileMatch
@@ -32,7 +31,7 @@ lsp.configure('jsonls', {
 lsp.configure('yamlls', {
     settings = {
         yaml = {
-            schemas = yaml_schemas
+            schemas = yaml_schemas,
         }
     }
 })
@@ -42,6 +41,7 @@ lsp.configure('yamlls', {
 lsp.nvim_workspace()
 
 local cmp = require('cmp')
+local cmp_action = require('lsp-zero').cmp_action()
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_mappings = lsp.defaults.cmp_mappings({
 	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
@@ -50,19 +50,27 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 	['<C-Space>'] = cmp.mapping.complete(),
 })
 
-lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
+-- Source: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/autocomplete.md#add-an-external-collection-of-snippets
+require("luasnip.loaders.from_vscode").lazy_load()
+
+-- Add rails framework support to Ruby files
+require'luasnip'.filetype_extend("ruby", {"rails"})
+
+cmp.setup({
+  sources = {
+    {name = 'path'}, -- gives completions based on the filesystem.
+    {name = 'nvim_lsp'}, -- suggestions based on language server
+    {name = 'buffer', keyword_length = 3}, -- provides suggestions based on the current file
+    {name = 'luasnip', keyword_length = 2}, -- it shows snippets loaded by luasnip in the suggestions
+  },
+  mapping = {
+    ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+    ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+  }
 })
 
--- See :help lsp-zero-preferences
-lsp.set_preferences({
---    suggest_lsp_servers = false,
-    sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I'
-    }
+lsp.setup_nvim_cmp({
+  mapping = cmp_mappings
 })
 
 lsp.on_attach(function(client, bufnr)
