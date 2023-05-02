@@ -1,5 +1,7 @@
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\powerlevel10k_modern.omp.json" | Invoke-Expression
 
+op completion powershell | Out-String | Invoke-Expression
+
 function streaml() {
     param(
         [string] $streamer
