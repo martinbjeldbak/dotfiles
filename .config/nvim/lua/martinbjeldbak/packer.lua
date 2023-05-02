@@ -15,7 +15,6 @@ return require('packer').startup(function(use)
 		requires = { {'nvim-lua/plenary.nvim'} }
 	})
 
-
     -- theming
     use({
         "catppuccin/nvim",
@@ -117,6 +116,12 @@ return require('packer').startup(function(use)
 			{'rafamadriz/friendly-snippets'}, -- Optional
 		}
 	}
+
+    -- Linting support
+    use({
+        'jose-elias-alvarez/null-ls.nvim',
+        requires = { "nvim-lua/plenary.nvim" },
+    })
 
     use('folke/twilight.nvim')
     use('folke/zen-mode.nvim')
