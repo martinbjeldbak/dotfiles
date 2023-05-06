@@ -1,9 +1,22 @@
 return {
+  -- snippet engine
+  {
+    "L3MON4D3/LuaSnip", -- snippet engine
+    version = "1.*",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+    },
+    config = function(_, opts)
+      require('luasnip.loaders.from_vscode').lazy_load()
+    end,
+  },
+
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
+      { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim", -- mason extension for lspconfig
       "hrsh7th/nvim-cmp", -- autocomplete engine
@@ -11,34 +24,41 @@ return {
       "hrsh7th/cmp-path", -- nvim-cmp source for filesystem paths.
       "hrsh7th/cmp-nvim-lsp", -- show data sent by the language server.
       "saadparwaiz1/cmp_luasnip", -- luasnip completion source for nvim-cmp
-      "L3MON4D3/LuaSnip", -- snippet engine
-      "rafamadriz/friendly-snippets",
+      "LuaSnip", -- snippet engine
       "b0o/schemastore.nvim",
     },
     ---@class PluginLspOpts
     opts = {
       diagnostics = {
-        virtual_text = true
+        virtual_text = true,
       }
     },
     ---@param opts PluginLspOpts
     config = function(_, opts)
+      -- Heavily inspired by https://github.com/VonHeikemen/nvim-starter/blob/03-lsp/init.lua
+      require('mason').setup()
+      local cmp = require('cmp')
+      local luasnip = require('luasnip')
+      local mlsp = require('mason-lspconfig')
+      local select_opts = {behavior = cmp.SelectBehavior.Select}
+
       -- diagnostics
       vim.diagnostic.config(opts.diagnostics)
 
-      -- mason & lspconfig setup
-      require('mason').setup()
-
-      local mlsp = require('mason-lspconfig')
 
       mlsp.setup({
         ensure_installed = {
+          'cssls',
+          'dockerls',
+          'docker_compose_language_service',
+          'eslint',
           'tsserver',
           'lua_ls',
           'html',
           'bashls',
           'yamlls',
           'gopls',
+          'jedi_language_server',
         }
       })
 
@@ -58,13 +78,82 @@ return {
         vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
       end
 
-      require('cmp').setup({
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end
+        },
         sources = {
           {name = 'path'}, -- gives completions based on the filesystem.
           {name = 'nvim_lsp'}, -- suggestions based on language server
           {name = 'buffer', keyword_length = 3}, -- provides suggestions based on the current file
           {name = 'luasnip', keyword_length = 2}, -- it shows snippets loaded by luasnip in the suggestions
-        }
+        },
+        formatting = {
+          fields = {'menu', 'abbr', 'kind'},
+          format = function(entry, item)
+            local menu_icon = {
+              nvim_lsp = 'λ',
+              luasnip = '⋗',
+              buffer = 'Ω',
+              path = '🖫',
+            }
+            item.menu = menu_icon[entry.source.name]
+            return item
+          end,
+        },
+        -- See :help cmp-mapping
+        mapping = {
+          ['<Up>'] = cmp.mapping.select_prev_item(select_opts),
+          ['<Down>'] = cmp.mapping.select_next_item(select_opts),
+
+          ['<C-p>'] = cmp.mapping.select_prev_item(select_opts),
+          ['<C-n>'] = cmp.mapping.select_next_item(select_opts),
+
+          ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-d>'] = cmp.mapping.scroll_docs(4),
+
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<C-y>'] = cmp.mapping.confirm({select = true}),
+          ['<CR>'] = cmp.mapping.confirm({select = false}),
+
+          ['<C-f>'] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(1) then
+              luasnip.jump(1)
+            else
+              fallback()
+            end
+          end, {'i', 's'}),
+
+          ['<C-b>'] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, {'i', 's'}),
+
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            local col = vim.fn.col('.') - 1
+
+            if cmp.visible() then
+              cmp.select_next_item(select_opts)
+            elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+              fallback()
+            else
+              cmp.complete()
+            end
+          end, {'i', 's'}),
+
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item(select_opts)
+            else
+              fallback()
+            end
+          end, {'i', 's'}),
+        },
       })
 
       local lspconfig = require('lspconfig')
@@ -95,6 +184,9 @@ return {
                 -- Do not send telemetry data containing a randomized but unique identifier
                 telemetry = {
                   enable = false,
+                },
+                completion = {
+                  callSnippet = "Replace",
                 },
               },
             }
