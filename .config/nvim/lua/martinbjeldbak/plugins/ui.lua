@@ -24,7 +24,14 @@ return {
       "nvim-web-devicons",
     },
     opts = {
-      theme = "catppuccin",
+      options = {
+        theme = "catppuccin",
+      },
+      extensions = {
+        "fugitive",
+        "fzf",
+        "nvim-tree",
+      },
     },
   }
 }
