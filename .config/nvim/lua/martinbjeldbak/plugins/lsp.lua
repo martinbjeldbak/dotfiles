@@ -19,12 +19,12 @@ return {
       { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim", -- mason extension for lspconfig
-      "hrsh7th/nvim-cmp", -- autocomplete engine
-      "hrsh7th/cmp-buffer", -- nvim-cmp source for buffer words
-      "hrsh7th/cmp-path", -- nvim-cmp source for filesystem paths.
-      "hrsh7th/cmp-nvim-lsp", -- show data sent by the language server.
-      "saadparwaiz1/cmp_luasnip", -- luasnip completion source for nvim-cmp
-      "LuaSnip", -- snippet engine
+      "hrsh7th/nvim-cmp",                  -- autocomplete engine
+      "hrsh7th/cmp-buffer",                -- nvim-cmp source for buffer words
+      "hrsh7th/cmp-path",                  -- nvim-cmp source for filesystem paths.
+      "hrsh7th/cmp-nvim-lsp",              -- show data sent by the language server.
+      "saadparwaiz1/cmp_luasnip",          -- luasnip completion source for nvim-cmp
+      "LuaSnip",                           -- snippet engine
       "b0o/schemastore.nvim",
     },
     ---@class PluginLspOpts
@@ -40,7 +40,7 @@ return {
       local cmp = require('cmp')
       local luasnip = require('luasnip')
       local mlsp = require('mason-lspconfig')
-      local select_opts = {behavior = cmp.SelectBehavior.Select}
+      local select_opts = { behavior = cmp.SelectBehavior.Select }
 
       -- diagnostics
       vim.diagnostic.config(opts.diagnostics)
@@ -64,7 +64,7 @@ return {
 
       local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
       local lsp_attach = function(_, bufnr)
-        local opts = {buffer = bufnr, remap = false}
+        local opts = { buffer = bufnr, remap = false }
 
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
@@ -85,13 +85,13 @@ return {
           end
         },
         sources = {
-          {name = 'path'}, -- gives completions based on the filesystem.
-          {name = 'nvim_lsp'}, -- suggestions based on language server
-          {name = 'buffer', keyword_length = 3}, -- provides suggestions based on the current file
-          {name = 'luasnip', keyword_length = 2}, -- it shows snippets loaded by luasnip in the suggestions
+          { name = 'path' },                      -- gives completions based on the filesystem.
+          { name = 'nvim_lsp' },                  -- suggestions based on language server
+          { name = 'buffer',  keyword_length = 3 }, -- provides suggestions based on the current file
+          { name = 'luasnip', keyword_length = 2 }, -- it shows snippets loaded by luasnip in the suggestions
         },
         formatting = {
-          fields = {'menu', 'abbr', 'kind'},
+          fields = { 'menu', 'abbr', 'kind' },
           format = function(entry, item)
             local menu_icon = {
               nvim_lsp = 'λ',
@@ -115,8 +115,8 @@ return {
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
 
           ['<C-e>'] = cmp.mapping.abort(),
-          ['<C-y>'] = cmp.mapping.confirm({select = true}),
-          ['<CR>'] = cmp.mapping.confirm({select = false}),
+          ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+          ['<CR>'] = cmp.mapping.confirm({ select = false }),
 
           ['<C-f>'] = cmp.mapping(function(fallback)
             if luasnip.jumpable(1) then
@@ -124,7 +124,7 @@ return {
             else
               fallback()
             end
-          end, {'i', 's'}),
+          end, { 'i', 's' }),
 
           ['<C-b>'] = cmp.mapping(function(fallback)
             if luasnip.jumpable(-1) then
@@ -132,7 +132,7 @@ return {
             else
               fallback()
             end
-          end, {'i', 's'}),
+          end, { 'i', 's' }),
 
           ['<Tab>'] = cmp.mapping(function(fallback)
             local col = vim.fn.col('.') - 1
@@ -144,7 +144,7 @@ return {
             else
               cmp.complete()
             end
-          end, {'i', 's'}),
+          end, { 'i', 's' }),
 
           ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -152,7 +152,7 @@ return {
             else
               fallback()
             end
-          end, {'i', 's'}),
+          end, { 'i', 's' }),
         },
       })
 
@@ -164,7 +164,7 @@ return {
             capabilities = lsp_capabilities,
           })
         end,
-        ["lua_ls"] = function ()
+        ["lua_ls"] = function()
           lspconfig.lua_ls.setup({
             settings = {
               Lua = {
@@ -174,7 +174,7 @@ return {
                 },
                 diagnostics = {
                   -- Get the language server to recognize the `vim` global
-                  globals = {'vim'},
+                  globals = { 'vim' },
                 },
                 workspace = {
                   -- Make the server aware of Neovim runtime files
@@ -192,7 +192,7 @@ return {
             }
           })
         end,
-        ["jsonls"] = function ()
+        ["jsonls"] = function()
           lspconfig.jsonls.setup({
             settings = {
               json = {
@@ -202,7 +202,7 @@ return {
             },
           })
         end,
-        ["yamlls"] = function ()
+        ["yamlls"] = function()
           lspconfig.yamlls.setup({
             settings = {
               yaml = {
@@ -212,7 +212,6 @@ return {
           })
         end,
       })
-
     end,
   },
 

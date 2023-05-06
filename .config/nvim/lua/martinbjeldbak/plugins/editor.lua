@@ -67,20 +67,31 @@ return {
   -- fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
+    version = false, -- telescope did only one release, so use HEAD for now
     dependencies = {
       {
         "nvim-telescope/telescope-fzf-native.nvim", -- add native fzf implementation
         build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
       },
     },
-    cmd = "Telescope",
-    version = false, -- telescope did only one release, so use HEAD for now
     keys = {
+      { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+
+      -- find
       { "<leader>ff", function() require('telescope.builtin').find_files() end, desc = "Find files" },
       { "<C-p>", function() require('telescope.builtin').git_files() end, desc = "Git files" },
-      { '<leader>fz', function() require('telescope.builtin').live_grep() end, desc = "Live grep" },
+      { '<leader>fz', function() require('telescope.builtin').live_grep() end, desc = "Live grep (root dir)" },
       { '<leader>fg', function() require('telescope.builtin').grep_string() end, desc = "Grep for string" },
       { '<leader>fb', function() require('telescope.builtin').buffers() end, desc = "Buffers" },
+
+      -- search
+      { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+      { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+      { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+      { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+      { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+      { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
     },
     opts = {
       defaults = {
