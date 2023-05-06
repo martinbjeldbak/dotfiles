@@ -189,5 +189,85 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
-  }
+  },
+
+  -- search/replace in multiple files
+  {
+    "nvim-pack/nvim-spectre",
+    -- stylua: ignore
+    keys = {
+      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+    },
+  },
+
+
+  {
+    "ggandor/leap.nvim",
+    keys = {
+      { "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
+      { "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
+      { "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
+    },
+    config = function(_, opts)
+      local leap = require("leap")
+      for k, v in pairs(opts) do
+        leap.opts[k] = v
+      end
+      leap.add_default_mappings(true)
+      vim.keymap.del({ "x", "o" }, "x")
+      vim.keymap.del({ "x", "o" }, "X")
+    end,
+  },
+
+  -- better diagnostics list and others
+  {
+    "folke/trouble.nvim",
+    cmd = { "TroubleToggle", "Trouble" },
+    opts = { use_diagnostic_signs = true },
+    keys = {
+      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+      { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+      {
+        "[q",
+        function()
+          if require("trouble").is_open() then
+            require("trouble").previous({ skip_groups = true, jump = true })
+          else
+            vim.cmd.cprev()
+          end
+        end,
+        desc = "Previous trouble/quickfix item",
+      },
+      {
+        "]q",
+        function()
+          if require("trouble").is_open() then
+            require("trouble").next({ skip_groups = true, jump = true })
+          else
+            vim.cmd.cnext()
+          end
+        end,
+        desc = "Next trouble/quickfix item",
+      },
+    },
+  },
+
+  -- todo comments
+  {
+    "folke/todo-comments.nvim",
+    cmd = { "TodoTrouble", "TodoTelescope" },
+    event = { "BufReadPost", "BufNewFile" },
+    config = true,
+    -- stylua: ignore
+    keys = {
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+      { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
+      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
+      { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+    },
+  },
 }
