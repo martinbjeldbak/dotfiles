@@ -5,13 +5,13 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      "hrsh7th/nvim-cmp",
+      "williamboman/mason-lspconfig.nvim", -- mason extension for lspconfig
+      "hrsh7th/nvim-cmp", -- autocomplete engine
       "hrsh7th/cmp-buffer", -- nvim-cmp source for buffer words
       "hrsh7th/cmp-path", -- nvim-cmp source for filesystem paths.
       "hrsh7th/cmp-nvim-lsp", -- show data sent by the language server.
       "saadparwaiz1/cmp_luasnip", -- luasnip completion source for nvim-cmp
-      "L3MON4D3/LuaSnip",
+      "L3MON4D3/LuaSnip", -- snippet engine
       "rafamadriz/friendly-snippets",
       "b0o/schemastore.nvim",
     },
@@ -43,7 +43,7 @@ return {
       })
 
       local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-      local lsp_attach = function(client, bufnr)
+      local lsp_attach = function(_, bufnr)
         local opts = {buffer = bufnr, remap = false}
 
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
@@ -58,23 +58,6 @@ return {
         vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
       end
 
-      local lspconfig = require('lspconfig')
-      lspconfig.jsonls.setup({
-        settings = {
-          json = {
-            schemas = require('schemastore').json.schemas(),
-            validate = { enable = true },
-          },
-        },
-      })
-      lspconfig.yamlls.setup({
-        settings = {
-          yaml = {
-            schemas = require('schemastore').yaml.schemas(),
-          },
-        },
-      })
-
       require('cmp').setup({
         sources = {
           {name = 'path'}, -- gives completions based on the filesystem.
@@ -84,11 +67,56 @@ return {
         }
       })
 
+      local lspconfig = require('lspconfig')
       mlsp.setup_handlers({
         function(server_name)
           lspconfig[server_name].setup({
             on_attach = lsp_attach,
             capabilities = lsp_capabilities,
+          })
+        end,
+        ["lua_ls"] = function ()
+          lspconfig.lua_ls.setup({
+            settings = {
+              Lua = {
+                runtime = {
+                  -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                  version = 'LuaJIT',
+                },
+                diagnostics = {
+                  -- Get the language server to recognize the `vim` global
+                  globals = {'vim'},
+                },
+                workspace = {
+                  -- Make the server aware of Neovim runtime files
+                  library = vim.api.nvim_get_runtime_file("", true),
+                  checkThirdParty = false, -- https://github.com/folke/neodev.nvim/issues/88
+                },
+                -- Do not send telemetry data containing a randomized but unique identifier
+                telemetry = {
+                  enable = false,
+                },
+              },
+            }
+          })
+        end,
+        ["jsonls"] = function ()
+          lspconfig.jsonls.setup({
+            settings = {
+              json = {
+                schemas = require('schemastore').json.schemas(),
+                validate = { enable = true },
+              },
+            },
+          })
+        end,
+        ["yamlls"] = function ()
+          lspconfig.yamlls.setup({
+            settings = {
+              yaml = {
+                schemas = require('schemastore').yaml.schemas(),
+              },
+            },
           })
         end,
       })
