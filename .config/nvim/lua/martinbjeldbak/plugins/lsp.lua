@@ -86,7 +86,7 @@ return {
         },
         sources = {
           { name = 'path' },                      -- gives completions based on the filesystem.
-          { name = 'nvim_lsp' },                  -- suggestions based on language server
+          { name = 'nvim_lsp', priority = 1 },                  -- suggestions based on language server
           { name = 'buffer',  keyword_length = 3 }, -- provides suggestions based on the current file
           { name = 'luasnip', keyword_length = 2 }, -- it shows snippets loaded by luasnip in the suggestions
         },
@@ -228,8 +228,8 @@ return {
           null_ls.builtins.code_actions.xo,
           null_ls.builtins.code_actions.gitsigns, -- integration with gitsigns.nvim
 
-          null_ls.builtins.completion.luasnip,
-          null_ls.builtins.completion.spell,
+          -- null_ls.builtins.completion.luasnip,
+          -- null_ls.builtins.completion.spell,
 
           null_ls.builtins.diagnostics.actionlint,
           null_ls.builtins.diagnostics.checkmake,
@@ -238,7 +238,10 @@ return {
           null_ls.builtins.diagnostics.buf,
           null_ls.builtins.diagnostics.dotenv_linter,
           null_ls.builtins.diagnostics.erb_lint,
-          null_ls.builtins.diagnostics.eslint,
+          -- using xo instead, which is wrapper on top of eslint
+          -- null_ls.builtins.diagnostics.eslint.with({
+          --   prefer_local = "node_modules/.bin",
+          -- }),
           null_ls.builtins.diagnostics.flake8,
           null_ls.builtins.diagnostics.golangci_lint,
           null_ls.builtins.diagnostics.hadolint,
@@ -267,9 +270,13 @@ return {
           null_ls.builtins.diagnostics.tfsec,
           null_ls.builtins.diagnostics.todo_comments,
           null_ls.builtins.diagnostics.trail_space,
-          null_ls.builtins.diagnostics.tsc,
+          null_ls.builtins.diagnostics.tsc.with({
+            prefer_local = "node_modules/.bin",
+          }),
           null_ls.builtins.diagnostics.write_good,
-          null_ls.builtins.diagnostics.xo,
+          null_ls.builtins.diagnostics.xo.with({
+            prefer_local = "node_modules/.bin",
+          }),
           null_ls.builtins.diagnostics.yamllint,
           null_ls.builtins.diagnostics.zsh,
 
