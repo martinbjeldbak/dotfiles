@@ -111,10 +111,10 @@ return {
             end,
           },
         },
-        pickers = {
-          -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-          find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
-        },
+      },
+      pickers = {
+        -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+        find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
       },
     },
     config = function(_, opts)
@@ -153,6 +153,9 @@ return {
       plugins = { spelling = true },
     },
     config = function(_, opts)
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+
       local wk = require("which-key")
       wk.setup(opts)
     end,

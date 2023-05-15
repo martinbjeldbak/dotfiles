@@ -69,7 +69,7 @@ export LANG=en_AU.UTF-8
 
 export EDITOR='nvim'
 
-export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
 # Google Cloud completions
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
