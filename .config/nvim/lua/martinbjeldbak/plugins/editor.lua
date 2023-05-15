@@ -176,6 +176,18 @@ return {
     event = { "BufReadPost", "BufNewFile" },
   },
 
+  -- autoclose tags
+  {
+    "windwp/nvim-ts-autotag",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "nvim-treesitter",
+    },
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end,
+  },
+
   -- comment stuff out
   {
     "tpope/vim-commentary",
