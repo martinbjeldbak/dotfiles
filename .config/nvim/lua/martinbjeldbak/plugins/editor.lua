@@ -4,7 +4,7 @@ return {
     "nvim-tree/nvim-tree.lua",
     version = "*",
     dependencies = {
-        "nvim-tree/nvim-web-devicons",
+      "nvim-tree/nvim-web-devicons",
     },
     opts = {
       sort_by = "case_sensitive",
@@ -23,7 +23,7 @@ return {
       },
     },
     keys = {
-      { "<C-t>", vim.cmd.NvimTreeToggle, desc = "NvimTree Toggle" },
+      { "<C-t>", vim.cmd.NvimTreeToggle,   desc = "NvimTree Toggle" },
       { "<C-f>", vim.cmd.NvimTreeFindFile, desc = "NvimTree Find File" },
     },
   },
@@ -39,10 +39,11 @@ return {
   {
     "tpope/vim-fugitive",
     keys = {
-      { "<leader>gs", vim.cmd.Git, desc = "Git" },
+      { "<leader>gs", vim.cmd.Git,           desc = "Git status" },
       { "<leader>gc", '<cmd>Git commit<cr>', desc = "Git commit" },
-      { "<leader>gp", '<cmd>Git push<cr>', desc = "Git push" },
+      { "<leader>gp", '<cmd>Git push<cr>',   desc = "Git push" },
     },
+    cmd = "G",
   },
   {
     "tpope/vim-rhubarb",
@@ -57,12 +58,12 @@ return {
   {
     "ThePrimeagen/harpoon",
     keys = {
-      { "<leader>a", function() require("harpoon.mark").add_file() end, desc = "Add file to Harpoon" },
-      { "<C-e>", function() require("harpoon.ui").toggle_quick_menu() end, desc = "Toggle harpoon quick menu" },
-      { "<C-1>", function() require("harpoon.ui").nav_file(1) end, desc = "Navigate to file 1" },
-      { "<C-2>", function() require("harpoon.ui").nav_file(2) end, desc = "Navigate to file 2" },
-      { "<C-3>", function() require("harpoon.ui").nav_file(3) end, desc = "Navigate to file 3" },
-      { "<C-4>", function() require("harpoon.ui").nav_file(4) end, desc = "Navigate to file 4" },
+      { "<leader>a", function() require("harpoon.mark").add_file() end,        desc = "Add file to Harpoon" },
+      { "<C-e>",     function() require("harpoon.ui").toggle_quick_menu() end, desc = "Toggle harpoon quick menu" },
+      { "<C-1>",     function() require("harpoon.ui").nav_file(1) end,         desc = "Navigate to file 1" },
+      { "<C-2>",     function() require("harpoon.ui").nav_file(2) end,         desc = "Navigate to file 2" },
+      { "<C-3>",     function() require("harpoon.ui").nav_file(3) end,         desc = "Navigate to file 3" },
+      { "<C-4>",     function() require("harpoon.ui").nav_file(4) end,         desc = "Navigate to file 4" },
     },
   },
 
@@ -74,26 +75,27 @@ return {
     dependencies = {
       {
         "nvim-telescope/telescope-fzf-native.nvim", -- add native fzf implementation
-        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+        build =
+        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
       },
     },
     keys = {
-      { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      { "<leader>:",  "<cmd>Telescope command_history<cr>",                      desc = "Command History" },
 
       -- find
-      { "<leader>ff", function() require('telescope.builtin').find_files() end, desc = "Find files" },
-      { "<C-p>", function() require('telescope.builtin').git_files() end, desc = "Git files" },
-      { '<leader>fz', function() require('telescope.builtin').live_grep() end, desc = "Live grep (root dir)" },
-      { '<leader>fg', function() require('telescope.builtin').grep_string() end, desc = "Grep for string" },
-      { '<leader>fb', function() require('telescope.builtin').buffers() end, desc = "Buffers" },
+      { "<leader>ff", function() require('telescope.builtin').find_files() end,  desc = "Find files" },
+      { "<C-p>",      function() require('telescope.builtin').git_files() end,   desc = "Git files" },
+      { '<leader>fz', function() require('telescope.builtin').live_grep() end,   desc = "Live grep (root dir)" },
+      { '<leader>fg', function() require('telescope.builtin').grep_string() end, desc = "Grep for string under cursor" },
+      { '<leader>fb', function() require('telescope.builtin').buffers() end,     desc = "Buffers" },
 
       -- search
-      { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
-      { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
-      { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
-      { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
-      { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
-      { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
+      { "<leader>sh", "<cmd>Telescope help_tags<cr>",                            desc = "Help Pages" },
+      { "<leader>sk", "<cmd>Telescope keymaps<cr>",                              desc = "Key Maps" },
+      { "<leader>sM", "<cmd>Telescope man_pages<cr>",                            desc = "Man Pages" },
+      { "<leader>sm", "<cmd>Telescope marks<cr>",                                desc = "Jump to Mark" },
+      { "<leader>so", "<cmd>Telescope vim_options<cr>",                          desc = "Options" },
+      { "<leader>sR", "<cmd>Telescope resume<cr>",                               desc = "Resume" },
     },
     opts = {
       defaults = {
@@ -115,8 +117,16 @@ return {
         },
       },
       pickers = {
-        -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-        find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
+        find_files = {
+          -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+          find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
+        },
+        -- https://github.com/nvim-telescope/telescope.nvim/issues/855#issuecomment-1032325327
+        live_grep = {
+          additional_args = function ()
+            return {"--hidden"}
+          end
+        }
       },
     },
     config = function(_, opts)
@@ -141,10 +151,14 @@ return {
       },
     },
     keys = {
-      { "<leader>zz", function()
-        require("zen-mode").toggle()
-        vim.wo.wrap = false
-      end, desc = "Enter zen mode" },
+      {
+        "<leader>zz",
+        function()
+          require("zen-mode").toggle()
+          vim.wo.wrap = false
+        end,
+        desc = "Enter zen mode"
+      },
     },
   },
 
@@ -232,8 +246,8 @@ return {
   {
     "ggandor/leap.nvim",
     keys = {
-      { "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
-      { "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
+      { "s",  mode = { "n", "x", "o" }, desc = "Leap forward to" },
+      { "S",  mode = { "n", "x", "o" }, desc = "Leap backward to" },
       { "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
     },
     config = function(_, opts)
@@ -253,10 +267,10 @@ return {
     cmd = { "TroubleToggle", "Trouble" },
     opts = { use_diagnostic_signs = true },
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
-      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
-      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List (Trouble)" },
+      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List (Trouble)" },
       {
         "[q",
         function()
@@ -290,12 +304,12 @@ return {
     config = true,
     -- stylua: ignore
     keys = {
-      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-      { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
-      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
-      { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
-      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+      { "]t",         function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+      { "[t",         function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+      { "<leader>xt", "<cmd>TodoTrouble<cr>",                              desc = "Todo (Trouble)" },
+      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",      desc = "Todo/Fix/Fixme (Trouble)" },
+      { "<leader>st", "<cmd>TodoTelescope<cr>",                            desc = "Todo" },
+      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "Todo/Fix/Fixme" },
     },
   },
 }
