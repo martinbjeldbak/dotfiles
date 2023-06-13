@@ -99,6 +99,7 @@ return {
     },
     opts = {
       defaults = {
+        file_ignore_patterns = { 'node_modules', '.git' },
         mappings = {
           i = {
             ["<C-Down>"] = function(...)
@@ -118,8 +119,7 @@ return {
       },
       pickers = {
         find_files = {
-          -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-          find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
+          hidden = true
         },
         -- https://github.com/nvim-telescope/telescope.nvim/issues/855#issuecomment-1032325327
         live_grep = {
