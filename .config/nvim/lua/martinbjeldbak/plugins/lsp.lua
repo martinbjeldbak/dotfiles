@@ -266,7 +266,7 @@ return {
           null_ls.builtins.diagnostics.staticcheck, -- golang
           null_ls.builtins.diagnostics.stylelint,
           null_ls.builtins.diagnostics.terraform_validate,
-          null_ls.builtins.diagnostics.textlint,
+          -- null_ls.builtins.diagnostics.textlint, -- causes weird bug at top of markdown files
           null_ls.builtins.diagnostics.tfsec,
           null_ls.builtins.diagnostics.todo_comments,
           null_ls.builtins.diagnostics.trail_space,
