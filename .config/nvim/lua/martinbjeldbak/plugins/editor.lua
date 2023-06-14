@@ -43,15 +43,10 @@ return {
       { "<leader>gc", '<cmd>Git commit<cr>', desc = "Git commit" },
       { "<leader>gp", '<cmd>Git push<cr>',   desc = "Git push" },
     },
-    cmd = "G",
-  },
-  {
-    "tpope/vim-rhubarb",
-    event = { "BufReadPost", "BufNewFile" },
+    cmd = {"G", "GBrowse"},
     dependencies = {
-      "tyru/open-browser.vim", -- support :GBrowse, see https://github.com/tpope/vim-rhubarb/issues/62
+      { "tpope/vim-rhubarb", dependencies = { "tyru/open-browser.vim" } }
     },
-    cmd = "GBrowse",
   },
 
   -- ez file navigation
@@ -220,6 +215,7 @@ return {
   {
     "j-hui/fidget.nvim",
     event = { "BufReadPost", "BufNewFile" },
+    tag = "legacy",
     opts = {
       window = { -- setup colorscheme for catppuccin
         blend = 0
