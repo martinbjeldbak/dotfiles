@@ -105,7 +105,8 @@ return {
           end,
         },
         -- See :help cmp-mapping
-        mapping = {
+        mapping = cmp.mapping.preset.insert({
+          ['<C-Space>'] = cmp.mapping.complete(),
           ['<Up>'] = cmp.mapping.select_prev_item(select_opts),
           ['<Down>'] = cmp.mapping.select_next_item(select_opts),
 
@@ -153,7 +154,7 @@ return {
               fallback()
             end
           end, { 'i', 's' }),
-        },
+        }),
       })
 
       local lspconfig = require('lspconfig')
@@ -199,24 +200,6 @@ return {
                 completeFunctionCalls = true
               }
             }
-          })
-        end,
-        ["gopls"] = function ()
-          lspconfig.gopls.setup({
-            cmd = { 'gopls' },
-            settings = {
-              gopls = {
-                experimentalPostfixCompletions = true,
-                analyses = {
-                  unusedparams = true,
-                  shadow = true,
-                },
-                staticcheck = true,
-              },
-            },
-            init_options = {
-              usePlaceholders = true,
-            },
           })
         end,
         ["jsonls"] = function()
