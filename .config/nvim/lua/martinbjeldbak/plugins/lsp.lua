@@ -36,7 +36,9 @@ return {
     ---@param opts PluginLspOpts
     config = function(_, opts)
       -- Heavily inspired by https://github.com/VonHeikemen/nvim-starter/blob/03-lsp/init.lua
-      require('mason').setup()
+      require('mason').setup({
+        ui = { border = 'rounded' }
+      })
       local cmp = require('cmp')
       local luasnip = require('luasnip')
       local mlsp = require('mason-lspconfig')
@@ -44,7 +46,6 @@ return {
 
       -- diagnostics
       vim.diagnostic.config(opts.diagnostics)
-
 
       mlsp.setup({
         ensure_installed = {
@@ -145,7 +146,6 @@ return {
               cmp.complete()
             end
           end, { 'i', 's' }),
-
           ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item(select_opts)
@@ -192,6 +192,33 @@ return {
             }
           })
         end,
+        ['tsserver'] = function()
+          lspconfig.tsserver.setup({
+            settings = {
+              completions = {
+                completeFunctionCalls = true
+              }
+            }
+          })
+        end,
+        ["gopls"] = function ()
+          lspconfig.gopls.setup({
+            cmd = { 'gopls' },
+            settings = {
+              gopls = {
+                experimentalPostfixCompletions = true,
+                analyses = {
+                  unusedparams = true,
+                  shadow = true,
+                },
+                staticcheck = true,
+              },
+            },
+            init_options = {
+              usePlaceholders = true,
+            },
+          })
+        end,
         ["jsonls"] = function()
           lspconfig.jsonls.setup({
             settings = {
@@ -211,6 +238,7 @@ return {
             },
           })
         end,
+
       })
     end,
   },
