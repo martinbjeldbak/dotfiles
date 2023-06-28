@@ -80,6 +80,9 @@ return {
       end
 
       cmp.setup({
+        experimental = {
+          ghost_text = true -- :h cmp-config.experimental.ghost_text
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
