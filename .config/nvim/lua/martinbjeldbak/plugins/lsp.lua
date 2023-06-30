@@ -58,7 +58,6 @@ return {
           'html',
           'bashls',
           'yamlls',
-          'gopls',
           'jedi_language_server',
         }
       })
@@ -196,6 +195,10 @@ return {
             }
           })
         end,
+        ['gopls'] = function ()
+          local cfg = require'go.lsp'.config() -- config() return the go.nvim gopls setup
+          require('lspconfig').gopls.setup(cfg)
+        end,
         ['tsserver'] = function()
           lspconfig.tsserver.setup({
             settings = {
@@ -233,9 +236,17 @@ return {
   {
     "jose-elias-alvarez/null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "mason.nvim" },
+    dependencies = {
+      "mason.nvim",
+      "nvim-lua/plenary.nvim",
+    },
     opts = function()
       local null_ls = require("null-ls")
+
+      local gotest = require("go.null_ls").gotest()
+      local gotest_codeaction = require("go.null_ls").gotest_action()
+      local golangci_lint = require("go.null_ls").golangci_lint()
+
       return {
         sources = {
           null_ls.builtins.code_actions.shellcheck,
@@ -257,7 +268,6 @@ return {
           --   prefer_local = "node_modules/.bin",
           -- }),
           null_ls.builtins.diagnostics.flake8,
-          null_ls.builtins.diagnostics.golangci_lint,
           null_ls.builtins.diagnostics.hadolint,
           null_ls.builtins.diagnostics.jshint,
           null_ls.builtins.diagnostics.jsonlint,
@@ -270,6 +280,12 @@ return {
           null_ls.builtins.diagnostics.pylint,
           null_ls.builtins.diagnostics.reek,
           null_ls.builtins.diagnostics.revive,
+          null_ls.builtins.formatting.golines.with({
+            extra_args = {
+              "--max-len=180",
+              "--base-formatter=gofumpt",
+            },
+          }),
           null_ls.builtins.diagnostics.rubocop,
           null_ls.builtins.diagnostics.ruff, -- python
           null_ls.builtins.diagnostics.shellcheck,
@@ -294,7 +310,13 @@ return {
           null_ls.builtins.diagnostics.yamllint,
           null_ls.builtins.diagnostics.zsh,
 
-          null_ls.builtins.formatting.stylua
+          null_ls.builtins.formatting.stylua,
+
+          -- from go.nvim https://github.com/ray-x/go.nvim#integrate-null-ls
+          gotest,
+          -- golangci_lint,
+          null_ls.builtins.diagnostics.golangci_lint,
+          gotest_codeaction,
         },
       }
     end,
