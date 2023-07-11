@@ -308,4 +308,18 @@ return {
       { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "Todo/Fix/Fixme" },
     },
   },
+
+  -- debugging
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      { "folke/neodev.nvim", opts = {library = { plugins = { "nvim-dap-ui" }, types = true }} },
+      "theHamsta/nvim-dap-virtual-text",
+    },
+    keys = {
+      { "<leader>b", function() require('dap').toggle_breakpoint() end, desc = "Toggle breakpoint" },
+      { "<leader>B", function() require('dap').set_breakpoint() end, desc = "Set breakpoint" },
+    }
+  },
 }

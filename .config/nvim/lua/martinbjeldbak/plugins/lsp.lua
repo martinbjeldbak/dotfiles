@@ -243,82 +243,82 @@ return {
     },
     opts = function()
       local null_ls = require("null-ls")
-
-      local gotest = require("go.null_ls").gotest()
       local gotest_codeaction = require("go.null_ls").gotest_action()
       local golangci_lint = require("go.null_ls").golangci_lint()
 
+      local sources = {
+        null_ls.builtins.code_actions.shellcheck,
+        null_ls.builtins.code_actions.xo,
+        null_ls.builtins.code_actions.gitsigns, -- integration with gitsigns.nvim
+
+        -- null_ls.builtins.completion.luasnip,
+        -- null_ls.builtins.completion.spell,
+
+        null_ls.builtins.diagnostics.actionlint,
+        null_ls.builtins.diagnostics.checkmake,
+        null_ls.builtins.diagnostics.chktex,
+        null_ls.builtins.diagnostics.codespell,
+        null_ls.builtins.diagnostics.buf,
+        null_ls.builtins.diagnostics.dotenv_linter,
+        null_ls.builtins.diagnostics.erb_lint,
+        -- using xo instead, which is wrapper on top of eslint
+        -- null_ls.builtins.diagnostics.eslint.with({
+        --   prefer_local = "node_modules/.bin",
+        -- }),
+        null_ls.builtins.diagnostics.flake8,
+        null_ls.builtins.diagnostics.hadolint,
+        null_ls.builtins.diagnostics.jshint,
+        null_ls.builtins.diagnostics.jsonlint,
+        null_ls.builtins.diagnostics.luacheck,
+        null_ls.builtins.diagnostics.markdownlint,
+        null_ls.builtins.diagnostics.proselint,
+        null_ls.builtins.diagnostics.protoc_gen_lint,
+        null_ls.builtins.diagnostics.protolint,
+        null_ls.builtins.diagnostics.pycodestyle,
+        null_ls.builtins.diagnostics.pylint,
+        null_ls.builtins.diagnostics.reek,
+        null_ls.builtins.diagnostics.revive,
+        null_ls.builtins.formatting.golines.with({
+          extra_args = {
+            "--max-len=180",
+            "--base-formatter=gofumpt",
+          },
+        }),
+        null_ls.builtins.diagnostics.rubocop,
+        null_ls.builtins.diagnostics.ruff, -- python
+        null_ls.builtins.diagnostics.shellcheck,
+        null_ls.builtins.diagnostics.sqlfluff.with({
+          extra_args = { "--dialect", "postgres" },
+        }),
+        null_ls.builtins.diagnostics.standardrb,
+        null_ls.builtins.diagnostics.staticcheck, -- golang
+        null_ls.builtins.diagnostics.stylelint,
+        null_ls.builtins.diagnostics.terraform_validate,
+        -- null_ls.builtins.diagnostics.textlint, -- causes weird bug at top of markdown files
+        null_ls.builtins.diagnostics.tfsec,
+        null_ls.builtins.diagnostics.todo_comments,
+        null_ls.builtins.diagnostics.trail_space,
+        null_ls.builtins.diagnostics.tsc.with({
+          prefer_local = "node_modules/.bin",
+        }),
+        null_ls.builtins.diagnostics.write_good,
+        null_ls.builtins.diagnostics.xo.with({
+          prefer_local = "node_modules/.bin",
+        }),
+        null_ls.builtins.diagnostics.yamllint,
+        null_ls.builtins.diagnostics.zsh,
+
+        null_ls.builtins.formatting.stylua,
+
+        -- from go.nvim https://github.com/ray-x/go.nvim#integrate-null-ls
+        golangci_lint,
+        gotest_codeaction,
+      }
+
       return {
-        sources = {
-          null_ls.builtins.code_actions.shellcheck,
-          null_ls.builtins.code_actions.xo,
-          null_ls.builtins.code_actions.gitsigns, -- integration with gitsigns.nvim
-
-          -- null_ls.builtins.completion.luasnip,
-          -- null_ls.builtins.completion.spell,
-
-          null_ls.builtins.diagnostics.actionlint,
-          null_ls.builtins.diagnostics.checkmake,
-          null_ls.builtins.diagnostics.chktex,
-          null_ls.builtins.diagnostics.codespell,
-          null_ls.builtins.diagnostics.buf,
-          null_ls.builtins.diagnostics.dotenv_linter,
-          null_ls.builtins.diagnostics.erb_lint,
-          -- using xo instead, which is wrapper on top of eslint
-          -- null_ls.builtins.diagnostics.eslint.with({
-          --   prefer_local = "node_modules/.bin",
-          -- }),
-          null_ls.builtins.diagnostics.flake8,
-          null_ls.builtins.diagnostics.hadolint,
-          null_ls.builtins.diagnostics.jshint,
-          null_ls.builtins.diagnostics.jsonlint,
-          null_ls.builtins.diagnostics.luacheck,
-          null_ls.builtins.diagnostics.markdownlint,
-          null_ls.builtins.diagnostics.proselint,
-          null_ls.builtins.diagnostics.protoc_gen_lint,
-          null_ls.builtins.diagnostics.protolint,
-          null_ls.builtins.diagnostics.pycodestyle,
-          null_ls.builtins.diagnostics.pylint,
-          null_ls.builtins.diagnostics.reek,
-          null_ls.builtins.diagnostics.revive,
-          null_ls.builtins.formatting.golines.with({
-            extra_args = {
-              "--max-len=180",
-              "--base-formatter=gofumpt",
-            },
-          }),
-          null_ls.builtins.diagnostics.rubocop,
-          null_ls.builtins.diagnostics.ruff, -- python
-          null_ls.builtins.diagnostics.shellcheck,
-          null_ls.builtins.diagnostics.sqlfluff.with({
-            extra_args = { "--dialect", "postgres" },
-          }),
-          null_ls.builtins.diagnostics.standardrb,
-          null_ls.builtins.diagnostics.staticcheck, -- golang
-          null_ls.builtins.diagnostics.stylelint,
-          null_ls.builtins.diagnostics.terraform_validate,
-          -- null_ls.builtins.diagnostics.textlint, -- causes weird bug at top of markdown files
-          null_ls.builtins.diagnostics.tfsec,
-          null_ls.builtins.diagnostics.todo_comments,
-          null_ls.builtins.diagnostics.trail_space,
-          null_ls.builtins.diagnostics.tsc.with({
-            prefer_local = "node_modules/.bin",
-          }),
-          null_ls.builtins.diagnostics.write_good,
-          null_ls.builtins.diagnostics.xo.with({
-            prefer_local = "node_modules/.bin",
-          }),
-          null_ls.builtins.diagnostics.yamllint,
-          null_ls.builtins.diagnostics.zsh,
-
-          null_ls.builtins.formatting.stylua,
-
-          -- from go.nvim https://github.com/ray-x/go.nvim#integrate-null-ls
-          gotest,
-          -- golangci_lint,
-          null_ls.builtins.diagnostics.golangci_lint,
-          gotest_codeaction,
-        },
+        sources = sources,
+        debounce = 1000,
+        default_timeout = 5000
       }
     end,
   },
