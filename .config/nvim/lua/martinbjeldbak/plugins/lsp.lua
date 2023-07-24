@@ -250,7 +250,7 @@ return {
       return {
         sources = {
           null_ls.builtins.code_actions.shellcheck,
-          null_ls.builtins.code_actions.xo,
+          null_ls.builtins.code_actions.xo, -- disabled because failing on windows
           null_ls.builtins.code_actions.gitsigns, -- integration with gitsigns.nvim
 
           -- null_ls.builtins.completion.luasnip,
@@ -263,10 +263,6 @@ return {
           null_ls.builtins.diagnostics.buf,
           null_ls.builtins.diagnostics.dotenv_linter,
           null_ls.builtins.diagnostics.erb_lint,
-          -- using xo instead, which is wrapper on top of eslint
-          -- null_ls.builtins.diagnostics.eslint.with({
-          --   prefer_local = "node_modules/.bin",
-          -- }),
           null_ls.builtins.diagnostics.flake8,
           null_ls.builtins.diagnostics.hadolint,
           null_ls.builtins.diagnostics.jshint,
