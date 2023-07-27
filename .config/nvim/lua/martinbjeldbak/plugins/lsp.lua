@@ -18,13 +18,14 @@ return {
     dependencies = {
       { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
       "mason.nvim",
-      "williamboman/mason-lspconfig.nvim", -- mason extension for lspconfig
-      "hrsh7th/nvim-cmp",                  -- autocomplete engine
-      "hrsh7th/cmp-buffer",                -- nvim-cmp source for buffer words
-      "hrsh7th/cmp-path",                  -- nvim-cmp source for filesystem paths.
-      "hrsh7th/cmp-nvim-lsp",              -- show data sent by the language server.
-      "saadparwaiz1/cmp_luasnip",          -- luasnip completion source for nvim-cmp
-      "LuaSnip",                           -- snippet engine
+      "williamboman/mason-lspconfig.nvim",   -- mason extension for lspconfig
+      "hrsh7th/nvim-cmp",                    -- autocomplete engine
+      "hrsh7th/cmp-buffer",                  -- nvim-cmp source for buffer words
+      "hrsh7th/cmp-path",                    -- nvim-cmp source for filesystem paths.
+      "hrsh7th/cmp-nvim-lsp",                -- show data sent by the language server.
+      "hrsh7th/cmp-nvim-lsp-signature-help", -- display function signatures with current parameter emphasized
+      "saadparwaiz1/cmp_luasnip",            -- luasnip completion source for nvim-cmp
+      "LuaSnip",                             -- snippet engine
       "b0o/schemastore.nvim",
     },
     ---@class PluginLspOpts
@@ -88,10 +89,11 @@ return {
           end
         },
         sources = {
-          { name = 'path' },                      -- gives completions based on the filesystem.
-          { name = 'nvim_lsp', priority = 1 },                  -- suggestions based on language server
-          { name = 'buffer',  keyword_length = 3 }, -- provides suggestions based on the current file
-          { name = 'luasnip', keyword_length = 2 }, -- it shows snippets loaded by luasnip in the suggestions
+          { name = 'path' },                                                            -- gives completions based on the filesystem.
+          { name = 'nvim_lsp',               priority = 100 },                            -- suggestions based on language server
+          { name = 'nvim_lsp_signature_help' },
+          { name = 'buffer',                 keyword_length = 3, max_item_count = 15, priority = 50 }, -- provides suggestions based on the current file
+          { name = 'luasnip',                keyword_length = 2, priority = 3 },        -- it shows snippets loaded by luasnip in the suggestions
         },
         formatting = {
           fields = { 'menu', 'abbr', 'kind' },
@@ -108,7 +110,9 @@ return {
         },
         -- See :help cmp-mapping
         mapping = cmp.mapping.preset.insert({
-          ['<C-Space>'] = cmp.mapping.complete(),
+          ["<C-Space>"] = cmp.mapping(cmp.mapping.complete({
+            config = { reason = cmp.ContextReason.Auto },
+          }), { "i", "c" }),
           ['<Up>'] = cmp.mapping.select_prev_item(select_opts),
           ['<Down>'] = cmp.mapping.select_next_item(select_opts),
 
@@ -195,9 +199,9 @@ return {
             }
           })
         end,
-        ['gopls'] = function ()
-          require("go").setup() -- https://github.com/ray-x/go.nvim/issues/112#issuecomment-1116715000
-          local cfg = require'go.lsp'.config() -- config() return the go.nvim gopls setup
+        ['gopls'] = function()
+          require("go").setup()                -- https://github.com/ray-x/go.nvim/issues/112#issuecomment-1116715000
+          local cfg = require 'go.lsp'.config() -- config() return the go.nvim gopls setup
           require('lspconfig').gopls.setup(cfg)
         end,
         ['tsserver'] = function()
@@ -228,9 +232,10 @@ return {
             },
           })
         end,
-        ["lemminx"] = function ()
+        ["lemminx"] = function()
           lspconfig.lemminx.setup({
-              cmd = { "lemminx", "-Djavax.net.ssl.trustStore=/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home/lib/security/cacerts" }
+            cmd = { "lemminx",
+              "-Djavax.net.ssl.trustStore=/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home/lib/security/cacerts" }
           })
         end,
       })
