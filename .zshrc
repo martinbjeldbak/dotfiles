@@ -96,7 +96,7 @@ case `uname` in
     }
 
     # Set default to java 8
-    export JAVA_HOME=$(/usr/libexec/java_home -v"1.8");
+    export JAVA_HOME=$(/usr/libexec/java_home -v"11");
 
     export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 

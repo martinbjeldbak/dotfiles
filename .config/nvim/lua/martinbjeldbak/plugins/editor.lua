@@ -43,7 +43,7 @@ return {
       { "<leader>gc", '<cmd>Git commit<cr>', desc = "Git commit" },
       { "<leader>gp", '<cmd>Git push<cr>',   desc = "Git push" },
     },
-    cmd = {"G", "GBrowse"},
+    cmd = { "G", "GBrowse" },
     dependencies = {
       { "tpope/vim-rhubarb", dependencies = { "tyru/open-browser.vim" } }
     },
@@ -118,8 +118,8 @@ return {
         },
         -- https://github.com/nvim-telescope/telescope.nvim/issues/855#issuecomment-1032325327
         live_grep = {
-          additional_args = function ()
-            return {"--hidden"}
+          additional_args = function()
+            return { "--hidden" }
           end
         }
       },
@@ -314,12 +314,12 @@ return {
     "rcarriga/nvim-dap-ui",
     dependencies = {
       "mfussenegger/nvim-dap",
-      { "folke/neodev.nvim", opts = {library = { plugins = { "nvim-dap-ui" }, types = true }} },
+      { "folke/neodev.nvim", opts = { library = { plugins = { "nvim-dap-ui" }, types = true } } },
       "theHamsta/nvim-dap-virtual-text",
     },
     keys = {
       { "<leader>b", function() require('dap').toggle_breakpoint() end, desc = "Toggle breakpoint" },
-      { "<leader>B", function() require('dap').set_breakpoint() end, desc = "Set breakpoint" },
+      { "<leader>B", function() require('dap').set_breakpoint() end,    desc = "Set breakpoint" },
     }
   },
 }

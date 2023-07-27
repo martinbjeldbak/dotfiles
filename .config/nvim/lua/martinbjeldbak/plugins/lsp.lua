@@ -228,7 +228,14 @@ return {
             },
           })
         end,
-
+        ["lemminx"] = function ()
+          lspconfig.lemminx.setup({
+            settings = {
+              xml = {
+              }
+            }
+          })
+        end,
       })
     end,
   },
@@ -272,8 +279,8 @@ return {
         null_ls.builtins.diagnostics.luacheck,
         null_ls.builtins.diagnostics.markdownlint,
         null_ls.builtins.diagnostics.proselint,
-        null_ls.builtins.diagnostics.protoc_gen_lint,
-        null_ls.builtins.diagnostics.protolint,
+        -- null_ls.builtins.diagnostics.protoc_gen_lint,
+        -- null_ls.builtins.diagnostics.protolint,
         null_ls.builtins.diagnostics.pycodestyle,
         null_ls.builtins.diagnostics.pylint,
         null_ls.builtins.diagnostics.reek,
