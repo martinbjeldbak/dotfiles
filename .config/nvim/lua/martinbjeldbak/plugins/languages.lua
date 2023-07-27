@@ -14,9 +14,6 @@ return {
       trouble = true,
       luasnip = true,
     },
-    config = function ()
-      require("go").setup()
-    end,
     init = function ()
       -- https://github.com/ray-x/go.nvim#run-gofmt--goimport-on-save
       -- local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})

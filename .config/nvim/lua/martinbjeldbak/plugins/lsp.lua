@@ -26,7 +26,6 @@ return {
       "saadparwaiz1/cmp_luasnip",          -- luasnip completion source for nvim-cmp
       "LuaSnip",                           -- snippet engine
       "b0o/schemastore.nvim",
-      "ray-x/go.nvim"                      -- integrates with lsp
     },
     ---@class PluginLspOpts
     opts = {
@@ -197,6 +196,7 @@ return {
           })
         end,
         ['gopls'] = function ()
+          require("go").setup() -- https://github.com/ray-x/go.nvim/issues/112#issuecomment-1116715000
           local cfg = require'go.lsp'.config() -- config() return the go.nvim gopls setup
           require('lspconfig').gopls.setup(cfg)
         end,
@@ -230,10 +230,7 @@ return {
         end,
         ["lemminx"] = function ()
           lspconfig.lemminx.setup({
-            settings = {
-              xml = {
-              }
-            }
+              cmd = { "lemminx", "-Djavax.net.ssl.trustStore=/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home/lib/security/cacerts" }
           })
         end,
       })
