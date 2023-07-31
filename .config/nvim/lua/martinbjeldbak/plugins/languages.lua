@@ -35,6 +35,8 @@ return {
     "tpope/vim-rails",
     ft = "ruby",
   },
+
+  -- Render markdown in browser on side
   {
     "iamcco/markdown-preview.nvim",
     ft = "markdown",
