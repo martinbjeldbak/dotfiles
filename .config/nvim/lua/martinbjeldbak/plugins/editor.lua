@@ -83,6 +83,7 @@ return {
       { '<leader>fz', function() require('telescope.builtin').live_grep() end,   desc = "Live grep (root dir)" },
       { '<leader>fg', function() require('telescope.builtin').grep_string() end, desc = "Grep for string under cursor" },
       { '<leader>fb', function() require('telescope.builtin').buffers() end,     desc = "Buffers" },
+      { '<leader>fr', function() require('telescope.builtin').lsp_references() end,     desc = "Code references" },
 
       -- search
       { "<leader>sh", "<cmd>Telescope help_tags<cr>",                            desc = "Help Pages" },

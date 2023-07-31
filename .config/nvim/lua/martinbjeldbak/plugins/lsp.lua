@@ -83,7 +83,13 @@ return {
           local opts = { buffer = ev.buf }
 
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+          vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, opts)
+          vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+          vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
+          vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+          vim.keymap.set("n", "<leader>wl", '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+          vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({async = true}) end, opts)
           vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
           vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
           vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
@@ -180,7 +186,7 @@ return {
         }),
       })
 
-      local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
       local lspconfig = require("lspconfig")
 
       lspconfig.lua_ls.setup({
@@ -210,7 +216,6 @@ return {
           },
         },
       })
-      require("go").setup()                 -- https://github.com/ray-x/go.nvim/issues/112#issuecomment-1116715000
       local gocfg = require("go.lsp").config() -- config() return the go.nvim gopls setup
       gocfg.capabilities = lsp_capabilities
       lspconfig.gopls.setup(gocfg)

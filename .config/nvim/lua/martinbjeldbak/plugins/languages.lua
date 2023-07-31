@@ -9,11 +9,11 @@ return {
     },
     opts = {
       lsp_cfg = false, -- Use nvim-lsp: https://github.com/ray-x/go.nvim#integrate-with-mason-lspconfig
+      lsp_keymaps = false, -- disable these, I have my own set
       lsp_gofumpt = true,
       fillstruct = 'gopls',
       trouble = true,
       luasnip = true,
-      lsp_keymaps = false, -- disable these, I have my own set
     },
     init = function ()
       -- https://github.com/ray-x/go.nvim#run-gofmt--goimport-on-save
