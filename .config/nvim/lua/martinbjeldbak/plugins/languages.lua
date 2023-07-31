@@ -45,4 +45,8 @@ return {
       vim.fn["mkdp#util#install"]()
     end,
   },
+  {
+    "ledger/vim-ledger",
+    ft = "ledger"
+  },
 }
