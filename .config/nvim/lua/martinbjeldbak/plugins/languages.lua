@@ -1,7 +1,7 @@
 return {
   {
     "ray-x/go.nvim",
-    dependencies = {  -- optional packages
+    dependencies = {
       "ray-x/guihua.lua",
       "nvim-treesitter/nvim-treesitter",
       "mfussenegger/nvim-dap", -- for debugging
@@ -13,6 +13,7 @@ return {
       fillstruct = 'gopls',
       trouble = true,
       luasnip = true,
+      lsp_keymaps = false, -- disable these, I have my own set
     },
     init = function ()
       -- https://github.com/ray-x/go.nvim#run-gofmt--goimport-on-save
