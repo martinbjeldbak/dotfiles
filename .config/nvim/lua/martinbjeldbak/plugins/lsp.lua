@@ -216,6 +216,7 @@ return {
           },
         },
       })
+      require("go").setup() -- https://github.com/ray-x/go.nvim/issues/112#issuecomment-1116715000
       local gocfg = require("go.lsp").config() -- config() return the go.nvim gopls setup
       gocfg.capabilities = lsp_capabilities
       lspconfig.gopls.setup(gocfg)
