@@ -189,68 +189,102 @@ return {
       local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
       local lspconfig = require("lspconfig")
 
-      lspconfig.lua_ls.setup({
-        capabilities = lsp_capabilities,
-        settings = {
-          Lua = {
-            runtime = {
-              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-              version = "LuaJIT",
+      -- See https://github.com/williamboman/mason-lspconfig.nvim#automatic-server-setup-advanced-feature
+      mlsp.setup_handlers({
+        function (server_name) -- default handler
+          require("lspconfig")[server_name].setup({
+            capabilities = lsp_capabilities,
+          })
+        end,
+        -- Override specific server settings
+        ["lua_ls"] = function()
+          lspconfig.lua_ls.setup({
+            capabilities = lsp_capabilities,
+            settings = {
+              Lua = {
+                runtime = {
+                  -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                  version = "LuaJIT",
+                },
+                diagnostics = {
+                  -- Get the language server to recognize the `vim` global
+                  globals = { "vim" },
+                },
+                workspace = {
+                  -- Make the server aware of Neovim runtime files
+                  library = vim.api.nvim_get_runtime_file("", true),
+                  checkThirdParty = false, -- https://github.com/folke/neodev.nvim/issues/88
+                },
+                -- Do not send telemetry data containing a randomized but unique identifier
+                telemetry = {
+                  enable = false,
+                },
+                completion = {
+                  callSnippet = "Replace",
+                },
+              },
             },
-            diagnostics = {
-              -- Get the language server to recognize the `vim` global
-              globals = { "vim" },
+          })
+        end,
+        ["gopls"] = function()
+          require("go").setup() -- https://github.com/ray-x/go.nvim/issues/112#issuecomment-1116715000
+          local gocfg = require("go.lsp").config() -- config() return the go.nvim gopls setup
+          gocfg.capabilities = lsp_capabilities
+          lspconfig.gopls.setup(gocfg)
+        end,
+        ["tsserver"] = function()
+          lspconfig.tsserver.setup({
+            capabilities = lsp_capabilities,
+            settings = {
+              completions = {
+                completeFunctionCalls = true,
+              },
             },
-            workspace = {
-              -- Make the server aware of Neovim runtime files
-              library = vim.api.nvim_get_runtime_file("", true),
-              checkThirdParty = false, -- https://github.com/folke/neodev.nvim/issues/88
+          })
+        end,
+        ["jsonls"] = function()
+          lspconfig.jsonls.setup({
+            capabilities = lsp_capabilities,
+            settings = {
+              json = {
+                schemas = require("schemastore").json.schemas(),
+                validate = { enable = true },
+              },
             },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-              enable = false,
+          })
+        end,
+        ["yamlls"] = function()
+          lspconfig.yamlls.setup({
+            capabilities = lsp_capabilities,
+            settings = {
+              yaml = {
+                schemas = require("schemastore").yaml.schemas(),
+              },
             },
-            completion = {
-              callSnippet = "Replace",
+          })
+        end,
+        ["lemminx"] = function()
+          lspconfig.lemminx.setup({
+            capabilities = lsp_capabilities,
+            cmd = {
+              "lemminx",
+              "-Djavax.net.ssl.trustStore=/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home/lib/security/cacerts",
             },
-          },
-        },
-      })
-      require("go").setup() -- https://github.com/ray-x/go.nvim/issues/112#issuecomment-1116715000
-      local gocfg = require("go.lsp").config() -- config() return the go.nvim gopls setup
-      gocfg.capabilities = lsp_capabilities
-      lspconfig.gopls.setup(gocfg)
-      lspconfig.tsserver.setup({
-        capabilities = lsp_capabilities,
-        settings = {
-          completions = {
-            completeFunctionCalls = true,
-          },
-        },
-      })
-      lspconfig.jsonls.setup({
-        capabilities = lsp_capabilities,
-        settings = {
-          json = {
-            schemas = require("schemastore").json.schemas(),
-            validate = { enable = true },
-          },
-        },
-      })
-      lspconfig.yamlls.setup({
-        capabilities = lsp_capabilities,
-        settings = {
-          yaml = {
-            schemas = require("schemastore").yaml.schemas(),
-          },
-        },
-      })
-      lspconfig.lemminx.setup({
-        capabilities = lsp_capabilities,
-        cmd = {
-          "lemminx",
-          "-Djavax.net.ssl.trustStore=/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home/lib/security/cacerts",
-        },
+          })
+        end,
+        ["pylsp"] = function()
+          lspconfig.pylsp.setup({
+            settings = {
+              pylsp = {
+                plugins = {
+                  pylint = {
+                    enabled = true
+                  }
+                }
+              }
+            }
+          })
+        end,
       })
     end,
   },
