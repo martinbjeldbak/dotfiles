@@ -59,7 +59,6 @@ return {
           "html",
           "bashls",
           "yamlls",
-          "jedi_language_server",
         },
       })
 
@@ -330,8 +329,6 @@ return {
         null_ls.builtins.diagnostics.proselint,
         -- null_ls.builtins.diagnostics.protoc_gen_lint,
         -- null_ls.builtins.diagnostics.protolint,
-        null_ls.builtins.diagnostics.pycodestyle,
-        null_ls.builtins.diagnostics.pylint,
         null_ls.builtins.diagnostics.reek,
         null_ls.builtins.diagnostics.revive,
         null_ls.builtins.formatting.golines.with({
