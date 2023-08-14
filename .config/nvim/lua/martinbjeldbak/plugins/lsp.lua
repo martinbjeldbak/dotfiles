@@ -16,7 +16,15 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
+      { "folke/neodev.nvim",
+        opts = {
+          experimental = { pathStrict = true },
+          library = {
+            plugins = { "nvim-dap-ui"},
+            types = true
+          }
+        }
+      },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim", -- mason extension for lspconfig
       "hrsh7th/nvim-cmp",                 -- autocomplete engine
@@ -228,7 +236,9 @@ return {
         ["gopls"] = function()
           require("go").setup() -- https://github.com/ray-x/go.nvim/issues/112#issuecomment-1116715000
           local gocfg = require("go.lsp").config() -- config() return the go.nvim gopls setup
-          gocfg.capabilities = lsp_capabilities
+          gocfg["capabilities"] = lsp_capabilities
+          gocfg["dap_debug"] = true
+          gocfg["dap_debug_gui"] = true
           lspconfig.gopls.setup(gocfg)
         end,
         ["tsserver"] = function()
@@ -257,6 +267,11 @@ return {
             capabilities = lsp_capabilities,
             settings = {
               yaml = {
+                schemaStore = {
+                  enable = false,
+                  -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                  url = "",
+                },
                 schemas = require("schemastore").yaml.schemas(),
               },
             },
@@ -346,7 +361,7 @@ return {
         null_ls.builtins.diagnostics.standardrb,
         null_ls.builtins.diagnostics.staticcheck, -- golang
         null_ls.builtins.diagnostics.stylelint,
-        null_ls.builtins.diagnostics.terraform_validate,
+        -- null_ls.builtins.diagnostics.terraform_validate, -- causes module not installed error, will try and rely on lsp
         -- null_ls.builtins.diagnostics.textlint, -- causes weird bug at top of markdown files
         null_ls.builtins.diagnostics.tfsec,
         null_ls.builtins.diagnostics.todo_comments,
