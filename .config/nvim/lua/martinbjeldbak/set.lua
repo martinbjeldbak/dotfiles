@@ -15,14 +15,17 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
+vim.opt.path:append("**")
+vim.opt.wildignore:append { "node_modules" }
+
 vim.opt.swapfile = false
 vim.opt.backup = false
 
-if vim.fn.has('win32') then
-    vim.opt.undodir = os.getenv("USERPROFILE") .. "/.vim/undodir"
-else
+--if vim.fn.has('win32') then
+--    vim.opt.undodir = os.getenv("USERPROFILE") .. "/.vim/undodir"
+--else
     vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-end
+--end
 
 vim.opt.undofile = true
 
