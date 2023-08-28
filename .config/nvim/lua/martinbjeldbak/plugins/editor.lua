@@ -36,6 +36,18 @@ return {
     },
   },
 
+  -- help align markdown tables
+  {
+    "echasnovski/mini.nvim",
+    version = false,
+    config = function()
+      require("mini.align").setup()
+      require('mini.animate').setup()
+      require('mini.indentscope').setup()
+      require('mini.pairs').setup()
+    end,
+  },
+
   {
     "tpope/vim-fugitive",
     keys = {

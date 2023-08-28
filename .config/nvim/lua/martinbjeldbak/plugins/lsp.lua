@@ -292,7 +292,7 @@ return {
               pylsp = {
                 plugins = {
                   pylint = {
-                    enabled = true
+                    enabled = false
                   }
                 }
               }
@@ -369,7 +369,7 @@ return {
         null_ls.builtins.diagnostics.tsc.with({
           prefer_local = "node_modules/.bin",
         }),
-        null_ls.builtins.diagnostics.write_good,
+        -- null_ls.builtins.diagnostics.write_good, -- too pedantic!
         null_ls.builtins.diagnostics.xo.with({
           prefer_local = "node_modules/.bin",
         }),
