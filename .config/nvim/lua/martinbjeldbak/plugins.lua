@@ -10,9 +10,14 @@ return {
           dark = "mocha",
         },
         integrations = {
-          which_key = true,
-          lsp_trouble = true,
           harpoon = true,
+          leap = true,
+          lsp_trouble = true,
+          markdown = true,
+          mason = true,
+          mini = true,
+          treesitter_context = true,
+          which_key = true,
         },
       })
 

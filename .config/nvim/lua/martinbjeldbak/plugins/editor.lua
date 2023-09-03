@@ -42,9 +42,8 @@ return {
     version = false,
     config = function()
       require("mini.align").setup()
-      require('mini.animate').setup()
-      require('mini.indentscope').setup()
-      require('mini.pairs').setup()
+      require("mini.indentscope").setup()
+      require("mini.pairs").setup()
     end,
   },
 
@@ -52,12 +51,12 @@ return {
     "tpope/vim-fugitive",
     keys = {
       { "<leader>gs", vim.cmd.Git,           desc = "Git status" },
-      { "<leader>gc", '<cmd>Git commit<cr>', desc = "Git commit" },
-      { "<leader>gp", '<cmd>Git push<cr>',   desc = "Git push" },
+      { "<leader>gc", "<cmd>Git commit<cr>", desc = "Git commit" },
+      { "<leader>gp", "<cmd>Git push<cr>",   desc = "Git push" },
     },
     cmd = { "G", "GBrowse" },
     dependencies = {
-      { "tpope/vim-rhubarb", dependencies = { "tyru/open-browser.vim" } }
+      { "tpope/vim-rhubarb", dependencies = { "tyru/open-browser.vim" } },
     },
   },
 
@@ -65,12 +64,48 @@ return {
   {
     "ThePrimeagen/harpoon",
     keys = {
-      { "<leader>a", function() require("harpoon.mark").add_file() end,        desc = "Add file to Harpoon" },
-      { "<C-e>",     function() require("harpoon.ui").toggle_quick_menu() end, desc = "Toggle harpoon quick menu" },
-      { "<C-1>",     function() require("harpoon.ui").nav_file(1) end,         desc = "Navigate to file 1" },
-      { "<C-2>",     function() require("harpoon.ui").nav_file(2) end,         desc = "Navigate to file 2" },
-      { "<C-3>",     function() require("harpoon.ui").nav_file(3) end,         desc = "Navigate to file 3" },
-      { "<C-4>",     function() require("harpoon.ui").nav_file(4) end,         desc = "Navigate to file 4" },
+      {
+        "<leader>a",
+        function()
+          require("harpoon.mark").add_file()
+        end,
+        desc = "Add file to Harpoon",
+      },
+      {
+        "<C-e>",
+        function()
+          require("harpoon.ui").toggle_quick_menu()
+        end,
+        desc = "Toggle harpoon quick menu",
+      },
+      {
+        "<C-1>",
+        function()
+          require("harpoon.ui").nav_file(1)
+        end,
+        desc = "Navigate to file 1",
+      },
+      {
+        "<C-2>",
+        function()
+          require("harpoon.ui").nav_file(2)
+        end,
+        desc = "Navigate to file 2",
+      },
+      {
+        "<C-3>",
+        function()
+          require("harpoon.ui").nav_file(3)
+        end,
+        desc = "Navigate to file 3",
+      },
+      {
+        "<C-4>",
+        function()
+          require("harpoon.ui").nav_file(4)
+        end,
+        desc = "Navigate to file 4",
+      },
     },
   },
 
@@ -87,25 +122,56 @@ return {
       },
     },
     keys = {
-      { "<leader>:",  "<cmd>Telescope command_history<cr>",                      desc = "Command History" },
+      { "<leader>:",  "<cmd>Telescope command_history<cr>", desc = "Command History" },
 
       -- find
-      { "<leader>ff", function() require('telescope.builtin').find_files() end,  desc = "Find files" },
-      { "<C-p>",      function() require('telescope.builtin').git_files() end,   desc = "Git files" },
-      { '<leader>fz', function() require('telescope.builtin').live_grep() end,   desc = "Live grep (root dir)" },
-      { '<leader>fb', function() require('telescope.builtin').buffers() end,     desc = "Buffers" },
-      { '<leader>fr', function() require('telescope.builtin').lsp_references() end,     desc = "Code references" },
+      {
+        "<leader>ff",
+        function()
+          require("telescope.builtin").find_files()
+        end,
+        desc = "Find files",
+      },
+      {
+        "<C-p>",
+        function()
+          require("telescope.builtin").git_files()
+        end,
+        desc = "Git files",
+      },
+      {
+        "<leader>fz",
+        function()
+          require("telescope.builtin").live_grep()
+        end,
+        desc = "Live grep (root dir)",
+      },
+      {
+        "<leader>fb",
+        function()
+          require("telescope.builtin").buffers()
+        end,
+        desc = "Buffers",
+      },
+      {
+        "<leader>fr",
+        function()
+          require("telescope.builtin").lsp_references()
+        end,
+        desc = "Code references",
+      },
 
       -- search
-      { "<leader>sh", "<cmd>Telescope help_tags<cr>",                            desc = "Help Pages" },
-      { "<leader>sk", "<cmd>Telescope keymaps<cr>",                              desc = "Key Maps" },
-      { "<leader>sM", "<cmd>Telescope man_pages<cr>",                            desc = "Man Pages" },
-      { "<leader>sm", "<cmd>Telescope marks<cr>",                                desc = "Jump to Mark" },
-      { "<leader>so", "<cmd>Telescope vim_options<cr>",                          desc = "Options" },
-      { "<leader>sR", "<cmd>Telescope resume<cr>",                               desc = "Resume" },
+      { "<leader>sh", "<cmd>Telescope help_tags<cr>",       desc = "Help Pages" },
+      { "<leader>sk", "<cmd>Telescope keymaps<cr>",         desc = "Key Maps" },
+      { "<leader>sM", "<cmd>Telescope man_pages<cr>",       desc = "Man Pages" },
+      { "<leader>sm", "<cmd>Telescope marks<cr>",           desc = "Jump to Mark" },
+      { "<leader>so", "<cmd>Telescope vim_options<cr>",     desc = "Options" },
+      { "<leader>sR", "<cmd>Telescope resume<cr>",          desc = "Resume" },
     },
     opts = {
       defaults = {
+        file_ignore_patterns = { '.git' },
         mappings = {
           i = {
             ["<C-Down>"] = function(...)
@@ -125,20 +191,20 @@ return {
       },
       pickers = {
         find_files = {
-          hidden = true
+          hidden = true,
         },
         -- https://github.com/nvim-telescope/telescope.nvim/issues/855#issuecomment-1032325327
         live_grep = {
           additional_args = function()
             return { "--hidden" }
-          end
-        }
+          end,
+        },
       },
     },
     config = function(_, opts)
       require("telescope").setup(opts)
       require("telescope").load_extension("fzf")
-    end
+    end,
   },
 
   -- ultimate concentration
@@ -153,7 +219,7 @@ return {
         options = {
           number = true,
           relativenumber = true,
-        }
+        },
       },
     },
     keys = {
@@ -163,7 +229,7 @@ return {
           require("zen-mode").toggle()
           vim.wo.wrap = false
         end,
-        desc = "Enter zen mode"
+        desc = "Enter zen mode",
       },
     },
   },
@@ -203,7 +269,7 @@ return {
       "nvim-treesitter",
     },
     config = function()
-      require('nvim-ts-autotag').setup()
+      require("nvim-ts-autotag").setup()
     end,
   },
 
@@ -226,7 +292,7 @@ return {
     tag = "legacy",
     opts = {
       window = { -- setup colorscheme for catppuccin
-        blend = 0
+        blend = 0,
       },
     },
   },
@@ -245,7 +311,6 @@ return {
       { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
     },
   },
-
 
   {
     "ggandor/leap.nvim",
@@ -326,8 +391,20 @@ return {
       "theHamsta/nvim-dap-virtual-text",
     },
     keys = {
-      { "<leader>b", function() require('dap').toggle_breakpoint() end, desc = "Toggle breakpoint" },
-      { "<leader>B", function() require('dap').set_breakpoint() end,    desc = "Set breakpoint" },
-    }
+      {
+        "<leader>b",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        desc = "Toggle breakpoint",
+      },
+      {
+        "<leader>B",
+        function()
+          require("dap").set_breakpoint()
+        end,
+        desc = "Set breakpoint",
+      },
+    },
   },
 }
