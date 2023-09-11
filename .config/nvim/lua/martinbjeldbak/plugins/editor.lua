@@ -43,7 +43,6 @@ return {
     config = function()
       require("mini.align").setup()
       require("mini.indentscope").setup()
-      require("mini.pairs").setup()
     end,
   },
 

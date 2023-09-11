@@ -355,9 +355,9 @@ return {
         null_ls.builtins.diagnostics.rubocop,
         null_ls.builtins.diagnostics.ruff, -- python
         null_ls.builtins.diagnostics.shellcheck,
-        null_ls.builtins.diagnostics.sqlfluff.with({
-          extra_args = { "--dialect", "postgres" },
-        }),
+        -- null_ls.builtins.diagnostics.sqlfluff.with({
+        --   extra_args = { "--dialect", "postgres" },
+        -- }),
         null_ls.builtins.diagnostics.standardrb,
         null_ls.builtins.diagnostics.staticcheck, -- golang
         null_ls.builtins.diagnostics.stylelint,
