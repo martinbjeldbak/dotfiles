@@ -42,7 +42,6 @@ return {
     version = false,
     config = function()
       require("mini.align").setup()
-      require("mini.indentscope").setup()
     end,
   },
 
@@ -219,6 +218,9 @@ return {
           number = true,
           relativenumber = true,
         },
+      },
+      plugins = {
+        tmux = { enabled = true },
       },
     },
     keys = {
