@@ -319,7 +319,7 @@ return {
       local sources = {
         null_ls.builtins.code_actions.shellcheck,
         null_ls.builtins.code_actions.xo,
-        null_ls.builtins.code_actions.gitsigns, -- integration with gitsigns.nvim
+        -- null_ls.builtins.code_actions.gitsigns, -- integration with gitsigns.nvim -- uncomment as never use
 
         -- null_ls.builtins.completion.luasnip,
         -- null_ls.builtins.completion.spell,
@@ -328,22 +328,26 @@ return {
         null_ls.builtins.diagnostics.checkmake,
         null_ls.builtins.diagnostics.chktex,
         null_ls.builtins.diagnostics.codespell,
-        null_ls.builtins.diagnostics.buf,
         null_ls.builtins.diagnostics.dotenv_linter,
         null_ls.builtins.diagnostics.erb_lint,
         -- using xo instead, which is wrapper on top of eslint
         -- null_ls.builtins.diagnostics.eslint.with({
         --   prefer_local = "node_modules/.bin",
         -- }),
-        null_ls.builtins.diagnostics.flake8,
         null_ls.builtins.diagnostics.hadolint,
         null_ls.builtins.diagnostics.jshint,
         null_ls.builtins.diagnostics.jsonlint,
         null_ls.builtins.diagnostics.luacheck,
-        null_ls.builtins.diagnostics.markdownlint,
+        null_ls.builtins.diagnostics.markdownlint.with({
+          extra_args = {
+            "--disable",
+            "MD013", -- line length
+          },
+        }),
         null_ls.builtins.diagnostics.proselint,
-        -- null_ls.builtins.diagnostics.protoc_gen_lint,
-        -- null_ls.builtins.diagnostics.protolint,
+        null_ls.builtins.diagnostics.buf,
+        null_ls.builtins.diagnostics.protoc_gen_lint,
+        null_ls.builtins.diagnostics.protolint,
         null_ls.builtins.diagnostics.reek,
         null_ls.builtins.diagnostics.revive,
         null_ls.builtins.formatting.golines.with({
@@ -353,11 +357,9 @@ return {
           },
         }),
         null_ls.builtins.diagnostics.rubocop,
-        null_ls.builtins.diagnostics.ruff, -- python
+        -- null_ls.builtins.diagnostics.ruff, -- python
         null_ls.builtins.diagnostics.shellcheck,
-        -- null_ls.builtins.diagnostics.sqlfluff.with({
-        --   extra_args = { "--dialect", "postgres" },
-        -- }),
+        null_ls.builtins.diagnostics.sqlfluff,
         null_ls.builtins.diagnostics.standardrb,
         null_ls.builtins.diagnostics.staticcheck, -- golang
         null_ls.builtins.diagnostics.stylelint,

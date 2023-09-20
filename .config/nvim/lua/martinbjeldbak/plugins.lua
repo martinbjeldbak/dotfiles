@@ -7,7 +7,7 @@ return {
       require('catppuccin').setup({
         background = {
           light = "latte",
-          dark = "mocha",
+          dark = "frappe",
         },
         integrations = {
           harpoon = true,

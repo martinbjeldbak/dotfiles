@@ -7,10 +7,10 @@ fi
 
 # set PATH so it includes user's private ~/.local/bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
-  PATH="$HOME/.local/bin:$PATH"
+  path+="$HOME/.local/bin"
 fi
 
-PATH="$HOME/.yarn/bin:$PATH"
+path+="$HOME/.yarn/bin"
 
 source $HOME/.exports
 
@@ -24,7 +24,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-BAT_THEME="Catppuccin-mocha"
+BAT_THEME="Catppuccin-latte"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -75,6 +75,10 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --e
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Poetry completions https://python-poetry.org/docs/
+fpath+=~/.zfunc
+autoload -Uz compinit && compinit
+
 # Source: https://github.com/zsh-users/zsh-syntax-highlighting/issues/295#issuecomment-214581607
 # Improve paste performance
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
@@ -100,9 +104,9 @@ case `uname` in
 
     export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
-    # source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-    # source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-
+    # Add gcloud components to your PATH, add this to your profile
+    source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+    source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 
     path+=("/usr/local/opt/curl/bin")
     ;;
