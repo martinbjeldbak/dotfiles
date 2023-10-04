@@ -3,7 +3,7 @@ vim.opt.guicursor = ""
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-vim.o.background = "light"
+vim.o.background = "dark" -- bg=dark
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true

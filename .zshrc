@@ -24,7 +24,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-BAT_THEME="Catppuccin-latte"
+BAT_THEME="Catppuccin-frappe"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -78,6 +78,9 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --e
 # Poetry completions https://python-poetry.org/docs/
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit
+
+# Pytest completions https://docs.pytest.org/en/7.1.x/how-to/bash-completion.html
+# register-python-argcomplete pytest
 
 # Source: https://github.com/zsh-users/zsh-syntax-highlighting/issues/295#issuecomment-214581607
 # Improve paste performance
