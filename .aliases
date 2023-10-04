@@ -1,6 +1,6 @@
 # Shortcuts
 alias gs="g s"
-alias ls='exa --icons'
+alias ls='eza --icons'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
