@@ -49,3 +49,9 @@ vim.g.mapleader = ","
 -- disable netrw as I am using nvim-tree/nvim-tree.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- https://neovim.discourse.group/t/options-formatoptions-not-working-when-put-in-init-lua/3746/2
+-- vim.opt.formatoptions:remove('c')
+-- vim.opt.formatoptions:remove('r')
+-- vim.opt.formatoptions:remove('o')
+vim.cmd([[autocmd BufEnter * set formatoptions-=r]])
