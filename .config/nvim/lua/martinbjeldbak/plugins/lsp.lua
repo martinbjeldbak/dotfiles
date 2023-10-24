@@ -67,6 +67,7 @@ return {
           "html",
           "bashls",
           "yamlls",
+          "marksman",
         },
       })
 
