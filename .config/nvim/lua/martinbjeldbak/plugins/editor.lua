@@ -23,34 +23,41 @@ return {
       },
     },
     keys = {
-      { "<C-t>", vim.cmd.NvimTreeToggle,   desc = "NvimTree Toggle" },
+      { "<C-y>", vim.cmd.NvimTreeToggle,   desc = "NvimTree Toggle" },
       { "<C-f>", vim.cmd.NvimTreeFindFile, desc = "NvimTree Find File" },
     },
   },
 
   -- Code folding
-  {'kevinhwang91/nvim-ufo',
+  {
+    'kevinhwang91/nvim-ufo',
     event = "BufRead",
-    dependencies = { 'kevinhwang91/promise-async'},
-    init = function ()
+    dependencies = { 'kevinhwang91/promise-async' },
+    init = function()
       vim.o.foldcolumn = '1' -- '0' is not bad
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
     end,
     keys = {
-      { "zR", function()
-        require('ufo').openAllFolds()
-      end,
-        desc = "Open all folds" },
-      { "zM", function()
-        require('ufo').closeAllFolds()
-      end,
-        desc = "Close all folds" },
+      {
+        "zR",
+        function()
+          require('ufo').openAllFolds()
+        end,
+        desc = "Open all folds"
+      },
+      {
+        "zM",
+        function()
+          require('ufo').closeAllFolds()
+        end,
+        desc = "Close all folds"
+      },
     },
     opts = {
       provider_selector = function(bufnr, filetype, buftype)
-        return {'treesitter', 'indent'}
+        return { 'treesitter', 'indent' }
       end,
     },
   },
@@ -104,28 +111,28 @@ return {
         desc = "Toggle harpoon quick menu",
       },
       {
-        "<C-1>",
+        "<C-h>",
         function()
           require("harpoon.ui").nav_file(1)
         end,
         desc = "Navigate to file 1",
       },
       {
-        "<C-2>",
+        "<C-t>",
         function()
           require("harpoon.ui").nav_file(2)
         end,
         desc = "Navigate to file 2",
       },
       {
-        "<C-3>",
+        "<C-n>",
         function()
           require("harpoon.ui").nav_file(3)
         end,
         desc = "Navigate to file 3",
       },
       {
-        "<C-4>",
+        "<C-s>",
         function()
           require("harpoon.ui").nav_file(4)
         end,
@@ -211,12 +218,14 @@ return {
             ["<C-b>"] = function(...)
               return require("telescope.actions").preview_scrolling_up(...)
             end,
+            ["<C-h>"] = "which_key",
           },
         },
       },
       pickers = {
         find_files = {
           hidden = true,
+          theme = "dropdown",
         },
         -- https://github.com/nvim-telescope/telescope.nvim/issues/855#issuecomment-1032325327
         live_grep = {
@@ -438,6 +447,7 @@ return {
 
   -- copilot
   {
-    "github/copilot.vim"
+    "github/copilot.vim",
+    event = { "BufReadPost", "BufNewFile" },
   }
 }
