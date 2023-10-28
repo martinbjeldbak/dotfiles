@@ -439,5 +439,9 @@ return {
   -- copilot
   {
     "github/copilot.vim"
-  }
+  },
+
+  {
+    "ThePrimeagen/vim-be-good"
+  },
 }
