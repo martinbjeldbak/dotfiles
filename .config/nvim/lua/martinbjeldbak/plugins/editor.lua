@@ -17,10 +17,12 @@ return {
       },
       view = {
         width = 40,
+        side = "right",
       },
       renderer = {
         group_empty = true,
       },
+      filters = { custom = { "^.git$" } },
     },
     keys = {
       { "<C-t>", vim.cmd.NvimTreeToggle,   desc = "NvimTree Toggle" },
@@ -29,28 +31,35 @@ return {
   },
 
   -- Code folding
-  {'kevinhwang91/nvim-ufo',
+  {
+    'kevinhwang91/nvim-ufo',
     event = "BufRead",
-    dependencies = { 'kevinhwang91/promise-async'},
-    init = function ()
+    dependencies = { 'kevinhwang91/promise-async' },
+    init = function()
       vim.o.foldcolumn = '1' -- '0' is not bad
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
     end,
     keys = {
-      { "zR", function()
-        require('ufo').openAllFolds()
-      end,
-        desc = "Open all folds" },
-      { "zM", function()
-        require('ufo').closeAllFolds()
-      end,
-        desc = "Close all folds" },
+      {
+        "zR",
+        function()
+          require('ufo').openAllFolds()
+        end,
+        desc = "Open all folds"
+      },
+      {
+        "zM",
+        function()
+          require('ufo').closeAllFolds()
+        end,
+        desc = "Close all folds"
+      },
     },
     opts = {
       provider_selector = function(bufnr, filetype, buftype)
-        return {'treesitter', 'indent'}
+        return { 'treesitter', 'indent' }
       end,
     },
   },
@@ -443,5 +452,25 @@ return {
 
   {
     "ThePrimeagen/vim-be-good"
+  },
+
+
+  {
+    "kristijanhusak/vim-dadbod-ui",
+    dependencies = {
+      { "tpope/vim-dadbod",                     lazy = true, cmd = { "DB" } },
+      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
+    },
+    cmd = {
+      'DBUI',
+      'DBUIToggle',
+      'DBUIAddConnection',
+      'DBUIFindBuffer',
+    },
+    init = function()
+      vim.g.db_ui_use_nerd_fonts = 1
+
+      vim.g.db_adapter_bigquery_region = "australia-southeast1"
+    end,
   },
 }
