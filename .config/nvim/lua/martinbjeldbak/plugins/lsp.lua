@@ -260,6 +260,11 @@ return {
                 validate = { enable = true },
               },
             },
+            filetypes = {
+              "json",
+              "jsonc",
+              "json5",
+            },
           })
         end,
         ["yamlls"] = function()
