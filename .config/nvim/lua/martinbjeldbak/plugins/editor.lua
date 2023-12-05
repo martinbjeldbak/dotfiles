@@ -192,6 +192,7 @@ return {
       pickers = {
         find_files = {
           hidden = true,
+          follow = true,
         },
         -- https://github.com/nvim-telescope/telescope.nvim/issues/855#issuecomment-1032325327
         live_grep = {
