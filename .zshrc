@@ -124,4 +124,3 @@ export PATH
 
 # Override any oh-my-zsh aliases
 source $HOME/.aliases
-source "${xdg_config_home:-$HOME/.config}/asdf-direnv/zshrc"
