@@ -272,9 +272,6 @@ return {
     dependencies = {
       "nvim-treesitter",
     },
-    config = function()
-      require("nvim-ts-autotag").setup()
-    end,
   },
 
   -- comment stuff out
@@ -413,6 +410,11 @@ return {
 
   -- copilot
   {
-    "github/copilot.vim"
+    "github/copilot.vim",
+    init = function()
+      vim.g.copilot_filetypes = {
+        yaml = true
+      }
+    end,
   },
 }
