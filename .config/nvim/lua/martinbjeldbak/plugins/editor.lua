@@ -30,40 +30,6 @@ return {
     },
   },
 
-  -- Code folding
-  {
-    'kevinhwang91/nvim-ufo',
-    event = "BufRead",
-    dependencies = { 'kevinhwang91/promise-async' },
-    init = function()
-      vim.o.foldcolumn = '1' -- '0' is not bad
-      vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
-      vim.o.foldlevelstart = 99
-      vim.o.foldenable = true
-    end,
-    keys = {
-      {
-        "zR",
-        function()
-          require('ufo').openAllFolds()
-        end,
-        desc = "Open all folds"
-      },
-      {
-        "zM",
-        function()
-          require('ufo').closeAllFolds()
-        end,
-        desc = "Close all folds"
-      },
-    },
-    opts = {
-      provider_selector = function(bufnr, filetype, buftype)
-        return { 'treesitter', 'indent' }
-      end,
-    },
-  },
-
   -- undotree
   {
     "mbbill/undotree",
@@ -226,6 +192,7 @@ return {
       pickers = {
         find_files = {
           hidden = true,
+          follow = true,
         },
         -- https://github.com/nvim-telescope/telescope.nvim/issues/855#issuecomment-1032325327
         live_grep = {
@@ -305,9 +272,6 @@ return {
     dependencies = {
       "nvim-treesitter",
     },
-    config = function()
-      require("nvim-ts-autotag").setup()
-    end,
   },
 
   -- comment stuff out
@@ -326,7 +290,6 @@ return {
   {
     "j-hui/fidget.nvim",
     event = { "BufReadPost", "BufNewFile" },
-    tag = "legacy",
     opts = {
       window = { -- setup colorscheme for catppuccin
         blend = 0,
@@ -447,6 +410,11 @@ return {
 
   -- copilot
   {
-    "github/copilot.vim"
+    "github/copilot.vim",
+    init = function()
+      vim.g.copilot_filetypes = {
+        yaml = true
+      }
+    end,
   },
 }
