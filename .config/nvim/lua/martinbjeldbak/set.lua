@@ -49,3 +49,8 @@ vim.g.mapleader = ","
 -- disable netrw as I am using nvim-tree/nvim-tree.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- stop line breaking https://stackoverflow.com/questions/2280030/how-to-stop-line-breaking-in-vim
+vim.opt.formatoptions:remove("t")
+
+vim.g.python3_host_prog = "~/.nvimvenv/bin/python"
