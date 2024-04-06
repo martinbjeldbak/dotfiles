@@ -311,75 +311,75 @@ return {
     end,
   },
 
-  -- formatters
-  {
-    "nvimtools/none-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "mason.nvim",
-      "nvim-lua/plenary.nvim",
+    -- formatters
+    {
+        "stevearc/conform.nvim",
+        event = { "BufWritePre" },
+        cmd = { "ConformInfo" },
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
+                python = { "ruff_fix", "ruff_format", },
+                javascript = { { "prettierd", "prettier" } },
+                sql = {"sqlfmt", 'sqlfluff', "pg_format",},
+                tf = {"terraform_fmt",},
+                ruby = {"rubyfmt","rubocop", 'standardrb'},
+                proto = {"buf",},
+                go = {"gofumpt", "goimports",},
+                jsonnet = {"jsonnetfmt",},
+                json = {"jq",},
+                markdown = {'markdownlint-cli2'},
+                sh = { 'shellcheck', 'shfmt',},
+                css = {'stylelint'},
+                yaml = {'yq'},
+            },
+            -- Set up format-on-save
+            format_on_save = { timeout_ms = 500, lsp_fallback = true },
+        },
+        init = function()
+            -- If you want the formatexpr, here is the place to set it
+            vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+        end,
     },
-    opts = function()
-      local null_ls = require("null-ls")
-      local gotest_codeaction = require("go.null_ls").gotest_action()
-      local golangci_lint = require("go.null_ls").golangci_lint()
 
-      local sources = {
-        null_ls.builtins.diagnostics.actionlint,
-        null_ls.builtins.diagnostics.checkmake,
-        null_ls.builtins.diagnostics.codespell,
-        null_ls.builtins.diagnostics.dotenv_linter,
-        null_ls.builtins.diagnostics.erb_lint,
-        -- using xo instead, which is wrapper on top of eslint
-        -- null_ls.builtins.diagnostics.eslint.with({
-        --   prefer_local = "node_modules/.bin",
-        -- }),
-        null_ls.builtins.diagnostics.hadolint,
-        null_ls.builtins.diagnostics.markdownlint.with({
-          extra_args = {
-            "--disable",
-            "MD013", -- line length
-          },
-        }),
-        null_ls.builtins.diagnostics.proselint,
-        null_ls.builtins.diagnostics.buf,
-        null_ls.builtins.diagnostics.protolint,
-        null_ls.builtins.diagnostics.reek,
-        null_ls.builtins.diagnostics.revive,
-        null_ls.builtins.formatting.golines.with({
-          extra_args = {
-            "--max-len=180",
-            "--base-formatter=gofumpt",
-          },
-        }),
-        null_ls.builtins.diagnostics.rubocop,
-        -- null_ls.builtins.diagnostics.ruff, -- python
-        null_ls.builtins.diagnostics.sqlfluff,
-        null_ls.builtins.diagnostics.staticcheck, -- golang
-        null_ls.builtins.diagnostics.stylelint,
-        -- null_ls.builtins.diagnostics.terraform_validate, -- causes module not installed error, will try and rely on lsp
-        -- null_ls.builtins.diagnostics.textlint, -- causes weird bug at top of markdown files
-        null_ls.builtins.diagnostics.tfsec,
-        null_ls.builtins.diagnostics.todo_comments,
-        null_ls.builtins.diagnostics.trail_space,
-        -- null_ls.builtins.diagnostics.write_good, -- too pedantic!
-        null_ls.builtins.diagnostics.yamllint,
-        null_ls.builtins.diagnostics.zsh,
+    -- linter
+    {
+        "mfussenegger/nvim-lint",
+        events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+        opts = {
+            linters_by_ft = {
+                markdown = {'vale', 'markdownlint'},
+                make = {'checkmake',},
+                eruby = { 'erb_lint', },
+                ruby = { 'ruby', 'rubocop', },
+                dockerfile = { 'hadolint', },
+                proto = { 'buf_lint',},
+                sh = { 'shellcheck', 'zsh',},
+                lua = { 'selene',},
+                python = { 'ruff',},
+                sql = { 'sqlfluff',},
+                css = { 'stylelint' },
+                tf = { 'tfsec'},
+                yaml = { 'yamllint' },
+                go = {"revive", "golangcilint"},
+            },
+        },
+        config = function(_, opts)
+            vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+                group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
+                callback = function()
+                    require("lint").try_lint()
 
-        null_ls.builtins.formatting.stylua,
-
-        -- from go.nvim https://github.com/ray-x/go.nvim#integrate-null-ls
-        golangci_lint,
-        gotest_codeaction,
-      }
-
-      return {
-        sources = sources,
-        debounce = 1000,
-        default_timeout = 5000,
-      }
-    end,
-  },
+                    -- always run these linters regardless of file type
+                    require("lint").try_lint("actionlint")
+                    require("lint").try_lint("cspell")
+                    require("lint").try_lint("codespell")
+                    require("lint").try_lint("dotenv_linter")
+                    require("lint").try_lint("write_good")
+                end
+            })
+        end
+    },
 
   -- cmdline tools and lsp servers
   {
