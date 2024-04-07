@@ -32,3 +32,4 @@ vim.keymap.set("n", "H", "^")
 vim.keymap.set("n", "L", "$")
 
 vim.keymap.set("n", ":Bd",":bp<bar>sp<bar>bn<bar>bd<CR>")
+
