@@ -6,7 +6,7 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
     },
-    config = function(_, opts)
+    config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
     end,
   },
@@ -16,25 +16,24 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      {
-        "folke/neodev.nvim",
+      { "folke/neodev.nvim",
         opts = {
           experimental = { pathStrict = true },
           library = {
-            plugins = { "nvim-dap-ui" },
+            plugins = { "nvim-dap-ui"},
             types = true
           }
         }
       },
       "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",   -- mason extension for lspconfig
-      "hrsh7th/nvim-cmp",                    -- autocomplete engine
-      "hrsh7th/cmp-buffer",                  -- nvim-cmp source for buffer words
-      "hrsh7th/cmp-path",                    -- nvim-cmp source for filesystem paths.
-      "hrsh7th/cmp-nvim-lsp",                -- show data sent by the language server.
+      "williamboman/mason-lspconfig.nvim", -- mason extension for lspconfig
+      "hrsh7th/nvim-cmp",                 -- autocomplete engine
+      "hrsh7th/cmp-buffer",               -- nvim-cmp source for buffer words
+      "hrsh7th/cmp-path",                 -- nvim-cmp source for filesystem paths.
+      "hrsh7th/cmp-nvim-lsp",             -- show data sent by the language server.
       "hrsh7th/cmp-nvim-lsp-signature-help", -- display function signatures with current parameter emphasized
-      "saadparwaiz1/cmp_luasnip",            -- luasnip completion source for nvim-cmp
-      "LuaSnip",                             -- snippet engine
+      "saadparwaiz1/cmp_luasnip",         -- luasnip completion source for nvim-cmp
+      "LuaSnip",                          -- snippet engine
       "b0o/schemastore.nvim",
     },
     ---@class PluginLspOpts
@@ -97,7 +96,7 @@ return {
           vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
           vim.keymap.set("n", "<leader>wl", '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-          vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, opts)
+          vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({async = true}) end, opts)
           vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
           vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
           vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
@@ -117,11 +116,11 @@ return {
           end,
         },
         sources = {
-          { name = "path" },                                   -- gives completions based on the filesystem.
-          { name = "nvim_lsp",               priority = 100 }, -- suggestions based on language server
+          { name = "path" },                                                      -- gives completions based on the filesystem.
+          { name = "nvim_lsp",               priority = 100 },                    -- suggestions based on language server
           { name = "nvim_lsp_signature_help" },
           -- { name = "buffer",                 keyword_length = 5, max_item_count = 15, priority = 50 }, -- provides suggestions based on the current file
-          { name = "luasnip",                keyword_length = 2, priority = 3 }, -- it shows snippets loaded by luasnip in the suggestions
+          { name = "luasnip",                keyword_length = 2, priority = 3 },  -- it shows snippets loaded by luasnip in the suggestions
         },
         formatting = {
           fields = { "menu", "abbr", "kind" },
@@ -199,7 +198,7 @@ return {
 
       -- See https://github.com/williamboman/mason-lspconfig.nvim#automatic-server-setup-advanced-feature
       mlsp.setup_handlers({
-        function(server_name) -- default handler
+        function (server_name) -- default handler
           require("lspconfig")[server_name].setup({
             capabilities = lsp_capabilities,
           })
@@ -235,8 +234,8 @@ return {
           })
         end,
         ["gopls"] = function()
-          require("go").setup()                    -- https://github.com/ray-x/go.nvim/issues/112#issuecomment-1116715000
-          local gocfg = require("go.lsp").config() -- config() return the go.nvim gopls setup
+          require("go").setup() -- https://github.com/ray-x/go.nvim/issues/112#issuecomment-1116715000
+          local gocfg = require("go.lsp").config()
           gocfg["capabilities"] = lsp_capabilities
           gocfg["dap_debug"] = true
           gocfg["dap_debug_gui"] = true
@@ -312,135 +311,75 @@ return {
     end,
   },
 
-  {
-    "mfussenegger/nvim-lint",
-    ---@class PluginLspOpts
-    opts = {
-      events = { "BufWritePost", "BufReadPost", "InsertLeave" },
-      linters_by_ft = {
-        python = { "ruff", "mypy" },
-        dockerfile = { "hadolint" },
-        -- Use the "*" filetype to run linters on all filetypes.
-        -- ['*'] = { 'global linter' },
-        -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
-        -- ['_'] = { 'fallback linter' },
-      },
-    },
-    config = function(_, opts)
-      local lint = require("lint")
-      lint.linters_by_ft = opts.linters_by_ft
-
-      --   lint.linters_by_ft = {
-      --     go = { "golangci_lint" },
-      --     python = { "ruff", "mypy" },
-      --   }
-
-      --   local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-      vim.api.nvim_create_autocmd(opts.events, {
-        group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
-        callback = function()
-          lint.try_lint()
+    -- formatters
+    {
+        "stevearc/conform.nvim",
+        event = { "BufWritePre" },
+        cmd = { "ConformInfo" },
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
+                python = { "ruff_fix", "ruff_format", },
+                javascript = { { "prettierd", "prettier" } },
+                sql = {"sqlfmt", 'sqlfluff', "pg_format",},
+                tf = {"terraform_fmt",},
+                ruby = {"rubyfmt","rubocop", 'standardrb'},
+                proto = {"buf",},
+                go = {"gofumpt", "goimports",},
+                jsonnet = {"jsonnetfmt",},
+                json = {"jq",},
+                markdown = {'markdownlint-cli2'},
+                sh = { 'shellcheck', 'shfmt',},
+                css = {'stylelint'},
+                yaml = {'yq'},
+            },
+            -- Set up format-on-save
+            format_on_save = { timeout_ms = 500, lsp_fallback = true },
+        },
+        init = function()
+            -- If you want the formatexpr, here is the place to set it
+            vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
         end,
-      })
+    },
 
-      --   vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-      --     group = lint_augroup,
-      --     callback = function()
-      --       lint.try_lint()
-      --     end,
-      --   })
-    end,
-  },
+    -- linter
+    {
+        "mfussenegger/nvim-lint",
+        events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+        opts = {
+            linters_by_ft = {
+                markdown = {'vale', 'markdownlint'},
+                make = {'checkmake',},
+                eruby = { 'erb_lint', },
+                ruby = { 'ruby', 'rubocop', },
+                dockerfile = { 'hadolint', },
+                proto = { 'buf_lint',},
+                sh = { 'shellcheck', 'zsh',},
+                lua = { 'selene',},
+                python = { 'ruff',},
+                sql = { 'sqlfluff',},
+                css = { 'stylelint' },
+                tf = { 'tfsec'},
+                yaml = { 'yamllint' },
+                go = {"revive", "golangcilint"},
+            },
+        },
+        config = function(_, opts)
+            vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+                group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
+                callback = function()
+                    require("lint").try_lint()
 
-  -- formatters
-  -- {
-  --   "jose-elias-alvarez/null-ls.nvim",
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   dependencies = {
-  --     "mason.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --   },
-  --   opts = function()
-  --     local null_ls = require("null-ls")
-  --     local gotest_codeaction = require("go.null_ls").gotest_action()
-  --     local golangci_lint = require("go.null_ls").golangci_lint()
-
-  --     local sources = {
-  --       null_ls.builtins.code_actions.shellcheck,
-  --       null_ls.builtins.code_actions.xo,
-  --       -- null_ls.builtins.code_actions.gitsigns, -- integration with gitsigns.nvim -- uncomment as never use
-
-  --       -- null_ls.builtins.completion.luasnip,
-  --       -- null_ls.builtins.completion.spell,
-
-  --       null_ls.builtins.diagnostics.actionlint,
-  --       null_ls.builtins.diagnostics.checkmake,
-  --       null_ls.builtins.diagnostics.chktex,
-  --       null_ls.builtins.diagnostics.codespell,
-  --       null_ls.builtins.diagnostics.dotenv_linter,
-  --       null_ls.builtins.diagnostics.erb_lint,
-  --       -- using xo instead, which is wrapper on top of eslint
-  --       -- null_ls.builtins.diagnostics.eslint.with({
-  --       --   prefer_local = "node_modules/.bin",
-  --       -- }),
-  --       null_ls.builtins.diagnostics.hadolint,
-  --       null_ls.builtins.diagnostics.jshint,
-  --       null_ls.builtins.diagnostics.jsonlint,
-  --       null_ls.builtins.diagnostics.luacheck,
-  --       null_ls.builtins.diagnostics.markdownlint.with({
-  --         extra_args = {
-  --           "--disable",
-  --           "MD013", -- line length
-  --         },
-  --       }),
-  --       null_ls.builtins.diagnostics.proselint,
-  --       null_ls.builtins.diagnostics.buf,
-  --       null_ls.builtins.diagnostics.protoc_gen_lint,
-  --       null_ls.builtins.diagnostics.protolint,
-  --       null_ls.builtins.diagnostics.reek,
-  --       null_ls.builtins.diagnostics.revive,
-  --       null_ls.builtins.formatting.golines.with({
-  --         extra_args = {
-  --           "--max-len=180",
-  --           "--base-formatter=gofumpt",
-  --         },
-  --       }),
-  --       null_ls.builtins.diagnostics.rubocop,
-  --       -- null_ls.builtins.diagnostics.ruff, -- python
-  --       null_ls.builtins.diagnostics.shellcheck,
-  --       null_ls.builtins.diagnostics.sqlfluff,
-  --       null_ls.builtins.diagnostics.standardrb,
-  --       null_ls.builtins.diagnostics.staticcheck, -- golang
-  --       null_ls.builtins.diagnostics.stylelint,
-  --       -- null_ls.builtins.diagnostics.terraform_validate, -- causes module not installed error, will try and rely on lsp
-  --       -- null_ls.builtins.diagnostics.textlint, -- causes weird bug at top of markdown files
-  --       null_ls.builtins.diagnostics.tfsec,
-  --       null_ls.builtins.diagnostics.todo_comments,
-  --       null_ls.builtins.diagnostics.trail_space,
-  --       null_ls.builtins.diagnostics.tsc.with({
-  --         prefer_local = "node_modules/.bin",
-  --       }),
-  --       -- null_ls.builtins.diagnostics.write_good, -- too pedantic!
-  --       null_ls.builtins.diagnostics.xo.with({
-  --         prefer_local = "node_modules/.bin",
-  --       }),
-  --       null_ls.builtins.diagnostics.yamllint,
-  --       null_ls.builtins.diagnostics.zsh,
-
-  --       null_ls.builtins.formatting.stylua,
-
-  --       -- from go.nvim https://github.com/ray-x/go.nvim#integrate-null-ls
-  --       golangci_lint,
-  --       gotest_codeaction,
-  --     }
-
-  --     return {
-  --       sources = sources,
-  --       debounce = 1000,
-  --       default_timeout = 5000,
-  --     }
-  --   end,
-  -- },
+                    -- always run these linters regardless of file type
+                    require("lint").try_lint("actionlint")
+                    require("lint").try_lint("cspell")
+                    require("lint").try_lint("codespell")
+                    require("lint").try_lint("dotenv_linter")
+                    require("lint").try_lint("write_good")
+                end
+            })
+        end
+    },
 
   -- cmdline tools and lsp servers
   {
@@ -459,3 +398,4 @@ return {
     end,
   },
 }
+
