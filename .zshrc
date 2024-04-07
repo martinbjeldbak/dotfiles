@@ -10,8 +10,6 @@ if [ -d "$HOME/.local/bin" ] ; then
   path+="$HOME/.local/bin"
 fi
 
-path+="$HOME/.yarn/bin"
-
 source $HOME/.exports
 
 # Path to your oh-my-zsh installation.
@@ -39,14 +37,11 @@ BAT_THEME="Catppuccin-frappe"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux asdf fzf ripgrep gh terraform helm golang kubectl docker docker-compose gcloud history mvn macos jira z zsh-syntax-highlighting)
+plugins=(git tmux asdf fzf ripgrep golang zsh-syntax-highlighting gcloud)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-#RPS1='$(kubectx_prompt_info)'
-#RPROMPT='$(tf_prompt_info)'
 
 ### History
 # Source: https://github.com/craigjperry2/dotfiles/blob/aa77ddcbde63bf3a0a61a2c218bf36f8e146a3c9/dotfiles/zshrc#L44
@@ -64,36 +59,18 @@ setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history 
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
-# You may need to manually set your language environment
-export LANG=en_AU.UTF-8
-
 export EDITOR='nvim'
 
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
-# Google Cloud completions
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Poetry completions https://python-poetry.org/docs/
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 
-# Pytest completions https://docs.pytest.org/en/7.1.x/how-to/bash-completion.html
-# register-python-argcomplete pytest
-
-# Source: https://github.com/zsh-users/zsh-syntax-highlighting/issues/295#issuecomment-214581607
-# Improve paste performance
-zstyle ':bracketed-paste-magic' active-widgets '.self-*'
-
 case `uname` in
   Darwin) # MacOS
-
-    if [[ $(arch) == 'arm64' ]]; then # M1
-        source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    else
-        source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    fi
 
     # Support switching JDK versions https://github.com/AdoptOpenJDK/homebrew-openjdk#switch-between-different-jdk-versions
     jdk() {
@@ -102,25 +79,20 @@ case `uname` in
       java -version
     }
 
-    # Set default to java 8
+    # Set default to java 11
     export JAVA_HOME=$(/usr/libexec/java_home -v"11");
 
     export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-
-    # Add gcloud components to your PATH, add this to your profile
-    source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-    source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
-
-    path+=("/usr/local/opt/curl/bin")
     ;;
   Linux)
     source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
-    source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 esac
 
 export PATH
 
-[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+# [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+
+# . $(pack completion --shell zsh)
 
 # Override any oh-my-zsh aliases
 source $HOME/.aliases

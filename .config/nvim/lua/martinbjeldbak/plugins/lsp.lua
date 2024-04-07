@@ -16,24 +16,25 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "folke/neodev.nvim",
+      {
+        "folke/neodev.nvim",
         opts = {
           experimental = { pathStrict = true },
           library = {
-            plugins = { "nvim-dap-ui"},
+            plugins = { "nvim-dap-ui" },
             types = true
           }
         }
       },
       "mason.nvim",
-      "williamboman/mason-lspconfig.nvim", -- mason extension for lspconfig
-      "hrsh7th/nvim-cmp",                 -- autocomplete engine
-      "hrsh7th/cmp-buffer",               -- nvim-cmp source for buffer words
-      "hrsh7th/cmp-path",                 -- nvim-cmp source for filesystem paths.
-      "hrsh7th/cmp-nvim-lsp",             -- show data sent by the language server.
+      "williamboman/mason-lspconfig.nvim",   -- mason extension for lspconfig
+      "hrsh7th/nvim-cmp",                    -- autocomplete engine
+      "hrsh7th/cmp-buffer",                  -- nvim-cmp source for buffer words
+      "hrsh7th/cmp-path",                    -- nvim-cmp source for filesystem paths.
+      "hrsh7th/cmp-nvim-lsp",                -- show data sent by the language server.
       "hrsh7th/cmp-nvim-lsp-signature-help", -- display function signatures with current parameter emphasized
-      "saadparwaiz1/cmp_luasnip",         -- luasnip completion source for nvim-cmp
-      "LuaSnip",                          -- snippet engine
+      "saadparwaiz1/cmp_luasnip",            -- luasnip completion source for nvim-cmp
+      "LuaSnip",                             -- snippet engine
       "b0o/schemastore.nvim",
     },
     ---@class PluginLspOpts
@@ -96,7 +97,7 @@ return {
           vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
           vim.keymap.set("n", "<leader>wl", '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-          vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({async = true}) end, opts)
+          vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, opts)
           vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
           vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
           vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
@@ -116,11 +117,11 @@ return {
           end,
         },
         sources = {
-          { name = "path" },                                                      -- gives completions based on the filesystem.
-          { name = "nvim_lsp",               priority = 100 },                    -- suggestions based on language server
+          { name = "path" },                                   -- gives completions based on the filesystem.
+          { name = "nvim_lsp",               priority = 100 }, -- suggestions based on language server
           { name = "nvim_lsp_signature_help" },
           -- { name = "buffer",                 keyword_length = 5, max_item_count = 15, priority = 50 }, -- provides suggestions based on the current file
-          { name = "luasnip",                keyword_length = 2, priority = 3 },  -- it shows snippets loaded by luasnip in the suggestions
+          { name = "luasnip",                keyword_length = 2, priority = 3 }, -- it shows snippets loaded by luasnip in the suggestions
         },
         formatting = {
           fields = { "menu", "abbr", "kind" },
@@ -198,7 +199,7 @@ return {
 
       -- See https://github.com/williamboman/mason-lspconfig.nvim#automatic-server-setup-advanced-feature
       mlsp.setup_handlers({
-        function (server_name) -- default handler
+        function(server_name) -- default handler
           require("lspconfig")[server_name].setup({
             capabilities = lsp_capabilities,
           })
@@ -234,7 +235,7 @@ return {
           })
         end,
         ["gopls"] = function()
-          require("go").setup() -- https://github.com/ray-x/go.nvim/issues/112#issuecomment-1116715000
+          require("go").setup()                    -- https://github.com/ray-x/go.nvim/issues/112#issuecomment-1116715000
           local gocfg = require("go.lsp").config() -- config() return the go.nvim gopls setup
           gocfg["capabilities"] = lsp_capabilities
           gocfg["dap_debug"] = true
@@ -308,6 +309,46 @@ return {
           })
         end,
       })
+    end,
+  },
+
+  {
+    "mfussenegger/nvim-lint",
+    ---@class PluginLspOpts
+    opts = {
+      events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+      linters_by_ft = {
+        python = { "ruff", "mypy" },
+        dockerfile = { "hadolint" },
+        -- Use the "*" filetype to run linters on all filetypes.
+        -- ['*'] = { 'global linter' },
+        -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
+        -- ['_'] = { 'fallback linter' },
+      },
+    },
+    config = function(_, opts)
+      local lint = require("lint")
+      lint.linters_by_ft = opts.linters_by_ft
+
+      --   lint.linters_by_ft = {
+      --     go = { "golangci_lint" },
+      --     python = { "ruff", "mypy" },
+      --   }
+
+      --   local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+      vim.api.nvim_create_autocmd(opts.events, {
+        group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
+        callback = function()
+          lint.try_lint()
+        end,
+      })
+
+      --   vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+      --     group = lint_augroup,
+      --     callback = function()
+      --       lint.try_lint()
+      --     end,
+      --   })
     end,
   },
 
