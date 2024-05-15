@@ -120,14 +120,6 @@ return {
         build =
         "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
       },
-      {
-        "danielfalk/smart-open.nvim",
-        branch = "main",
-        dependencies = {
-          "kkharji/sqlite.lua",
-          "nvim-telescope/telescope-fzf-native.nvim",
-        },
-      },
     },
     keys = {
       { "<leader>:",  "<cmd>Telescope command_history<cr>", desc = "Command History" },
@@ -136,8 +128,7 @@ return {
       {
         "<leader>ff",
         function()
-          require("telescope").extensions.smart_open.smart_open()
-          -- require("telescope.builtin").git_files()
+          require("telescope.builtin").git_files()
         end,
         desc = "Find files",
       },
@@ -210,18 +201,10 @@ return {
           end,
         },
       },
-      extensions = {
-        smart_open = {
-          show_scores = true,
-          match_algorithm = "fzf",
-          open_buffer_indicators = { previous = "👀", others = "🙈" },
-        },
-      },
     },
     config = function(_, opts)
       require("telescope").setup(opts)
       require("telescope").load_extension("fzf")
-      require("telescope").load_extension("smart_open")
     end,
   },
 
