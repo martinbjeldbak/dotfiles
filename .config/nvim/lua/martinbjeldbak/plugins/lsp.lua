@@ -369,17 +369,11 @@ return {
 			},
 		},
 		config = function(_, opts)
-			vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
-				group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
+			local lint = require("lint")
+			lint.linters_by_ft = opts.linters_by_ft
+			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "TextChanged", "InsertLeave" }, {
 				callback = function()
-					require("lint").try_lint()
-
-					-- always run these linters regardless of file type
-					-- require("lint").try_lint("actionlint")
-					-- require("lint").try_lint("cspell") -- noisy
-					-- require("lint").try_lint("codespell") -- noisy
-					-- require("lint").try_lint("dotenv_linter")
-					-- require("lint").try_lint("write_good")
+					lint.try_lint()
 				end,
 			})
 		end,
