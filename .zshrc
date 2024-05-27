@@ -37,7 +37,7 @@ BAT_THEME="Catppuccin-frappe"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux asdf fzf ripgrep golang zsh-syntax-highlighting gcloud)
+plugins=(git tmux golang asdf fzf ripgrep zsh-syntax-highlighting) # gcloud
 
 source $ZSH/oh-my-zsh.sh
 
@@ -69,30 +69,26 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --e
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 
-case `uname` in
-  Darwin) # MacOS
+# case `uname` in
+#   Darwin) # MacOS
 
-    # Support switching JDK versions https://github.com/AdoptOpenJDK/homebrew-openjdk#switch-between-different-jdk-versions
-    jdk() {
-      version=$1
-      export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
-      java -version
-    }
+#     # Support switching JDK versions https://github.com/AdoptOpenJDK/homebrew-openjdk#switch-between-different-jdk-versions
+#     jdk() {
+#       version=$1
+#       export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+#       java -version
+#     }
 
-    # Set default to java 11
-    export JAVA_HOME=$(/usr/libexec/java_home -v"11");
+#     # Set default to java 11
+#     export JAVA_HOME=$(/usr/libexec/java_home -v"11");
 
-    export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-    ;;
-  Linux)
-    source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
-esac
+#     export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+#     ;;
+#   Linux)
+#     source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+# esac
 
 export PATH
-
-# [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
-
-# . $(pack completion --shell zsh)
 
 # Override any oh-my-zsh aliases
 source $HOME/.aliases
