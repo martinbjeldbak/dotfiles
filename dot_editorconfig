@@ -1,0 +1,6 @@
+# top-most EditorConfig file
+root = true
+
+[*.proto]
+indent_size = 2
+indent_style = space
