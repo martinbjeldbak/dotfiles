@@ -2,6 +2,9 @@ import = [
   "~/.config/alacritty/catppuccin-frappe.toml"
 ]
 
+[env]
+TERM = "xterm-256color"
+
 [font]
 size = 12
 
