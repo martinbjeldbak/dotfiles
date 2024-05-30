@@ -1,5 +1,3 @@
-EDITOR="nvim"
-
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 # Download zinit if we dont have it
@@ -60,8 +58,10 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls='ls --color'
+alias ls='eza --icons'
+alias ll='eza -l --icons --no-user --group-directories-first  --time-style long-iso'
 alias vim='nvim'
+alias cat='bat'
 
 # Shell integrations
 eval "$(fzf --zsh)"
