@@ -57,20 +57,6 @@ return {
 			-- diagnostics
 			vim.diagnostic.config(opts.diagnostics)
 
-			mlsp.setup({
-				ensure_installed = {
-					"cssls",
-					"dockerls",
-					"docker_compose_language_service",
-					"eslint",
-					"tsserver",
-					"lua_ls",
-					"html",
-					"bashls",
-					"yamlls",
-				},
-			})
-
 			-- Global mappings.
 			-- See `:help vim.diagnostic.*` for documentation on any of the below functions
 			vim.keymap.set("n", "vd", vim.diagnostic.open_float)
