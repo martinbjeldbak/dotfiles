@@ -6,7 +6,7 @@ import = [
 TERM = "xterm-256color"
 
 [font]
-size = 12
+size = 16
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
@@ -19,6 +19,11 @@ family = "JetBrainsMono Nerd Font"
 family = "JetBrainsMono Nerd Font"
 style = "Regular"
 
-[font.glyph_offset]
-x = 0
-y = 0
+[window]
+decorations = "buttonless"
+dynamic_padding = false
+opacity = 0.9
+
+[window.padding]
+x = 25
+y = 20
