@@ -20,7 +20,9 @@ family = "JetBrainsMono Nerd Font"
 style = "Regular"
 
 [window]
+{{- if eq .chezmoi.os "darwin" }}
 decorations = "buttonless"
+{{- end }}
 dynamic_padding = false
 opacity = 0.9
 
