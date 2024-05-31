@@ -28,6 +28,7 @@ zinit snippet OMZP::git
 zinit snippet OMZP::gcloud
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::tmux
+zinit snippet OMZP::asdf
 
 # Load completions
 autoload -U compinit && compinit
