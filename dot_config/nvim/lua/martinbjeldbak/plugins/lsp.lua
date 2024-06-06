@@ -335,7 +335,7 @@ return {
 		events = { "BufWritePost", "BufReadPost", "InsertLeave" },
 		opts = {
 			linters_by_ft = {
-				markdown = { "vale", "markdownlint" },
+				markdown = { "markdownlint" }, -- "vale" is very strict
 				make = { "checkmake" },
 				eruby = { "erb_lint" },
 				ruby = { "ruby", "rubocop" },

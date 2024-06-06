@@ -1,4 +1,7 @@
 README.md
+{{- if eq .chezmoi.os "windows" }}
+dot_config/btop/*
+{{- end }}
 {{- if ne .chezmoi.os "linux" }}
 dot_config/hypr/*
 {{- end }}
