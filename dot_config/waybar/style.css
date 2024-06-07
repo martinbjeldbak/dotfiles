@@ -55,11 +55,16 @@ tooltip label {
 /* Waves to the left */
 #clock.week,
 #clock.time,
+#systemd-failed-units,
 #network,
-#pulseaudio,
+#cpu,
+#memory,
+#privacy,
+#bluetooth,
+#language,
 #wireplumber,
+#idle_inhibitor,
 #backlight,
-#battery,
 #tray {
     border-left: 2px solid #303030;
     border-radius: 360px;
@@ -82,10 +87,15 @@ tooltip label {
 
 #custom-launcher,
 #clock,
-#battery,
 #backlight,
+#systemd-failed-units,
 #network,
-#pulseaudio,
+#cpu,
+#memory,
+#privacy,
+#bluetooth,
+#language,
+#idle_inhibitor,
 #wireplumber,
 #tray {
     padding: 0 10px;
@@ -115,21 +125,12 @@ tooltip label {
 }
 
 #custom-launcher,
-#pulseaudio.muted,
 #wireplumber.muted,
-#battery.warning,
-#battery.charging,
-#battery.plugged {
-	color: #dda456;
-}
 
 #workspaces button.urgent,
 #network.disconnected,
-#battery.critical:not(.charging) {
-	color: #dd5656;
-    animation-name: wave;
-    animation-duration: 750ms;
-    animation-timing-function: steps(3);
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+
+#language {
+    padding-left: 10px;
+    padding-right: 10px;
 }

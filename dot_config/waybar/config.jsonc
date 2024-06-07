@@ -16,10 +16,15 @@
 		"clock#date"
     ],
     "modules-right": [
+		"wireplumber",
+        "hyprland/language",
+        "idle_inhibitor",
 		"network",
-		"backlight",
-		"pulseaudio",
-		"battery",
+        "systemd-failed-units",
+        "privacy",
+		"cpu",
+        "memory",
+        "bluetooth",
 		"tray"
     ],
     "custom/launcher": {
@@ -59,69 +64,84 @@
 	},
     "network": {
 		"interval": 5,
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "   {signalStrength}%",
-        "format-ethernet": "  Connected",   
-        "format-linked": "  {ifname} (No IP)",
+        "format-ethernet": "   up: {bandwidthUpBytes} down: {bandwidthDownBytes}",   
+        "format-linked": "   {ifname} (No IP)",
         "format-disconnected": "   Disconnected",
         "tooltip-format": "{essid} {ifname}: {ipaddr}/{cidr}",
 		"on-click": "exec nm-connection-editor"
     },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "   {percent}%",
-		"on-scroll-up": "exec brightnessctl set 5%+",
-		"on-scroll-down": "exec brightnessctl set 5%-",
-        "tooltip": false
+    "wireplumber": {
+        "format": "{volume}%  {icon} ",
+        "format-muted": "",
+        "on-click": "helvum",
+        "on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "format-icons": ["", "", ""]
     },
-    "pulseaudio": {
-        "format": "{icon}   {volume:2}%   {format_source}",
-        "format-bluetooth": "{icon}   {volume:2}%    {format_source}",
-        "format-bluetooth-muted": "{icon}   Muted    {format_source}",
-        "format-muted": "{icon}   Muted   {format_source}",
-        "format-source": "  {volume:2}%",
-        "format-source-muted": "   Muted",
-        "format-icons": {
-            "headphone": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "default": [
-				"",
-                // Increase number of icons indicating "some volume" and "high volume" so the "empty speaker" is only used in <10%
-				"",
-                "",
-                "",
-                "",
-                "",
-				""
-			]
-        },
-        "scroll-step": 1,
-		"on-click": "pamixer -t",
-		"on-click-right": "pavucontrol"
-    },
-    "battery": {
-        "interval": 5,
-		"states": {
-			"warning": 30,
-			"critical": 20
-		},
-		"format": "{icon}  {capacity}%",
-		"format-charging": "🗲  {capacity}%",
-        "format-plugged": "🗲  {capacity}%",
-		"format-alt": "󰥔  {time} remaining",
-		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			""
-		]
-	},
     "tray": {
 		"icon-size": 16,
-		"spacing": 10
-	}
+		"spacing": 10,
+        "show-passive-items": true
+	},
+    "hyprland/language": {
+        "format": "{}",
+        "format-en": "en",
+        "format-da": "dk",
+    },
+    "cpu": {
+        "interval": 10,
+        "format": "{usage}% ",
+        "max-length": 10
+    },
+    "bluetooth": {
+        "format": " {status}",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "memory": {
+        "interval": 30,
+        "format": "{used:0.1f}G/{total:0.1f}G "
+    },
+    "privacy": {
+        "icon-spacing": 4,
+        "icon-size": 18,
+        "transition-duration": 250,
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-out",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            }
+        ]
+    },
+    "systemd-failed-units": {
+        "hide-on-ok": true, // Hide if there is zero failed units.
+        "format": "✗ {nr_failed}",
+        "format-ok": "✓",
+        "system": true, // Monitor failed systemwide units.
+        "user": false // Ignore failed user units.
+    }
 }
 
