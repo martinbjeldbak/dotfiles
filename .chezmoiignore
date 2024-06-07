@@ -1,8 +1,8 @@
 README.md
 {{- if eq .chezmoi.os "windows" }}
-.config/btop/*
-.config/bat/*
+.config/btop/**
+.config/bat/**
 {{- end }}
 {{- if ne .chezmoi.os "linux" }}
-.config/hypr/*
+.config/hypr/**
 {{- end }}

@@ -26,9 +26,13 @@ zinit light aloxaf/fzf-tab
 # Snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::gcloud
+zinit snippet OMZP::golang
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::tmux
 zinit snippet OMZP::asdf
+zinit snippet OMZP::fzf
+zinit snippet OMZP::ssh
+zinit snippet OMZP::docker-compose
 
 # Load completions
 autoload -U compinit && compinit
