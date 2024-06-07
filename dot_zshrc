@@ -20,7 +20,9 @@ zinit light starship/starship
 # Zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
+
+zinit wait lucid atload'_zsh_autosuggest_start' light-mode for \
+    zsh-users/zsh-autosuggestions
 zinit light aloxaf/fzf-tab
 
 # Snippets
@@ -33,6 +35,7 @@ zinit snippet OMZP::asdf
 zinit snippet OMZP::fzf
 zinit snippet OMZP::ssh
 zinit snippet OMZP::docker-compose
+zinit snippet OMZP::pip
 
 # Load completions
 autoload -U compinit && compinit
