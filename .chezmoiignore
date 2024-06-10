@@ -5,4 +5,5 @@ README.md
 {{- end }}
 {{- if ne .chezmoi.os "linux" }}
 .config/hypr/**
+.config/waybar/**
 {{- end }}
