@@ -4,6 +4,6 @@ vim.filetype.add {
     },
     filename = {
         ['Kustomization'] = "yaml",
-        ['dot_zshrc'] = "zsh"
+        ['dot_zshrc.tmpl'] = "zsh"
     }
 }

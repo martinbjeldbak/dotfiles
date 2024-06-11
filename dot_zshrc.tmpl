@@ -46,10 +46,9 @@ zinit wait lucid for \
         OMZP::docker/completions/_docker
 
 
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
+{{- if eq .chezmoi.os "darwin" }}
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+{{- end }}
 
 # Load completions
 autoload -U compinit && compinit
