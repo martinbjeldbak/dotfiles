@@ -3,6 +3,7 @@ vim.filetype.add {
         tfvars = 'terraform',
     },
     filename = {
-        ['Kustomization'] = "yaml"
+        ['Kustomization'] = "yaml",
+        ['dot_zshrc'] = "zsh"
     }
 }

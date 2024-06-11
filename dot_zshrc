@@ -38,8 +38,22 @@ zinit snippet OMZP::docker-compose
 zinit snippet OMZP::pip
 zinit snippet OMZL::key-bindings.zsh
 
+zinit wait lucid for \
+  atinit"zicompinit; zicdreplay"  \
+      OMZP::colored-man-pages \
+  as"completion" \
+        OMZP::fd/_fd \
+        OMZP::docker/completions/_docker
+
+
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
 # Load completions
 autoload -U compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
 
 zinit cdreplay -q
 
@@ -62,7 +76,6 @@ setopt hist_find_no_dups
 
 # For kill-word, see https://github.com/ohmyzsh/ohmyzsh/issues/9367
 WORDCHARS=''
-
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
