@@ -1,4 +1,5 @@
 README.md
+selene.toml
 {{- if eq .chezmoi.os "windows" }}
 .config/btop/**
 .config/bat/**
