@@ -170,7 +170,6 @@ return {
 		},
 		opts = {
 			defaults = {
-				file_ignore_patterns = { ".git/" },
 				mappings = {
 					i = {
 						["<C-Down>"] = function(...)
@@ -184,6 +183,14 @@ return {
 						end,
 						["<C-b>"] = function(...)
 							return require("telescope.actions").preview_scrolling_up(...)
+						end,
+						["<C-t>"] = function(...)
+							require("trouble.sources.telescope").open(...)
+						end,
+					},
+					n = {
+						["<C-t>"] = function(...)
+							require("trouble.sources.telescope").open(...)
 						end,
 					},
 				},
