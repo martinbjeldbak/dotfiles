@@ -11,20 +11,43 @@ return {
         end,
     },
 
+    { -- mason extension for lspconfig
+        "williamboman/mason-lspconfig.nvim",
+        ---@class PluginLspOpts
+        opts = {
+            ensure_installed = {
+                "pyright",
+                "lemminx",
+                "terraformls",
+                "docker_compose_language_service",
+                "dockerls",
+                "html",
+                "yamlls",
+                "lua_ls",
+                "taplo",
+                "bashls",
+                "astro",
+                "gopls",
+                "marksman",
+                "sqls",
+            }
+        }
+    },
+
     -- lspconfig
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "mason.nvim",
-            "williamboman/mason-lspconfig.nvim", -- mason extension for lspconfig
-            "hrsh7th/nvim-cmp",           -- autocomplete engine
-            "hrsh7th/cmp-buffer",         -- nvim-cmp source for buffer words
-            "hrsh7th/cmp-path",           -- nvim-cmp source for filesystem paths.
-            "hrsh7th/cmp-nvim-lsp",       -- show data sent by the language server.
+            "mason-lspconfig.nvim",
+            "hrsh7th/nvim-cmp",                    -- autocomplete engine
+            "hrsh7th/cmp-buffer",                  -- nvim-cmp source for buffer words
+            "hrsh7th/cmp-path",                    -- nvim-cmp source for filesystem paths.
+            "hrsh7th/cmp-nvim-lsp",                -- show data sent by the language server.
             "hrsh7th/cmp-nvim-lsp-signature-help", -- display function signatures with current parameter emphasized
-            "saadparwaiz1/cmp_luasnip",   -- luasnip completion source for nvim-cmp
-            "LuaSnip",                    -- snippet engine
+            "saadparwaiz1/cmp_luasnip",            -- luasnip completion source for nvim-cmp
+            "LuaSnip",                             -- snippet engine
             "b0o/schemastore.nvim",
         },
         ---@class PluginLspOpts
@@ -35,10 +58,6 @@ return {
         },
         ---@param opts PluginLspOpts
         config = function(_, opts)
-            -- Heavily inspired by https://github.com/VonHeikemen/nvim-starter/blob/03-lsp/init.lua
-            require("mason").setup({
-                ui = { border = "rounded" },
-            })
             local cmp = require("cmp")
             local luasnip = require("luasnip")
             local mlsp = require("mason-lspconfig")
@@ -97,7 +116,7 @@ return {
                     end,
                 },
                 sources = {
-                    { name = "path" },      -- gives completions based on the filesystem.
+                    { name = "path" },                                   -- gives completions based on the filesystem.
                     { name = "nvim_lsp",               priority = 100 }, -- suggestions based on language server
                     { name = "nvim_lsp_signature_help" },
                     -- { name = "buffer",                 keyword_length = 5, max_item_count = 15, priority = 50 }, -- provides suggestions based on the current file
@@ -177,9 +196,12 @@ return {
             local lsp_capabilities =
                 require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
             local lspconfig = require("lspconfig")
+            lspconfig.hyprls.setup {
+                filetypes = { "hyprlang" }
+            }
 
             -- See https://github.com/williamboman/mason-lspconfig.nvim#automatic-server-setup-advanced-feature
-            mlsp.setup_handlers({
+            mlsp.setup_handlers {
                 function(server_name) -- default handler
                     require("lspconfig")[server_name].setup({
                         capabilities = lsp_capabilities,
@@ -272,7 +294,7 @@ return {
                         },
                     })
                 end,
-            })
+            }
         end,
     },
     {
@@ -368,11 +390,7 @@ return {
         cmd = "Mason",
         keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
         opts = {
-            ensure_installed = {
-                "stylua",
-                "shfmt",
-                "black",
-            },
+            ui = { border = "rounded" }
         },
         config = function(_, opts)
             require("mason").setup(opts)

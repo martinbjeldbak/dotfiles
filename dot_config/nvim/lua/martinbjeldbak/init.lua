@@ -14,6 +14,7 @@ vim.filetype.add {
     pattern = {
         ['Kustomization'] = "yaml",
         ['dot_zshrc.tmpl'] = "zsh",
-        ['.*%.toml%.tmpl'] = "toml"
+        ['.*%.toml%.tmpl'] = "toml",
+        [".*/hypr/.*%.conf"] = "hyprlang"
     },
 }
