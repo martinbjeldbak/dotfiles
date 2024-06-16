@@ -6,10 +6,11 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     keys = {
-      { "<c-space>", desc = "Increment selection" },
+      { "<C-space>", desc = "Increment selection" },
       { "<bs>", desc = "Decrement selection", mode = "x" },
     },
     ---@type TSConfig
+    ---@diagnostic disable-next-line: missing-fields
     opts = {
       auto_install = true, -- automatically install missing parsers when entering buffer
       highlight = { enable = true },

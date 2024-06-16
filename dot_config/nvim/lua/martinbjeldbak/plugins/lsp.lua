@@ -51,11 +51,39 @@ return {
             "b0o/schemastore.nvim",
         },
         ---@class PluginLspOpts
-        opts = {
-            diagnostics = {
-                virtual_text = true,
-            },
-        },
+        opts = function()
+            return {
+                diagnostics = {
+                    virtual_text = true,
+                },
+                -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
+                -- Be aware that you also will need to properly configure your LSP server to
+                -- provide the inlay hints.
+                inlay_hints = {
+                    enabled = true,
+                    exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
+                },
+                -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
+                -- Be aware that you also will need to properly configure your LSP server to
+                -- provide the code lenses.
+                codelens = {
+                    enabled = true,
+                },
+                -- Enable lsp cursor word highlighting
+                document_highlight = {
+                    enabled = true,
+                },
+                -- add any global capabilities here
+                capabilities = {
+                    workspace = {
+                        fileOperations = {
+                            didRename = true,
+                            willRename = true,
+                        },
+                    },
+                },
+            }
+        end,
         ---@param opts PluginLspOpts
         config = function(_, opts)
             local cmp = require("cmp")
@@ -137,12 +165,6 @@ return {
                 },
                 -- See :help cmp-mapping
                 mapping = cmp.mapping.preset.insert({
-                    ["<C-Space>"] = cmp.mapping(
-                        cmp.mapping.complete({
-                            config = { reason = cmp.ContextReason.Auto },
-                        }),
-                        { "i", "c" }
-                    ),
                     ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
                     ["<Down>"] = cmp.mapping.select_next_item(select_opts),
 
@@ -197,7 +219,7 @@ return {
                 require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
             local lspconfig = require("lspconfig")
             lspconfig.hyprls.setup {
-                filetypes = { "hyprlang" }
+                filetypes = { "hyprlang" }, -- override this until TODO merged
             }
 
             -- See https://github.com/williamboman/mason-lspconfig.nvim#automatic-server-setup-advanced-feature

@@ -87,6 +87,7 @@
         "format": "{}",
         "format-en": "en",
         "format-da": "dk",
+        "on-click": "hyprctl switchxkblayout keychron-keychron-k2 next"
     },
     "cpu": {
         "interval": 10,
