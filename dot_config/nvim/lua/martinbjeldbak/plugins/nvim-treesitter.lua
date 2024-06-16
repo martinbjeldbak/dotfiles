@@ -6,7 +6,7 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     keys = {
-      { "<C-space>", desc = "Increment selection" },
+      { "<c-space>", desc = "Increment selection" },
       { "<bs>", desc = "Decrement selection", mode = "x" },
     },
     ---@type TSConfig
