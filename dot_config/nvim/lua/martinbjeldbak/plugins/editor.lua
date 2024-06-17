@@ -170,6 +170,7 @@ return {
 		},
 		opts = {
 			defaults = {
+				file_ignore_patterns = { ".git/" },
 				mappings = {
 					i = {
 						["<C-Down>"] = function(...)

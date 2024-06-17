@@ -19,8 +19,16 @@ return {
                         icon_hl = '@variable',
                         desc = 'Files',
                         group = 'Label',
-                        action = 'Telescope find_files',
+                        action = 'Telescope git_files',
                         key = 'f',
+                    },
+                    {
+                        icon = ' ',
+                        icon_hl = '@variable',
+                        desc = 'Grep',
+                        group = 'Label',
+                        action = 'Telescope live_grep',
+                        key = 'g',
                     },
                     {
                         desc = ' dotfiles',
