@@ -3,6 +3,8 @@
   name = Martin Bjeldbak Madsen
 {{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
   signingkey = 5A2F8438842037996C66B8EF5797AFAA475ED88D
+{{- else }}
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJT8COxse6v5R1s66CsppcCgdhCNBQ/uPJd4f9eE2CNH
 {{- end }}
 
 [alias]
@@ -164,10 +166,9 @@
 	gpgsign = true
 [gui]
 [gpg]
-	program = /usr/local/bin/gpg
-{{- if ne .chezmoi.hostname "RV42QFMFQ4" }}
 	format = ssh
-{{- end }}
+[gpg "ssh"]
+        program = /opt/1Password/op-ssh-sign
 [color]
 	ui = true
 [color "diff-highlight"]
