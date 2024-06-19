@@ -166,9 +166,13 @@
 	gpgsign = true
 [gui]
 [gpg]
+{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+       program = /usr/local/bin/gpg
+{{- else }}
 	format = ssh
 [gpg "ssh"]
         program = /opt/1Password/op-ssh-sign
+{{- end }}
 [color]
 	ui = true
 [color "diff-highlight"]
