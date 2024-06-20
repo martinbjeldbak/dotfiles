@@ -129,14 +129,14 @@ return {
 				function()
 					require("telescope.builtin").git_files()
 				end,
-				desc = "Find files",
+				desc = "Git files",
 			},
 			{
 				"<C-p>",
 				function()
 					require("telescope.builtin").find_files()
 				end,
-				desc = "Git files",
+				desc = "Find files",
 			},
 			{
 				"<leader>fz",
@@ -144,6 +144,13 @@ return {
 					require("telescope.builtin").live_grep()
 				end,
 				desc = "Live grep (root dir)",
+			},
+			{
+				"<leader>fg",
+				function()
+					require("telescope.builtin").grep_string()
+				end,
+				desc = "Searches for the string under your cursor or selection in your current working directory",
 			},
 			{
 				"<leader>fb",
@@ -157,12 +164,62 @@ return {
 				function()
 					require("telescope.builtin").lsp_references()
 				end,
-				desc = "Code references",
+				desc = "Lists LSP references",
+			},
+			{
+				"<leader>fs",
+				function()
+					require("telescope.builtin").lsp_document_symbols()
+				end,
+				desc = "Lists LSP document symbols in the current workspace",
+			},
+			{
+				"<leader>fd",
+				function()
+					require("telescope.builtin").lsp_definitions()
+				end,
+				desc = "Goto the definition of the word under the cursor, if there's only one, otherwise show all options in Telescope",
+			},
+			{
+				"<leader>fdd",
+				function()
+					require("telescope.builtin").diagnostics()
+				end,
+				desc = "Lists Diagnostics for all open buffers"
+			},
+			{
+				"<leader>ft",
+				function()
+					require("telescope.builtin").treesitter()
+				end,
+				desc = "Lists Function names, variables, from Treesitter",
+			},
+			{
+				"<leader>fc",
+				function()
+					require("telescope.builtin").git_commits()
+				end,
+				desc = "Lists git commits with diff preview",
+			},
+			{
+				"<leader>fbb",
+				function()
+					require("telescope.builtin").git_bcommits()
+				end,
+				desc = "Lists buffer's git commits with diff preview",
+			},
+			{
+				"<leader>fB",
+				function()
+					require("telescope.builtin").git_branches()
+				end,
+				desc = "Lists all branches with log preview",
 			},
 
 			-- search
 			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
 			{ "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+			{ "<leader>sh", "<cmd>Telescope search_history<cr>", desc = "Search History" },
 			{ "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
 			{ "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
 			{ "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
@@ -188,6 +245,10 @@ return {
 						["<C-t>"] = function(...)
 							require("trouble.sources.telescope").open(...)
 						end,
+						-- map actions.which_key to <C-h> (default: <C-/>)
+						-- actions.which_key shows the mappings for your picker,
+						-- e.g. git_{create, delete, ...}_branch for the git_branches picker
+						["<C-h>"] = "which_key",
 					},
 					n = {
 						["<C-t>"] = function(...)
