@@ -12,77 +12,81 @@
     ],
     "modules-center": [
         "clock#week",
-		"clock#time",
-		"clock#date"
+        "clock#time",
+        "clock#date"
     ],
     "modules-right": [
-		"wireplumber",
+        "wireplumber",
         "hyprland/language",
         "idle_inhibitor",
-		"network",
+        "network",
         "systemd-failed-units",
         "privacy",
-		"cpu",
+        "cpu",
         "memory",
         "bluetooth",
-		"tray"
+        "tray"
     ],
     "custom/launcher": {
-		"format": "ム",
-		"tooltip": false,
-		"on-click": "exec wlogout -p layer-shell"
-	},
+        "format": "ム",
+        "tooltip": false,
+        "on-click": "exec wlogout -p layer-shell"
+    },
     "hyprland/workspaces": {
-		"format": "{icon}",
+        "format": "{icon}",
         "format-icons": {
             "1": "一",
             "2": "二",
             "3": "三",
-        	"4": "四",
-        	"5": "五",
-			"6": "六",
-			"7": "七",
-			"8": "八",
-			"9": "九",
-			"10": "十"
+            "4": "四",
+            "5": "五",
+            "6": "六",
+            "7": "七",
+            "8": "八",
+            "9": "九",
+            "10": "十"
         }
-	},
-	"hyprland/window": {
-		"format": "ア   {}"
-	},
+    },
+    "hyprland/window": {
+        "format": "ア   {}"
+    },
     "clock#week": {
-		"format": "{:%A}",
-		"tooltip-format": "<tt><big>{calendar}</big></tt>"
-	},
-	"clock#time": {
-		"format": "{:%H:%M}",
-		"tooltip-format": "<tt><big>{calendar}</big></tt>"
-	},
-	"clock#date": {
-		"format": "{:%d.%m.%Y}",
-		"tooltip-format": "<tt><big>{calendar}</big></tt>"
-	},
+        "format": "{:%A}",
+        "tooltip-format": "<tt><big>{calendar}</big></tt>"
+    },
+    "clock#time": {
+        "format": "{:%H:%M}",
+        "tooltip-format": "<tt><big>{calendar}</big></tt>"
+    },
+    "clock#date": {
+        "format": "{:%d.%m.%Y}",
+        "tooltip-format": "<tt><big>{calendar}</big></tt>"
+    },
     "network": {
-		"interval": 5,
+        "interval": 5,
         "format-wifi": "   {signalStrength}%",
-        "format-ethernet": "   up: {bandwidthUpBytes} down: {bandwidthDownBytes}",   
+        "format-ethernet": "   up: {bandwidthUpBytes} down: {bandwidthDownBytes}",
         "format-linked": "   {ifname} (No IP)",
         "format-disconnected": "   Disconnected",
         "tooltip-format": "{essid} {ifname}: {ipaddr}/{cidr}",
-		"on-click": "exec nm-connection-editor"
+        "on-click": "exec nm-connection-editor"
     },
     "wireplumber": {
         "format": "{volume}%  {icon} ",
         "format-muted": "",
         "on-click": "helvum",
         "on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "format-icons": ["", "", ""]
+        "format-icons": [
+            "",
+            "",
+            ""
+        ]
     },
     "tray": {
-		"icon-size": 16,
-		"spacing": 10,
+        "icon-size": 16,
+        "spacing": 10,
         "show-passive-items": true
-	},
+    },
     "hyprland/language": {
         "format": "{}",
         "format-en": "en",
@@ -145,4 +149,3 @@
         "user": false // Ignore failed user units.
     }
 }
-
