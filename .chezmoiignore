@@ -8,5 +8,5 @@ selene.toml
 .config/hypr/**
 .config/waybar/**
 .config/rofi/**
-.local/rofi/**
+.local/share/rofi/**
 {{- end }}
