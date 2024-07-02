@@ -119,6 +119,12 @@ return {
 				"nvim-telescope/telescope-fzf-native.nvim", -- add native fzf implementation
 				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 			},
+			{
+				"nvim-telescope/telescope-live-grep-args.nvim",
+				-- This will not install any breaking changes.
+				-- For major updates, this must be adjusted manually.
+				version = "^1.0.0",
+			},
 		},
 		keys = {
 			{ "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
@@ -141,7 +147,7 @@ return {
 			{
 				"<leader>fz",
 				function()
-					require("telescope.builtin").live_grep()
+					require("telescope").extensions.live_grep_args.live_grep_args()
 				end,
 				desc = "Live grep (root dir)",
 			},
@@ -185,7 +191,7 @@ return {
 				function()
 					require("telescope.builtin").diagnostics()
 				end,
-				desc = "Lists Diagnostics for all open buffers"
+				desc = "Lists Diagnostics for all open buffers",
 			},
 			{
 				"<leader>ft",
@@ -271,8 +277,10 @@ return {
 			},
 		},
 		config = function(_, opts)
-			require("telescope").setup(opts)
-			require("telescope").load_extension("fzf")
+			local telescope = require("telescope")
+			telescope.setup(opts)
+			telescope.load_extension("fzf")
+			telescope.load_extension("live_grep_args")
 		end,
 	},
 

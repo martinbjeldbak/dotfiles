@@ -36,6 +36,7 @@ zinit snippet OMZP::fzf
 zinit snippet OMZP::ssh
 zinit snippet OMZP::docker-compose
 zinit snippet OMZP::pip
+zinit snippet OMZP::poetry
 zinit snippet OMZL::key-bindings.zsh
 
 zinit wait lucid for \
@@ -48,6 +49,8 @@ zinit wait lucid for \
 
 {{- if eq .chezmoi.os "darwin" }}
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+export PATH="$PATH:/Users/madsenm1/.local/bin"
 {{- end }}
 
 # Load completions
