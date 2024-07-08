@@ -98,6 +98,14 @@ alias cat='bat'
 
 # Env variables
 export EDITOR='nvim'
+export SSL_CERT_FILE=/opt/homebrew/etc/openssl@3/cert.pem   # Various tools incl Golang
+export ca_certificates_file=${SSL_CERT_FILE}                # Various tools incl Python & gsutil/boto
+export CLOUDSDK_CORE_CUSTOM_CA_CERTS_FILE=${SSL_CERT_FILE}  # gcloud
+export CURL_CA_BUNDLE=${SSL_CERT_FILE}                      # curl
+export REQUESTS_CA_BUNDLE=${SSL_CERT_FILE}                  # Python requests library
+export HTTPLIB2_CA_CERTS=${SSL_CERT_FILE}                   # Python httplib2 library
+export GRPC_DEFAULT_SSL_ROOTS_FILE_PATH=${SSL_CERT_FILE}    # GRPC
+
 
 # Shell integrations
 eval "$(fzf --zsh)"
