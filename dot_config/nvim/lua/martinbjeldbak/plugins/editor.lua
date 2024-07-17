@@ -147,7 +147,18 @@ return {
 			{
 				"<leader>fz",
 				function()
-					require("telescope").extensions.live_grep_args.live_grep_args()
+					require("telescope").extensions.live_grep_args.live_grep_args({
+						vimgrep_arguments = {
+							"rg",
+                            "--hidden",
+							"--color=never",
+							"--no-heading",
+							"--with-filename",
+							"--line-number",
+							"--column",
+							"--smart-case",
+						},
+					})
 				end,
 				desc = "Live grep (root dir)",
 			},
@@ -270,9 +281,7 @@ return {
 				},
 				-- https://github.com/nvim-telescope/telescope.nvim/issues/855#issuecomment-1032325327
 				live_grep = {
-					additional_args = function()
-						return { "--hidden" }
-					end,
+					additional_args = { "--hidden" },
 				},
 			},
 		},

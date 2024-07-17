@@ -28,6 +28,8 @@ $line_break$character"""
 
 palette = 'gruvbox_dark'
 
+command_timeout = 1000 # asdf loading ruby python and others is slowww
+
 [palettes.gruvbox_dark]
 color_fg0 = '#fbf1c7'
 color_bg1 = '#3c3836'
