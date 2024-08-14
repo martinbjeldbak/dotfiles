@@ -2,7 +2,7 @@
   email = {{ .email | quote }}
   name = Martin Bjeldbak Madsen
 {{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
-  signingkey = 5A2F8438842037996C66B8EF5797AFAA475ED88D
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGFr92HbF1f3ZF1Tatmab7jybDq4HSLR1oT3VknO4Blx
 {{- else }}
   signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJT8COxse6v5R1s66CsppcCgdhCNBQ/uPJd4f9eE2CNH
 {{- end }}
@@ -125,6 +125,12 @@
 
 # URL shorthands
 
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+
+[url "ssh://git@github.service.anz/"]
+	insteadOf = https://github.com/
+
 [url "git@github.com:"]
 
   insteadOf = "gh:"
@@ -166,10 +172,9 @@
 	gpgsign = true
 [gui]
 [gpg]
-{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
-       program = /usr/local/bin/gpg
-{{- else }}
 	format = ssh
+{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+{{- else }}
 [gpg "ssh"]
         program = /opt/1Password/op-ssh-sign
 {{- end }}
