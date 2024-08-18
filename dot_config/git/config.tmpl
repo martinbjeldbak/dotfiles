@@ -173,9 +173,10 @@
 [gui]
 [gpg]
 	format = ssh
-{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
-{{- else }}
 [gpg "ssh"]
+{{- if eq .chezmoi.os "darwin" }}
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+{{- else }}
         program = /opt/1Password/op-ssh-sign
 {{- end }}
 [color]
