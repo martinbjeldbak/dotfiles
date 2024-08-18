@@ -5,9 +5,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
 
 -- Make line numbers default
 vim.opt.relativenumber = true
@@ -64,6 +61,18 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+vim.filetype.add({
+	extension = {
+		tfvars = "terraform",
+	},
+	pattern = {
+		["Kustomization"] = "yaml",
+		["dot_zshrc.tmpl"] = "zsh",
+		[".*%.toml%.tmpl"] = "toml",
+		[".*/hypr/.*%.conf"] = "hyprlang",
+	},
+})
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
