@@ -174,7 +174,8 @@
 [gpg]
 	format = ssh
 [gpg "ssh"]
-{{- if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+{{- else if eq .chezmoi.os "darwin" }}
 	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 {{- else }}
         program = /opt/1Password/op-ssh-sign
