@@ -99,7 +99,7 @@ alias cat='bat'
 # Env variables
 export EDITOR='nvim'
 
-{{- if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
 export SSL_CERT_FILE=/opt/homebrew/etc/openssl@3/cert.pem   # Various tools incl Golang
 export ca_certificates_file=${SSL_CERT_FILE}                # Various tools incl Python & gsutil/boto
 export CLOUDSDK_CORE_CUSTOM_CA_CERTS_FILE=${SSL_CERT_FILE}  # gcloud
