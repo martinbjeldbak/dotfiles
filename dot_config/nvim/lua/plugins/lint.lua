@@ -32,8 +32,6 @@ return {
 				group = lint_augroup,
 				callback = function()
 					lint.try_lint()
-
-					lint.try_lint("cspell") -- run on all filetypes
 				end,
 			})
 		end,

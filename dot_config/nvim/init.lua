@@ -434,6 +434,7 @@ require("lazy").setup({
 				},
 				jsonnet_ls = {},
 				yamlls = {
+					filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.ghaction" },
 					settings = {
 						yaml = {
 							schemaStore = {
