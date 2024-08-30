@@ -73,8 +73,8 @@ vim.filetype.add({
 		[".*%.toml%.tmpl"] = "toml",
 		[".*/hypr/.*%.conf"] = "hyprlang",
 		[".env"] = "dotenv",
-		[".*/.github/workflows/.*%.yml"] = "githubaction",
-		[".*/.github/workflows/.*%.yaml"] = "githubaction",
+		[".*/.github/workflows/.*%.yml"] = "yaml.ghaction",
+		[".*/.github/workflows/.*%.yaml"] = "yaml.ghaction",
 	},
 })
 

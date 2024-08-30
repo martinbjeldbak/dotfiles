@@ -21,7 +21,7 @@ return {
 				go = { "revive", "golangcilint" },
 				dotenv = { "dotenv_linter" },
 				gitcommit = { "commitlint" },
-				githubaction = { "actionlint", "yamllint" },
+				ghaction = { "actionlint" },
 				ledger = { "hledger" },
 			}
 
