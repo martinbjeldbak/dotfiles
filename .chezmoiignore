@@ -2,7 +2,7 @@ README.md
 selene.toml
 
 {{- if ne .chezmoi.hostname "RV42QFMFQ4" }}
-dot_config/nvim/lua/plugins/copilot.lua
+.config/nvim/lua/plugins/copilot.lua
 {{- end }}
 {{- if eq .chezmoi.os "windows" }}
 .config/btop/**
