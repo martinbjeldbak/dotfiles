@@ -13,7 +13,7 @@ return {
 				proto = { "buf_lint" },
 				sh = { "shellcheck", "zsh" },
 				lua = { "selene" },
-				python = { "ruff" },
+				python = { "ruff" }, -- ruff already loaded in conform.nvim
 				sql = { "sqlfluff" },
 				css = { "stylelint" },
 				tf = { "tfsec" },

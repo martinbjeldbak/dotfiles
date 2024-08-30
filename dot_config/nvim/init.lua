@@ -410,7 +410,6 @@ require("lazy").setup({
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				gopls = {},
-				basedpyright = {},
 				lemminx = {},
 				terraformls = {},
 				tflint = {},
@@ -450,7 +449,8 @@ require("lazy").setup({
 				astro = {},
 				marksman = {},
 				sqlls = {},
-				ruff_lsp = {},
+				basedpyright = {},
+				ruff = {},
 				cssls = {},
 				bufls = {},
 				tsserver = {},
@@ -515,7 +515,7 @@ require("lazy").setup({
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },
 				lua = { "stylua" },
-				python = { "ruff_fix", "ruff_format" },
+				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 				javascript = { { "prettierd", "prettier" } },
 				sql = { "sqlfmt", "sqlfluff", "pg_format" },
 				tf = { "terraform_fmt" },
@@ -762,10 +762,6 @@ require("lazy").setup({
 			--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 		end,
 	},
-
-	require("kickstart.plugins.indent_line"),
-	require("kickstart.plugins.lint"),
-	require("kickstart.plugins.autopairs"),
 
 	{ import = "plugins" },
 }, {
