@@ -72,6 +72,9 @@ vim.filetype.add({
 		["dot_zshrc.tmpl"] = "zsh",
 		[".*%.toml%.tmpl"] = "toml",
 		[".*/hypr/.*%.conf"] = "hyprlang",
+		[".env"] = "dotenv",
+		[".*/.github/workflows/.*%.yml"] = "yaml.ghaction",
+		[".*/.github/workflows/.*%.yaml"] = "yaml.ghaction",
 	},
 })
 
@@ -410,7 +413,6 @@ require("lazy").setup({
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				gopls = {},
-				basedpyright = {},
 				lemminx = {},
 				terraformls = {},
 				tflint = {},
@@ -432,6 +434,7 @@ require("lazy").setup({
 				},
 				jsonnet_ls = {},
 				yamlls = {
+					filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.ghaction" },
 					settings = {
 						yaml = {
 							schemaStore = {
@@ -450,7 +453,8 @@ require("lazy").setup({
 				astro = {},
 				marksman = {},
 				sqlls = {},
-				ruff_lsp = {},
+				basedpyright = {},
+				ruff = {},
 				cssls = {},
 				bufls = {},
 				tsserver = {},
@@ -515,7 +519,7 @@ require("lazy").setup({
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },
 				lua = { "stylua" },
-				python = { "ruff_fix", "ruff_format" },
+				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 				javascript = { { "prettierd", "prettier" } },
 				sql = { "sqlfmt", "sqlfluff", "pg_format" },
 				tf = { "terraform_fmt" },
@@ -632,9 +636,10 @@ require("lazy").setup({
 						-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
 						group_index = 0,
 					},
+					{ name = "copilot", group_index = 2 },
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
 					{ name = "path" },
+					{ name = "luasnip" },
 				},
 			})
 		end,
@@ -762,10 +767,6 @@ require("lazy").setup({
 			--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 		end,
 	},
-
-	require("kickstart.plugins.indent_line"),
-	require("kickstart.plugins.lint"),
-	require("kickstart.plugins.autopairs"),
 
 	{ import = "plugins" },
 }, {

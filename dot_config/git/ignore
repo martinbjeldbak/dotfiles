@@ -1,6 +1,3 @@
-# Automatically created by GitHub for Mac
-# To make edits, delete these initial comments, or else your changes may be lost!
-
 # General
 .DS_Store
 .AppleDouble
@@ -40,3 +37,5 @@ texoutput
 .envrc
 .overcommit.yml
 
+# Python, I always create a .venv/ folder. Not everyone will
+.venv/

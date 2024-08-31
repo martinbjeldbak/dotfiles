@@ -107,6 +107,8 @@ export CURL_CA_BUNDLE=${SSL_CERT_FILE}                      # curl
 export REQUESTS_CA_BUNDLE=${SSL_CERT_FILE}                  # Python requests library
 export HTTPLIB2_CA_CERTS=${SSL_CERT_FILE}                   # Python httplib2 library
 export GRPC_DEFAULT_SSL_ROOTS_FILE_PATH=${SSL_CERT_FILE}    # GRPC
+{{ else }}
+export ANTHROPIC_API_KEY={{ onepasswordRead "op://private/anthropic api key/credential" }}
 {{ end }}
 
 # Shell integrations
