@@ -125,11 +125,13 @@
 
 # URL shorthands
 
+{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 
 [url "ssh://git@github.service.anz/"]
 	insteadOf = https://github.com/
+{{- end }}
 
 [url "git@github.com:"]
 
