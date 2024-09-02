@@ -181,9 +181,6 @@ require("lazy").setup({
 			},
 			{
 				"nvim-telescope/telescope-live-grep-args.nvim",
-				-- This will not install any breaking changes.
-				-- For major updates, this must be adjusted manually.
-				version = "^1.0.0",
 			},
 
 			{ "nvim-telescope/telescope-ui-select.nvim" },
@@ -211,7 +208,8 @@ require("lazy").setup({
 			-- do as well as how to actually do it!
 
 			-- [[ Configure Telescope ]]
-			require("telescope").setup({
+			local telescope = require("telescope")
+			telescope.setup({
 				-- You can put your default mappings / updates / etc. in here
 				--  All the info you're looking for is in `:help telescope.setup()`
 				--
@@ -220,22 +218,35 @@ require("lazy").setup({
 				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
 				--   },
 				-- },
-				-- pickers = {}
+				defaults = {
+					file_ignore_patterns = { ".git/" },
+				},
+				pickers = {
+					find_files = {
+						hidden = true,
+						follow = true,
+					},
+					live_grep = {
+						additional_args = { "--hidden" },
+					},
+				},
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
 					},
+					live_grep_args = {
+						additional_args = { "--hidden" },
+					},
 				},
 			})
 
-			-- Enable Telescope extensions if they are installed
-			pcall(require("telescope").load_extension, "fzf")
-			pcall(require("telescope").load_extension, "ui-select")
-			pcall(require("telescope").load_extension, "live_grep_args")
+			telescope.load_extension("fzf")
+			telescope.load_extension("ui-select")
+			telescope.load_extension("live_grep_args")
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
-			local live_grep_args = require("telescope").extensions.live_grep_args
+			local live_grep_args = telescope.extensions.live_grep_args
 
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
@@ -560,11 +571,15 @@ require("lazy").setup({
 			--  into multiple repos for maintenance purposes.
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
+
+			-- Pictograms for completion sources
+			"onsails/lspkind.nvim",
 		},
 		config = function()
 			-- See `:help cmp`
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
+			local lspkind = require("lspkind")
 			luasnip.config.setup({})
 
 			cmp.setup({
@@ -637,9 +652,27 @@ require("lazy").setup({
 						group_index = 0,
 					},
 					{ name = "copilot", group_index = 2 },
-					{ name = "nvim_lsp" },
-					{ name = "path" },
-					{ name = "luasnip" },
+					{ name = "nvim_lsp", group_index = 2 },
+					{ name = "path", group_index = 2 },
+					{ name = "luasnip", group_index = 2 },
+				},
+				formatting = {
+					format = lspkind.cmp_format({
+						mode = "symbol", -- show only symbol annotations
+						maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+						-- can also be a function to dynamically calculate max width such as
+						-- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+						ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+						show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+						symbol_map = { Copilot = "" },
+
+						-- The function below will be called before any actual modifications from lspkind
+						-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+						-- before = function (entry, vim_item)
+						--   ...
+						--   return vim_item
+						-- end
+					}),
 				},
 			})
 		end,
