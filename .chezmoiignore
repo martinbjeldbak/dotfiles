@@ -2,7 +2,6 @@ README.md
 selene.toml
 
 {{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
-.config/nvim/lua/plugins/avante.lua
 {{ else }}
 .config/nvim/lua/plugins/copilot.lua
 {{- end }}
