@@ -468,7 +468,7 @@ require("lazy").setup({
 				ruff = {},
 				cssls = {},
 				bufls = {},
-				tsserver = {},
+				ts_ls= {},
 				lua_ls = {
 					settings = {
 						Lua = {
