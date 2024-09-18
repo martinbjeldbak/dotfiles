@@ -71,6 +71,7 @@ vim.filetype.add({
 		["Kustomization"] = "yaml",
 		["dot_zshrc.tmpl"] = "zsh",
 		[".*%.toml%.tmpl"] = "toml",
+		[".*%.lua%.tmpl"] = "lua",
 		[".*/hypr/.*%.conf"] = "hyprlang",
 		[".env"] = "dotenv",
 		[".*/.github/workflows/.*%.yml"] = "yaml.ghaction",
