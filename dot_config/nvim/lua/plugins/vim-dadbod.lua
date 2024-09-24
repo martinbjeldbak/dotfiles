@@ -12,8 +12,8 @@ return {
 		"DBUIFindBuffer",
 	},
 	init = function()
-		-- Your DBUI configuration
 		vim.g.db_ui_use_nerd_fonts = 1
-		-- vim.g.db_adapter_bigquery_region = "region-australia-southeast1"
+		-- For schema support
+		vim.g.db_adapter_bigquery_region = "region-australia-southeast1"
 	end,
 }

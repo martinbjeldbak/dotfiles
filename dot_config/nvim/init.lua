@@ -63,6 +63,14 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- https://github.com/kristijanhusak/vim-dadbod-ui/issues/141
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "dbout",
+	callback = function()
+		vim.opt_local.foldenable = false
+	end,
+})
+
 vim.filetype.add({
 	extension = {
 		tfvars = "terraform",
@@ -469,7 +477,7 @@ require("lazy").setup({
 				ruff = {},
 				cssls = {},
 				bufls = {},
-				ts_ls= {},
+				ts_ls = {},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -533,7 +541,7 @@ require("lazy").setup({
 				lua = { "stylua" },
 				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 				javascript = { { "prettierd", "prettier" } },
-				sql = { "sqlfmt", "sqlfluff", "pg_format" },
+				sql = { "sql_formatter", "sqlfmt", "sqlfluff", "pg_format" },
 				tf = { "terraform_fmt" },
 				ruby = { "rubyfmt", "rubocop", "standardrb" },
 				proto = { "buf" },
@@ -656,6 +664,7 @@ require("lazy").setup({
 					{ name = "nvim_lsp", group_index = 2 },
 					{ name = "path", group_index = 2 },
 					{ name = "luasnip", group_index = 2 },
+					{ name = "vim-dadbod-completion", group_index = 2 },
 				},
 				formatting = {
 					format = lspkind.cmp_format({
@@ -691,6 +700,11 @@ require("lazy").setup({
 
 			-- You can configure highlights by doing something like:
 			vim.cmd.hi("Comment gui=none")
+		end,
+		config = function()
+			require("catppuccin").setup({
+				transparent_background = true,
+			})
 		end,
 	},
 
