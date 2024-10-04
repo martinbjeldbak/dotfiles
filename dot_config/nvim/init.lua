@@ -589,6 +589,7 @@ require("lazy").setup({
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			local lspkind = require("lspkind")
+			local compare = cmp.config.compare
 			luasnip.config.setup({})
 
 			cmp.setup({
@@ -661,7 +662,7 @@ require("lazy").setup({
 						group_index = 0,
 					},
 					{ name = "copilot", group_index = 2 },
-					{ name = "nvim_lsp", group_index = 2 },
+					{ name = "nvim_lsp", group_index = 2, priority = 100 },
 					{ name = "path", group_index = 2 },
 					{ name = "luasnip", group_index = 2 },
 					{ name = "vim-dadbod-completion", group_index = 2 },
@@ -733,6 +734,10 @@ require("lazy").setup({
 			-- - sd'   - [S]urround [D]elete [']quotes
 			-- - sr)'  - [S]urround [R]eplace [)] [']
 			require("mini.surround").setup()
+
+      -- - gc    - Toggle comment
+      -- - gcc   - Toggle comment on current line
+      require("mini.comment").setup()
 
 			-- Simple and easy statusline.
 			--  You could remove this setup call if you don't like it,
