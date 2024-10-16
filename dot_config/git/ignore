@@ -39,3 +39,4 @@ texoutput
 
 # Python, I always create a .venv/ folder. Not everyone will
 .venv/
+.ipynb_checkpoints
