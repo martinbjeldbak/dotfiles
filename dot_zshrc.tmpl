@@ -28,15 +28,15 @@ zinit light aloxaf/fzf-tab
 # Snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::gcloud
-zinit snippet OMZP::golang
+# zinit snippet OMZP::golang # don't need completion, and don't use aliases
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::tmux
 zinit snippet OMZP::asdf
-zinit snippet OMZP::fzf
+# zinit snippet OMZP::fzf
 zinit snippet OMZP::ssh
 zinit snippet OMZP::docker-compose
-zinit snippet OMZP::pip
-zinit snippet OMZP::poetry
+#zinit snippet OMZP::pip
+#zinit snippet OMZP::poetry
 zinit snippet OMZL::key-bindings.zsh
 
 zinit wait lucid for \
@@ -46,12 +46,15 @@ zinit wait lucid for \
         OMZP::fd/_fd \
         OMZP::docker/completions/_docker
 
-
 {{- if eq .chezmoi.os "darwin" }}
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 export PATH="$PATH:/Users/madsenm1/.local/bin"
 {{- end }}
+
+# fzf completion and key-bindings
+zi for \
+    https://github.com/junegunn/fzf/raw/master/shell/{'completion','key-bindings'}.zsh
 
 # Load completions
 autoload -U compinit && compinit

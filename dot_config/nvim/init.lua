@@ -218,6 +218,7 @@ require("lazy").setup({
 
 			-- [[ Configure Telescope ]]
 			local telescope = require("telescope")
+			local lga_actions = require("telescope-live-grep-args.actions")
 			telescope.setup({
 				-- You can put your default mappings / updates / etc. in here
 				--  All the info you're looking for is in `:help telescope.setup()`
@@ -245,6 +246,15 @@ require("lazy").setup({
 					},
 					live_grep_args = {
 						additional_args = { "--hidden" },
+						auto_quoting = true,
+						mappings = {
+							i = {
+								["C-k"] = lga_actions.quote_prompt(),
+								["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+								-- freeze the current list and start a fuzzy search in the frozen list
+								-- ["<C-space>"] = actions.to_fuzzy_refine,
+							},
+						},
 					},
 				},
 			})
@@ -666,6 +676,15 @@ require("lazy").setup({
 					{ name = "path", group_index = 2 },
 					{ name = "luasnip", group_index = 2 },
 					{ name = "vim-dadbod-completion", group_index = 2 },
+					{ name = "jupynium", group_index = 2, priority = 1000 },
+				},
+				sorting = {
+					priority_weight = 1.0,
+					comparators = {
+						compare.score, -- Jupyter kernel completion shows prior to LSP
+						compare.recently_used,
+						compare.locality,
+					},
 				},
 				formatting = {
 					format = lspkind.cmp_format({
@@ -735,9 +754,11 @@ require("lazy").setup({
 			-- - sr)'  - [S]urround [R]eplace [)] [']
 			require("mini.surround").setup()
 
-      -- - gc    - Toggle comment
-      -- - gcc   - Toggle comment on current line
-      require("mini.comment").setup()
+			-- - gc    - Toggle comment
+			-- - gcc   - Toggle comment on current line
+			require("mini.comment").setup()
+
+			require("mini.align").setup()
 
 			-- Simple and easy statusline.
 			--  You could remove this setup call if you don't like it,
