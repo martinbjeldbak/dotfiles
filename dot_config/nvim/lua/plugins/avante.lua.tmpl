@@ -1,14 +1,27 @@
 return {
+	{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+	{
+		"zbirenbaum/copilot.lua", -- for providers='copilot'
+		event = "InsertEnter",
+		cmd = "Copilot",
+		config = function()
+			require("copilot").setup({})
+		end,
+	},
+	{{ end }}
+	{
 	"yetone/avante.nvim",
 	event = "VeryLazy",
 	lazy = false,
 	version = false, -- set this if you want to always pull the latest change
 	opts = {
 		provider = {{ .avanteProvider | quote }},
+		{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
 		auto_suggestions_provider = "copilot",
 		behaviour = {
 			auto_suggestions = true, -- Experimental stage
 		}
+		{{ end }}
 	},
 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 	build = "make",
@@ -19,7 +32,9 @@ return {
 		"MunifTanjim/nui.nvim",
 		--- The below dependencies are optional,
 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+		{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
 		"zbirenbaum/copilot.lua", -- for providers='copilot'
+		{{ end }}
 		{
 			-- support for image pasting
 			"HakonHarnes/img-clip.nvim",
@@ -46,4 +61,6 @@ return {
 			ft = { "markdown", "Avante" },
 		},
 	},
+
+	}
 }
