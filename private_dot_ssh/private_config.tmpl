@@ -1,0 +1,15 @@
+Host *
+	{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+	{{ else }}
+	IdentityAgent ~/.1password/agent.sock
+	{{ end }}
+{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+Host github.com
+  ControlMaster auto
+  ControlPersist yes
+  Hostname ssh.github.com
+  Port 443
+  ProxyCommand /usr/bin/env nc -X connect -x localhost:3128 %h %p
+  User git
+{{ end }}
