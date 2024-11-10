@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# frappe hash: {{ include "~/.config/bat/themes/Catppuccin Frappe.tmTheme" | sha256sum }}
+# latte hash: {{ include "~/.config/bat/themes/Catppuccin Latte.tmTheme" | sha256sum }}
+# macchiato hash: {{ include "~/.config/bat/themes/Catppuccin Macchiato.tmTheme" | sha256sum }}
+# mocha hash: {{ include "~/.config/bat/themes/Catppuccin Mocha.tmTheme" | sha256sum }}
+
+# Source: https://github.com/catppuccin/bat/tree/main?tab=readme-ov-file#usage
+bat cache --build
