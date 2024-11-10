@@ -1,5 +1,9 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
 
+[diff]
+  command = "delta"
+  pager = "delta"
+
 [data]
     email = {{ $email | quote }}
     avanteProvider = "claude"
