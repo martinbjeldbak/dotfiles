@@ -83,6 +83,8 @@
   trustctime = false
   autocrlf = input
 
+  pager = delta
+
 [color "branch"]
 
   current = yellow reverse
@@ -176,9 +178,8 @@
 [gpg]
 	format = ssh
 [gpg "ssh"]
-{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
-{{- else if eq .chezmoi.os "darwin" }}
-	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+{{- if eq .chezmoi.os "darwin" }}
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 {{- else }}
         program = /opt/1Password/op-ssh-sign
 {{- end }}
@@ -189,8 +190,7 @@
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
-[interactive]
-	diffFilter = diff-so-fancy --patch
+
 
 [pager]
     diff = delta
@@ -199,18 +199,23 @@
     show = delta
 
 [interactive]
-    diffFilter = delta --color-only
+#	diffFilter = delta --diff-so-fancy --patch
+	diffFilter = delta --color-only
 
 [delta]
     features = line-numbers decorations
     whitespace-error-style = 22 reverse
     syntax-theme = Nord
-    navigate = true
+    navigate = true # use n and N to move between diff sections
 
 [delta "decorations"]
     commit-decoration-style = bold yellow box ul
     file-style = bold yellow ul
     file-decoration-style = none
+
+[merge]
+    conflictstyle = zdiff3
+
 [pull]
 	rebase = false
 [init]
