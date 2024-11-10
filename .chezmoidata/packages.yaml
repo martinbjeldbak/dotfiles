@@ -1,6 +1,7 @@
 packages:
   darwin:
     brews:
-    - 'git'
+      - git
+      - delta
     casks:
-    - 'google-chrome'
+      - google-chrome
