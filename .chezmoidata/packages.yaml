@@ -3,5 +3,6 @@ packages:
     brews:
       - git
       - delta
+      - tfenv
     casks:
       - google-chrome
