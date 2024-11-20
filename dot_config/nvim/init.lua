@@ -486,7 +486,6 @@ require("lazy").setup({
 				basedpyright = {},
 				ruff = {},
 				cssls = {},
-				bufls = {},
 				ts_ls = {},
 				lua_ls = {
 					settings = {
