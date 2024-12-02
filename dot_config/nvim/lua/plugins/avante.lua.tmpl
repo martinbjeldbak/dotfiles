@@ -14,6 +14,7 @@ return {
 	event = "VeryLazy",
 	lazy = false,
 	version = false, -- set this if you want to always pull the latest change
+	build = "make BUILD_FROM_SOURCE=true", -- https://github.com/yetone/avante.nvim/issues/544
 	opts = {
 		provider = {{ .avanteProvider | quote }},
 		{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
