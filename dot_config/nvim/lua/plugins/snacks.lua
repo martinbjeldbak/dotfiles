@@ -14,6 +14,7 @@ return {
 			rename = { enabled = true },
 			statuscolumn = { enabled = true },
 			words = { enabled = true },
+			scratch = { enabled = true },
 		},
 		keys = {
 			{
@@ -112,6 +113,20 @@ return {
 				end,
 				desc = "Prev Reference",
 				mode = { "n", "t" },
+			},
+			{
+				"<leader>.",
+				function()
+					Snacks.scratch()
+				end,
+				desc = "Toggle Scratch Buffer",
+			},
+			{
+				"<leader>S",
+				function()
+					Snacks.scratch.select()
+				end,
+				desc = "Select Scratch Buffer",
 			},
 		},
 		init = function()
