@@ -28,3 +28,11 @@
     stripComponents = 2
     refreshPeriod = "168h"
     include = ["*/themes/**"]
+
+[".local/share/rofi/themes"]
+    type = "archive"
+    url = "https://github.com/catppuccin/rofi/archive/refs/heads/main.zip"
+    exact = true
+    stripComponents = 6
+    refreshPeriod = "168h"
+    include = ["*/basic/.local/share/rofi/themes/**"]
