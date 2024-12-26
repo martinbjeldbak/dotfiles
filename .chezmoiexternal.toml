@@ -36,3 +36,9 @@
     stripComponents = 6
     refreshPeriod = "168h"
     include = ["*/basic/.local/share/rofi/themes/**"]
+
+[".config/hypr/frappe.conf"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/catppuccin/hyprland/refs/heads/main/themes/frappe.conf"
+    refreshPeriod = "168h"
+
