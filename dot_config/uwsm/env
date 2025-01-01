@@ -1,0 +1,10 @@
+# NVIDIA GPU support 
+export LIBVA_DRIVER_NAME=nvidia
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+
+## toolkit-specific scale
+export GDK_SCALE=2
+
+# Cursors
+export XCURSOR_SIZE=24
+export HYPRCURSOR_SIZE=24
