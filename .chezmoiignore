@@ -10,4 +10,7 @@ selene.toml
 .config/waybar/**
 .config/rofi/**
 .local/share/rofi/**
+.config/private_gtk-3.0
+.config/systemd/**
+.config/xsettingsd/**
 {{- end }}

@@ -11,7 +11,7 @@ return {
 				dockerfile = { "hadolint" },
 				proto = { "buf_lint" },
 				sh = { "shellcheck", "zsh" },
-				lua = { "selene" },
+				-- lua = { "selene" },
 				python = { "ruff" },
 				sql = { "sqlfluff" },
 				css = { "stylelint" },
