@@ -1,2 +1,3 @@
 theme = catppuccin-frappe
 window-decoration = false
+link-url = true
