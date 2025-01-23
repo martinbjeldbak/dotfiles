@@ -3,6 +3,8 @@
 
 palette = 'catppuccin_frappe'
 
+command_timeout = 1000
+
 # Starship modules
 [character]
 # Note the use of Catppuccin color 'peach'
