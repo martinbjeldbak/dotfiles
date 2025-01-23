@@ -7,7 +7,6 @@ if [ ! -d $ZINIT_HOME ]; then
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
-source "~/.exports"
 
 # Load starship theme
 # line 1: `starship` binary as command, from github release
@@ -44,7 +43,6 @@ zinit wait lucid for \
   atinit"zicompinit; zicdreplay"  \
       OMZP::colored-man-pages \
   as"completion" \
-        OMZP::fd/_fd \
         OMZP::docker/completions/_docker
 
 {{- if eq .chezmoi.os "darwin" }}
