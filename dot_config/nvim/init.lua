@@ -219,6 +219,7 @@ require("lazy").setup({
 			-- [[ Configure Telescope ]]
 			local telescope = require("telescope")
 			local lga_actions = require("telescope-live-grep-args.actions")
+      local open_with_trouble = require("trouble.sources.telescope").open
 			telescope.setup({
 				-- You can put your default mappings / updates / etc. in here
 				--  All the info you're looking for is in `:help telescope.setup()`
@@ -230,6 +231,10 @@ require("lazy").setup({
 				-- },
 				defaults = {
 					file_ignore_patterns = { ".git/" },
+					mapping = {
+						i = { ["<c-t>"] = open_with_trouble },
+						n = { ["<c-t>"] = open_with_trouble },
+					},
 				},
 				pickers = {
 					find_files = {
