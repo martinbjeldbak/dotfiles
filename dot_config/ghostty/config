@@ -1,3 +1,4 @@
 theme = catppuccin-frappe
 window-decoration = false
 link-url = true
+background-opacity = 0.5
