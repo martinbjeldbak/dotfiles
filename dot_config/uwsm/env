@@ -11,3 +11,6 @@ export GDK_SCALE=2
 # Cursors
 export XCURSOR_SIZE=24
 export HYPRCURSOR_SIZE=24
+
+# https://wiki.hyprland.org/Nvidia/#va-api-hardware-video-acceleration
+export NVD_BACKEND=direct
