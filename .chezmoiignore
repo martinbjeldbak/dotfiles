@@ -16,4 +16,5 @@ empty_dot_hushlogin
 .config/private_gtk-3.0
 .config/systemd/**
 .config/xsettingsd/**
+.config/uwsm/**
 {{- end }}
