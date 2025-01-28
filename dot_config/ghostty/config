@@ -1,3 +1,5 @@
 theme = catppuccin-frappe
-window-decoration = true
 font-size = 18
+window-decoration = false
+link-url = true
+background-opacity = 0.5

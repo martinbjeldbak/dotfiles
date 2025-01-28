@@ -168,8 +168,10 @@
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
 	required = true
+{{- if eq .chezmoi.os "darwin" -}}
 [credential]
 	helper = osxkeychain
+{{- end }}
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	required = true
