@@ -25,9 +25,6 @@ return {
 					["o"] = "system_open",
 				},
 			},
-			follow_current_file = {
-				enabled = true,
-			},
 		},
 		commands = {
 			-- source: https://github.com/nvim-neo-tree/neo-tree.nvim/wiki/Recipes#open-with-system-viewer
