@@ -28,16 +28,14 @@ zinit light aloxaf/fzf-tab
 # Snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::gcloud
-# zinit snippet OMZP::golang # don't need completion, and don't use aliases
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::tmux
 zinit snippet OMZP::asdf
-# zinit snippet OMZP::fzf
 zinit snippet OMZP::ssh
 zinit snippet OMZP::docker-compose
-#zinit snippet OMZP::pip
-#zinit snippet OMZP::poetry
 zinit snippet OMZL::key-bindings.zsh
+zinit snippet OMZL::functions.zsh
+zinit snippet OMZL::termsupport.zsh
 
 zinit wait lucid for \
   atinit"zicompinit; zicdreplay"  \
@@ -112,6 +110,20 @@ export GRPC_DEFAULT_SSL_ROOTS_FILE_PATH=${SSL_CERT_FILE}    # GRPC
 {{ else }}
 export ANTHROPIC_API_KEY={{ onepasswordRead "op://private/anthropic api key/credential" }}
 {{ end }}
+
+# Set terminal title
+# Source: https://wiki.archlinux.org/title/Zsh
+autoload -Uz add-zsh-hook
+function xterm_title_precmd () {
+	print -Pn -- '\e]2;\a'
+}
+function xterm_title_preexec () {
+	print -Pn -- '\e]2;%# ' && print -n -- "${(q)1}\a"
+}
+if [[ "$TERM" == (Eterm*|alacritty*|aterm*|foot*|gnome*|konsole*|kterm*|putty*|rxvt*|screen*|wezterm*|tmux*|xterm*) ]]; then
+	add-zsh-hook -Uz precmd xterm_title_precmd
+	add-zsh-hook -Uz preexec xterm_title_preexec
+fi
 
 # Shell integrations
 eval "$(fzf --zsh)"
