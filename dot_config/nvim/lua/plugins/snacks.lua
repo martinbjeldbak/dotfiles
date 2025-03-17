@@ -3,6 +3,7 @@ return {
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
+		---@type snacks.Config
 		opts = {
 			bigfile = { enabled = true },
 			dashboard = { enabled = true },
@@ -15,6 +16,23 @@ return {
 			statuscolumn = { enabled = true },
 			words = { enabled = true },
 			scratch = { enabled = true },
+			explorer = { enabled = true },
+			picker = {
+				sources = {
+					explorer = {
+						layout = { position = "right" },
+					},
+				},
+			},
+			zen = {
+				enabled = true,
+				---@type table<string, boolean>
+				toggles = {
+					git_signs = false,
+					diagnostics = false,
+				}
+
+			}
 		},
 		keys = {
 			{
@@ -128,6 +146,20 @@ return {
 				end,
 				desc = "Select Scratch Buffer",
 			},
+			{
+				"\\",
+				function()
+					Snacks.explorer.open()
+				end,
+				desc = "Open buffer in explorer",
+			},
+			{
+				"<leader>zz",
+				function()
+					Snacks.zen.zen()
+				end,
+				desc = "Enter zen mode",
+			},
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("User", {
@@ -156,20 +188,6 @@ return {
 						:map("<leader>ub")
 					Snacks.toggle.inlay_hints():map("<leader>uh")
 				end,
-			})
-		end,
-	},
-	{ -- https://github.com/folke/snacks.nvim/blob/main/docs/rename.md
-		"nvim-neo-tree/neo-tree.nvim",
-		opts = function(_, opts)
-			local function on_move(data)
-				Snacks.rename.on_rename_file(data.source, data.destination)
-			end
-			local events = require("neo-tree.events")
-			opts.event_handlers = opts.event_handlers or {}
-			vim.list_extend(opts.event_handlers, {
-				{ event = events.FILE_MOVED, handler = on_move },
-				{ event = events.FILE_RENAMED, handler = on_move },
 			})
 		end,
 	},
