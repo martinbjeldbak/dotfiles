@@ -5,6 +5,34 @@ return {
 			"ray-x/guihua.lua",
 			"neovim/nvim-lspconfig",
 			"nvim-treesitter/nvim-treesitter",
+			"theHamsta/nvim-dap-virtual-text",
+		},
+		keys = {
+			{
+				"<leader>ga",
+				"<cmd>GoAlt<cr>",
+				desc = "Open alternative go file",
+			},
+			{
+				"<leader>gas",
+				"<cmd>GoAltS<cr>",
+				desc = "Open alternative go file in split",
+			},
+			{
+				"<leader>gav",
+				"<cmd>GoAltV<cr>",
+				desc = "Open alternative go file in vertical split",
+			},
+			{
+				"<leader>gt",
+				"<cmd>GoTest -n<cr>",
+				desc = "Test nearest",
+			},
+			{
+				"<leader>gta",
+				"<cmd>GoTest<cr>",
+				desc = "Test all",
+			},
 		},
 		config = function()
 			require("go").setup()

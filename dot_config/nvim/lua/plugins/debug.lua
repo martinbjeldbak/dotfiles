@@ -17,19 +17,16 @@ return {
 		-- Installs the debug adapters for you
 		"williamboman/mason.nvim",
 		"jay-babu/mason-nvim-dap.nvim",
-
-		-- Add your own debuggers here
-		"leoluz/nvim-dap-go",
 	},
 	keys = function(_, keys)
 		local dap = require("dap")
 		local dapui = require("dapui")
 		return {
 			-- Basic debugging keymaps
-			{ "<F5>", dap.continue, desc = "Debug: Start/Continue" },
-			{ "<F1>", dap.step_into, desc = "Debug: Step Into" },
-			{ "<F2>", dap.step_over, desc = "Debug: Step Over" },
-			{ "<F3>", dap.step_out, desc = "Debug: Step Out" },
+			-- { "<F5>", dap.continue, desc = "Debug: Start/Continue" },
+			-- { "<F1>", dap.step_into, desc = "Debug: Step Into" },
+			-- { "<F2>", dap.step_over, desc = "Debug: Step Over" },
+			-- { "<F3>", dap.step_out, desc = "Debug: Step Out" },
 			{ "<leader>b", dap.toggle_breakpoint, desc = "Debug: Toggle Breakpoint" },
 			{
 				"<leader>B",
@@ -38,9 +35,9 @@ return {
 				end,
 				desc = "Debug: Set Breakpoint",
 			},
-			-- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-			{ "<F7>", dapui.toggle, desc = "Debug: See last session result." },
-			unpack(keys),
+			-- -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
+			-- { "<F7>", dapui.toggle, desc = "Debug: See last session result." },
+			-- unpack(keys),
 		}
 	end,
 	config = function()
@@ -84,11 +81,26 @@ return {
 			},
 		})
 
+		-- Conditionally set keybinds
+		-- See https://github.com/rcarriga/nvim-dap-ui/issues/134#issuecomment-2656882128
+		dap.listeners.after.event_initialized["me.dap.keys"] = function()
+			vim.keymap.set("n", "c", dap.continue, { desc = "Debug: Continue" })
+			vim.keymap.set("n", "<right>", dap.step_over, { desc = "Debug: Step Over" })
+			vim.keymap.set("n", "<up>", dap.step_out, { desc = "Debug: Step Out" })
+			vim.keymap.set("n", "<down>", dap.step_into, { desc = "Debug: Step Into" })
+		end
+		local reset_keys = function()
+			pcall(vim.keymap.del, "n", "c")
+			pcall(vim.keymap.del, "n", "<down>")
+			pcall(vim.keymap.del, "n", "<up>")
+			pcall(vim.keymap.del, "n", "<right>")
+		end
+		dap.listeners.after.event_terminated["me.dap.keys"] = reset_keys
+		dap.listeners.after.disconnected["me.dap.keys"] = reset_keys
+
+
 		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
 		dap.listeners.before.event_terminated["dapui_config"] = dapui.close
 		dap.listeners.before.event_exited["dapui_config"] = dapui.close
-
-		-- Install golang specific config
-		require("dap-go").setup()
 	end,
 }

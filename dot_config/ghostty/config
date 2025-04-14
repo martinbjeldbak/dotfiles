@@ -1,5 +1,6 @@
 theme = catppuccin-frappe
 font-size = 18
-window-decoration = false
+# window-decoration = false
+macos-titlebar-style = hidden
 link-url = true
 # background-opacity = 0.8
