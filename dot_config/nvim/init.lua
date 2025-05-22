@@ -210,7 +210,7 @@ require("lazy").setup({
 			-- [[ Configure Telescope ]]
 			local telescope = require("telescope")
 			local lga_actions = require("telescope-live-grep-args.actions")
-      local open_with_trouble = require("trouble.sources.telescope").open
+			local open_with_trouble = require("trouble.sources.telescope").open
 			telescope.setup({
 				-- You can put your default mappings / updates / etc. in here
 				--  All the info you're looking for is in `:help telescope.setup()`
@@ -321,8 +321,8 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			-- Automatically install LSPs and related tools to stdpath for Neovim
-			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
-			"williamboman/mason-lspconfig.nvim",
+			{ "mason-org/mason.nvim", version = "^1.0.0", config = true }, -- NOTE: Must be loaded before dependants https://github.com/LazyVim/LazyVim/issues/6039#issuecomment-2856227817
+			{ "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 			-- Useful status updates for LSP.
@@ -483,7 +483,7 @@ require("lazy").setup({
 				ruff = {},
 				cssls = {},
 				ts_ls = {},
-        -- nil_ls = {},
+				-- nil_ls = {},
 				lua_ls = {
 					settings = {
 						Lua = {
