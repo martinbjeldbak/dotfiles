@@ -1,7 +1,7 @@
 [user]
   email = {{ .email | quote }}
   name = Martin Bjeldbak Madsen
-{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+{{- if eq .work_laptop true }}
   signingkey =  ~/.ssh/id_ed25519.pub
 {{- else }}
   signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJT8COxse6v5R1s66CsppcCgdhCNBQ/uPJd4f9eE2CNH
@@ -130,7 +130,7 @@
 
 # URL shorthands
 
-{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+{{- if eq .work_laptop true }}
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 
