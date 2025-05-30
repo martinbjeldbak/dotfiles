@@ -30,7 +30,6 @@ zinit snippet OMZP::git
 zinit snippet OMZP::gcloud
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::tmux
-zinit snippet OMZP::asdf
 zinit snippet OMZP::ssh
 zinit snippet OMZP::docker-compose
 zinit snippet OMZL::key-bindings.zsh
@@ -99,7 +98,7 @@ alias cat='bat'
 # Env variables
 export EDITOR='nvim'
 
-{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+{{- if eq .work_laptop true }}
 export SSL_CERT_FILE=/opt/homebrew/etc/openssl@3/cert.pem   # Various tools incl Golang
 export ca_certificates_file=${SSL_CERT_FILE}                # Various tools incl Python & gsutil/boto
 export CLOUDSDK_CORE_CUSTOM_CA_CERTS_FILE=${SSL_CERT_FILE}  # gcloud

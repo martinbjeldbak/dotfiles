@@ -1,9 +1,9 @@
-{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+{{- if eq .work_laptop true }}
 {{- else }}
 Host *
 	IdentityAgent ~/.1password/agent.sock
 {{- end }}
-{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+{{- if eq .work_laptop true }}
 Host github.com
   ControlMaster auto
   ControlPersist yes
@@ -11,7 +11,7 @@ Host github.com
   Port 443
   ProxyCommand /usr/bin/env nc -X connect -x localhost:3128 %h %p
   User git
-  {{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+  {{- if eq .work_laptop true }}
   AddKeysToAgent yes
   UseKeychain yes
   IdentityFile ~/.ssh/id_ed25519

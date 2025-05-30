@@ -1,4 +1,5 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $work_laptop := promptBoolOnce . "work_laptop" "Work laptop" -}}
 
 [diff]
   command = "delta"
@@ -6,4 +7,5 @@
 
 [data]
     email = {{ $email | quote }}
+    work_laptop = {{ $work_laptop }}
     avanteProvider = "claude"

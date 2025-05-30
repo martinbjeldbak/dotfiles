@@ -1,6 +1,6 @@
 return {}
 -- return {
--- 	{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+	{{- if eq .work_laptop true }}
 -- 	{
 -- 		"zbirenbaum/copilot.lua", -- for providers='copilot'
 -- 		event = "InsertEnter",
@@ -18,7 +18,7 @@ return {}
 -- 	build = "make BUILD_FROM_SOURCE=true", -- https://github.com/yetone/avante.nvim/issues/544
 -- 	opts = {
 -- 		provider = {{ .avanteProvider | quote }},
--- 		{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+		{{- if eq .work_laptop true }}
 -- 		auto_suggestions_provider = "copilot",
 -- 		behaviour = {
 -- 			auto_suggestions = true, -- Experimental stage
@@ -37,7 +37,7 @@ return {}
 -- 		"MunifTanjim/nui.nvim",
 -- 		--- The below dependencies are optional,
 -- 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
--- 		{{- if eq .chezmoi.hostname "RV42QFMFQ4" }}
+		{{- if eq .work_laptop true }}
 -- 		"zbirenbaum/copilot.lua", -- for providers='copilot'
 -- 		{{ end }}
 -- 		{

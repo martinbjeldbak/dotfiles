@@ -3,7 +3,7 @@
 
 palette = 'catppuccin_frappe'
 
-command_timeout = 1000
+command_timeout = 10000
 
 # Starship modules
 [character]

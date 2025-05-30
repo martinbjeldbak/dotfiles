@@ -42,3 +42,10 @@
     url = "https://raw.githubusercontent.com/catppuccin/hyprland/refs/heads/main/themes/frappe.conf"
     refreshPeriod = "168h"
 
+
+[".tmux/plugins/tpm"]
+    type = "archive"
+    url = "https://github.com/tmux-plugins/tpm/archive/master.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"

@@ -13,7 +13,8 @@ empty_dot_hushlogin
 .config/waybar/**
 .config/rofi/**
 .local/share/rofi/**
-.config/private_gtk-3.0
+.gtkrc-2.0
+.config/gtk-3.0
 .config/systemd/**
 .config/xsettingsd/**
 .config/uwsm/**
