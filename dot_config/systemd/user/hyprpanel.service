@@ -1,0 +1,23 @@
+# Inspo: https://github.com/Vladimir-csp/uwsm/tree/ec9a72cd00726c7333663c9324df13f420094fd1/example-units
+[Unit]
+Description=Highly customizable Wayland bar for Sway and Wlroots based compositors.
+Documentation=man:hyprpanel(5)
+# order startup after WM
+After=graphical-session.target
+
+[Service]
+Type=exec
+# Repurpose XDG Autostart filtering
+ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire:labwc:Hyprland" ""
+ExecStart=/usr/bin/hyprpanel
+ExecReload=kill -SIGUSR2 $MAINPID
+Restart=on-failure
+Slice=app-graphical.slice
+
+[Install]
+#WantedBy=graphical-session.target
+# Alternatively can be wanted by specific WMs
+#WantedBy=wayland-session@sway.desktop.target
+#WantedBy=wayland-session@wayfire.desktop.target
+#WantedBy=wayland-session@labwc.desktop.target
+WantedBy=wayland-session@hyprland.desktop.target
