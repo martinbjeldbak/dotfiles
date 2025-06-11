@@ -17,7 +17,7 @@ return {
 				css = { "stylelint" },
 				tf = { "tflint", "trivy" },
 				yaml = { "yamllint" },
-				go = { "revive", "golangcilint" },
+				go = { "golangcilint" },
 				dotenv = { "dotenv_linter" },
 				gitcommit = { "commitlint" },
 				ghaction = { "actionlint" },

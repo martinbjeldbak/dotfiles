@@ -23,7 +23,6 @@ zinit light zsh-users/zsh-completions
 
 zinit wait lucid atload'_zsh_autosuggest_start' light-mode for \
     zsh-users/zsh-autosuggestions
-zinit light aloxaf/fzf-tab
 
 # Snippets
 zinit snippet OMZP::git
@@ -82,12 +81,6 @@ WORDCHARS=''
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors '${(s.:.)LS_COLORS}'
-# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous pref
-zstyle ':completion:*' menu no
-# preview directory's content with eza when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # Aliases
 alias ls='eza -a --icons=auto'

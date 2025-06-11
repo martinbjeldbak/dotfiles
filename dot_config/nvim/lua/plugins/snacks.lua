@@ -50,13 +50,6 @@ return {
 				desc = "Delete Buffer",
 			},
 			{
-				"<leader>gg",
-				function()
-					Snacks.lazygit()
-				end,
-				desc = "Lazygit",
-			},
-			{
 				"<leader>gb",
 				function()
 					Snacks.git.blame_line()
