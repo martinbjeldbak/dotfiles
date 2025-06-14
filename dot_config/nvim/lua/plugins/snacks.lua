@@ -18,11 +18,15 @@ return {
 			scratch = { enabled = true },
 			explorer = { enabled = true },
 			image = { enabled = true },
+			input = { enabled = true },
+			scroll = { enabled = true },
+			indent = { enabled = true },
 			dim = { enabled = true },
 			picker = {
 				sources = {
 					explorer = {
-						layout = { position = "right" },
+						hidden = true,
+						layout = { layout = { position = "right" } },
 					},
 				},
 			},
@@ -32,9 +36,8 @@ return {
 				toggles = {
 					git_signs = false,
 					diagnostics = false,
-				}
-
-			}
+				},
+			},
 		},
 		keys = {
 			{
