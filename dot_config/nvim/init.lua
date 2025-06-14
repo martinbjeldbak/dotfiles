@@ -160,146 +160,70 @@ require("lazy").setup({
 		},
 	},
 
-	{ -- Fuzzy Finder (files, lsp, etc)
-		"nvim-telescope/telescope.nvim",
-		event = "VimEnter",
-		branch = "master",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
+	{
+		"ibhagwan/fzf-lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = function(_, opts)
+			local fzf = require("fzf-lua")
+			local config = fzf.config
 
-				-- `build` is used to run some command when the plugin is installed/updated.
-				-- This is only run then, not every time Neovim starts up.
-				build = "make",
+			-- Quickfix
+			config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
+			config.defaults.keymap.fzf["ctrl-u"] = "half-page-up"
+			config.defaults.keymap.fzf["ctrl-d"] = "half-page-down"
+			config.defaults.keymap.fzf["ctrl-x"] = "jump"
+			config.defaults.keymap.fzf["ctrl-f"] = "preview-page-down"
+			config.defaults.keymap.fzf["ctrl-b"] = "preview-page-up"
+			config.defaults.keymap.builtin["<c-f>"] = "preview-page-down"
+			config.defaults.keymap.builtin["<c-b>"] = "preview-page-up"
 
-				-- `cond` is a condition used to determine whether this plugin should be
-				-- installed and loaded.
-				cond = function()
-					return vim.fn.executable("make") == 1
-				end,
-			},
-			{
-				"nvim-telescope/telescope-live-grep-args.nvim",
-			},
-
-			{ "nvim-telescope/telescope-ui-select.nvim" },
-
-			{ "nvim-tree/nvim-web-devicons" },
-		},
-		config = function()
-			-- Telescope is a fuzzy finder that comes with a lot of different things that
-			-- it can fuzzy find! It's more than just a "file finder", it can search
-			-- many different aspects of Neovim, your workspace, LSP, and more!
-			--
-			-- The easiest way to use Telescope, is to start by doing something like:
-			--  :Telescope help_tags
-			--
-			-- After running this command, a window will open up and you're able to
-			-- type in the prompt window. You'll see a list of `help_tags` options and
-			-- a corresponding preview of the help.
-			--
-			-- Two important keymaps to use while in Telescope are:
-			--  - Insert mode: <c-/>
-			--  - Normal mode: ?
-			--
-			-- This opens a window that shows you all of the keymaps for the current
-			-- Telescope picker. This is really useful to discover what Telescope can
-			-- do as well as how to actually do it!
-
-			-- [[ Configure Telescope ]]
-			local telescope = require("telescope")
-			local lga_actions = require("telescope-live-grep-args.actions")
-			local open_with_trouble = require("trouble.sources.telescope").open
-			telescope.setup({
-				-- You can put your default mappings / updates / etc. in here
-				--  All the info you're looking for is in `:help telescope.setup()`
-				--
-				-- defaults = {
-				--   mappings = {
-				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-				--   },
-				-- },
-				defaults = {
-					file_ignore_patterns = { ".git/" },
-					mapping = {
-						i = { ["<c-t>"] = open_with_trouble },
-						n = { ["<c-t>"] = open_with_trouble },
-					},
-				},
-				pickers = {
-					find_files = {
-						hidden = true,
-						follow = true,
-					},
-					live_grep = {
-						additional_args = { "--hidden" },
-					},
-				},
-				extensions = {
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown(),
-					},
-					live_grep_args = {
-						additional_args = { "--hidden" },
-						auto_quoting = true,
-						mappings = {
-							i = {
-								["C-k"] = lga_actions.quote_prompt(),
-								["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-								-- freeze the current list and start a fuzzy search in the frozen list
-								-- ["<C-space>"] = actions.to_fuzzy_refine,
-							},
-						},
-					},
-				},
-			})
-
-			telescope.load_extension("fzf")
-			telescope.load_extension("ui-select")
-			telescope.load_extension("live_grep_args")
-
-			-- See `:help telescope.builtin`
-			local builtin = require("telescope.builtin")
-			local live_grep_args = telescope.extensions.live_grep_args
-
-			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-			vim.keymap.set("n", "<leader>sc", builtin.git_commits, { desc = "[S]earch git [C]ommits" })
-			vim.keymap.set("n", "<leader>scb", builtin.git_bcommits, { desc = "[S]earch git [C]ommits [B]tree" })
-			vim.keymap.set("n", "<leader>sb", builtin.git_branches, { desc = "[S]earch git [B]ranches" })
-			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-			vim.keymap.set("n", "<leader>sg", live_grep_args.live_grep_args, { desc = "[S]earch by [G]rep" })
-			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
-
-			-- Slightly advanced example of overriding default behavior and theme
-			vim.keymap.set("n", "<leader>/", function()
-				-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-					winblend = 10,
-					previewer = false,
-				}))
-			end, { desc = "[/] Fuzzily search in current buffer" })
-
-			-- It's also possible to pass additional configuration options.
-			--  See `:help telescope.builtin.live_grep()` for information about particular keys
-			vim.keymap.set("n", "<leader>s/", function()
-				builtin.live_grep({
-					grep_open_files = true,
-					prompt_title = "Live Grep in Open Files",
-				})
-			end, { desc = "[S]earch [/] in Open Files" })
-
-			-- Shortcut for searching your Neovim configuration files
-			vim.keymap.set("n", "<leader>sn", function()
-				builtin.find_files({ cwd = vim.fn.stdpath("config") })
-			end, { desc = "[S]earch [N]eovim files" })
+			config.defaults.actions.files["ctrl-t"] = require("trouble.sources.fzf").actions.open
+			return {
+				"default-title",
+				fzf_colors = true,
+			}
 		end,
+		keys = {
+			{
+				"<leader>,",
+				"<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>",
+				desc = "Switch Buffer",
+			},
+			{ "<leader>/", "<cmd>FzfLua live_grep<cr>", desc = "Grep (Root Dir)" },
+			{ "<leader>:", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
+			{ "<leader><space>", "<cmd>FzfLua files<cr>", desc = "Find Files (Root Dir)" },
+			-- find
+			{ "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+			{ "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find Files (Root Dir)" },
+			{ "<leader>fg", "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
+			{ "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
+			-- git
+			{ "<leader>gc", "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
+			{ "<leader>gs", "<cmd>FzfLua git_status<CR>", desc = "Status" },
+			{ '<leader>s"', "<cmd>FzfLua registers<cr>", desc = "Registers" },
+			{ "<leader>sa", "<cmd>FzfLua autocmds<cr>", desc = "Auto Commands" },
+			{ "<leader>sb", "<cmd>FzfLua grep_curbuf<cr>", desc = "Buffer" },
+			{ "<leader>sc", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
+			{ "<leader>sC", "<cmd>FzfLua commands<cr>", desc = "Commands" },
+			{ "<leader>sd", "<cmd>FzfLua diagnostics_document<cr>", desc = "Document Diagnostics" },
+			{ "<leader>sD", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Workspace Diagnostics" },
+			{ "<leader>sg", "<cmd>FzfLua live_grep<cr>", desc = "Grep (Root Dir)" },
+			{ "<leader>sh", "<cmd>FzfLua help_tags<cr>", desc = "Help Pages" },
+			{ "<leader>sH", "<cmd>FzfLua highlights<cr>", desc = "Search Highlight Groups" },
+			{ "<leader>sj", "<cmd>FzfLua jumps<cr>", desc = "Jumplist" },
+			{ "<leader>sk", "<cmd>FzfLua keymaps<cr>", desc = "Key Maps" },
+			{ "<leader>sl", "<cmd>FzfLua loclist<cr>", desc = "Location List" },
+			{ "<leader>sM", "<cmd>FzfLua man_pages<cr>", desc = "Man Pages" },
+			{ "<leader>sm", "<cmd>FzfLua marks<cr>", desc = "Jump to Mark" },
+			{ "<leader>sR", "<cmd>FzfLua resume<cr>", desc = "Resume" },
+			{ "<leader>sq", "<cmd>FzfLua quickfix<cr>", desc = "Quickfix List" },
+			{ "<leader>sw", "<cmd>FzfLua grep_cword<cr>", desc = "Word (Root Dir)" },
+			{ "<leader>sW", "<cmd>FzfLua grep_cWORD<cr>", desc = "Word Under Cursor (Root Dir)" },
+			{ "<leader>sw", "<cmd>FzfLua grep_visual<cr>", mode = "v", desc = "Selection (Root Dir)" },
+			{ "<leader>uC", "<cmd>FzfLua colorschemes<cr>", desc = "Colorscheme with Preview" },
+			{ "<leader>ss", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Goto Symbol" },
+			{ "<leader>ss", "<cmd>FzfLua lsp_live_workspace_symbols<cr>", desc = "Goto Symbol (Workspace)" },
+		},
 	},
 
 	-- LSP Plugins
@@ -341,33 +265,6 @@ require("lazy").setup({
 					local map = function(keys, func, desc)
 						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
-
-					-- Jump to the definition of the word under your cursor.
-					--  This is where a variable was first declared, or where a function is defined, etc.
-					--  To jump back, press <C-t>.
-					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-
-					-- Find references for the word under your cursor.
-					map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-
-					-- Jump to the implementation of the word under your cursor.
-					--  Useful when your language has ways of declaring types without an actual implementation.
-					map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-
-					-- Jump to the type of the word under your cursor.
-					--  Useful when you're not sure what type a variable is and you want to see
-					--  the definition of its *type*, not where it was *defined*.
-					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-
-					map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-
-					-- Fuzzy find all the symbols in your current workspace.
-					--  Similar to document symbols, except searches over your entire project.
-					map(
-						"<leader>ws",
-						require("telescope.builtin").lsp_dynamic_workspace_symbols,
-						"[W]orkspace [S]ymbols"
-					)
 
 					-- Rename the variable under your cursor.
 					--  Most Language Servers support renaming across files, etc.
@@ -520,6 +417,12 @@ require("lazy").setup({
 				},
 			})
 		end,
+    keys = {
+        { "gd", "<cmd>FzfLua lsp_definitions     jump1=true ignore_current_line=true<cr>", desc = "Goto Definition", has = "definition" },
+        { "gr", "<cmd>FzfLua lsp_references      jump1=true ignore_current_line=true<cr>", desc = "References", nowait = true },
+        { "gI", "<cmd>FzfLua lsp_implementations jump1=true ignore_current_line=true<cr>", desc = "Goto Implementation" },
+        { "gy", "<cmd>FzfLua lsp_typedefs        jump1=true ignore_current_line=true<cr>", desc = "Goto T[y]pe Definition" },
+    }
 	},
 
 	{ -- Autoformat
@@ -704,11 +607,7 @@ require("lazy").setup({
 		end,
 	},
 
-	{ -- You can easily change to a different colorscheme.
-		-- Change the name of the colorscheme plugin below, and then
-		-- change the command in the config to whatever the name of that colorscheme is.
-		--
-		-- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+	{
 		"catppuccin/nvim",
 		priority = 1000, -- Make sure to load this before all the other start plugins.
 		init = function()
