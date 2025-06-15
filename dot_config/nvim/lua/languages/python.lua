@@ -1,8 +1,8 @@
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = { ensure_installed = { 'ninja', 'rst' } },
-  },
+              opts = { ensure_installed = { 'ninja', 'rst' } },
+                  },
   {
     'neovim/nvim-lspconfig',
     opts = function(_, opts)
@@ -15,7 +15,6 @@ return {
   },
   {
     'nvim-neotest/neotest',
-    optional = true,
     dependencies = {
       'nvim-neotest/neotest-python',
     },
@@ -31,7 +30,6 @@ return {
   },
   {
     'mfussenegger/nvim-dap',
-    optional = true,
     dependencies = {
       'mfussenegger/nvim-dap-python',
 			-- stylua: ignore
@@ -42,19 +40,9 @@ return {
     },
   },
 
-  {
-    'hrsh7th/nvim-cmp',
-    optional = true,
-    opts = function(_, opts)
-      opts.auto_brackets = opts.auto_brackets or {}
-      table.insert(opts.auto_brackets, 'python')
-    end,
-  },
-
   -- Don't mess up DAP adapters provided by nvim-dap-python
   {
     'jay-babu/mason-nvim-dap.nvim',
-    optional = true,
     opts = {
       handlers = {
         python = function() end,

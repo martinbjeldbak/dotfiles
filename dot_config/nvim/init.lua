@@ -240,60 +240,65 @@ require('lazy').setup({
       },
     },
   },
-  { -- Autoformat
-    'stevearc/conform.nvim',
-    event = { 'BufWritePre' },
-    cmd = { 'ConformInfo' },
-    keys = {
-      {
-        '<leader>f',
-        function()
-          require('conform').format { async = true, lsp_fallback = true }
-        end,
-        mode = '',
-        desc = '[F]ormat buffer',
-      },
-    },
-    opts = {
-      notify_on_error = false,
-      formatters_by_ft = {
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
-        -- TODO: move these into their own language files, see how with nix, json, yaml
-        lua = { 'stylua' },
-        python = { 'ruff_fix', 'ruff_format', 'ruff_organize_imports' },
-        javascript = { { 'prettierd', 'prettier' } },
-        sql = { 'sql_formatter', 'sqlfmt', 'sqlfluff', 'pg_format' },
-        tf = { 'terraform_fmt' },
-        ruby = { 'rubyfmt', 'rubocop', 'standardrb' },
-        proto = { 'buf' },
-        go = { 'gofumpt', 'goimports' },
-        jsonnet = { 'jsonnetfmt' },
-        json = { 'jq' },
-        markdown = { 'markdownlint-cli2' },
-        sh = { 'shellcheck', 'shfmt' },
-        css = { 'stylelint' },
-      },
-    },
-  },
 
   {
     'catppuccin/nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+    name = 'catppuccin',
+    priority = 1000,
     init = function()
       vim.cmd.colorscheme 'catppuccin-frappe'
-
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
     end,
-    config = function()
-      require('catppuccin').setup {
-        transparent_background = true,
-      }
-    end,
+    opts = {
+      integrations = {
+        aerial = true,
+        alpha = true,
+        cmp = true,
+        dashboard = true,
+        flash = true,
+        fzf = true,
+        grug_far = true,
+        gitsigns = true,
+        headlines = true,
+        illuminate = true,
+        indent_blankline = { enabled = true },
+        leap = true,
+        lsp_trouble = true,
+        mason = true,
+        markdown = true,
+        mini = true,
+        native_lsp = {
+          enabled = true,
+          underlines = {
+            errors = { 'undercurl' },
+            hints = { 'undercurl' },
+            warnings = { 'undercurl' },
+            information = { 'undercurl' },
+          },
+        },
+        navic = { enabled = true, custom_bg = 'lualine' },
+        neotest = true,
+        neotree = true,
+        noice = true,
+        notify = true,
+        semantic_tokens = true,
+        snacks = true,
+        telescope = true,
+        treesitter = true,
+        treesitter_context = true,
+        which_key = true,
+      },
+    },
+    specs = {
+      {
+        'akinsho/bufferline.nvim',
+        optional = true,
+        opts = function(_, opts)
+          if (vim.g.colors_name or ''):find 'catppuccin' then
+            opts.highlights = require('catppuccin.groups.integrations.bufferline').get()
+          end
+        end,
+      },
+    },
   },
 
   -- Highlight todo, notes, etc in comments
