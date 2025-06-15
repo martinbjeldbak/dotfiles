@@ -1,4 +1,4 @@
 return {
-	"christoomey/vim-tmux-navigator",
-	event = { "BufReadPost", "BufNewFile" },
+  'christoomey/vim-tmux-navigator',
+  event = { 'BufReadPost', 'BufNewFile' },
 }

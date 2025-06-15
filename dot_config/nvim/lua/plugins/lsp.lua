@@ -303,7 +303,6 @@ return {
         mode = { 'n' },
       },
       { '<leader>cr', vim.lsp.buf.rename, desc = 'Rename' },
-      -- { '<leader>cA', LazyVim.lsp.action.source, desc = 'Source Action', has = 'codeAction' },
       {
         ']]',
         function()

@@ -1,5 +1,5 @@
 return {
   {
-    "tpope/vim-obsession"
-  }
+    'tpope/vim-obsession',
+  },
 }
