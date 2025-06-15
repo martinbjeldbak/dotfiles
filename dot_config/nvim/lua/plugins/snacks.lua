@@ -20,6 +20,7 @@ return {
 			image = { enabled = true },
 			input = { enabled = true },
 			scroll = { enabled = true },
+			scope = { enabled = true },
 			indent = { enabled = true },
 			dim = { enabled = true },
 			picker = {
