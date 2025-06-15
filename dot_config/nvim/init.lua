@@ -350,7 +350,6 @@ require("lazy").setup({
 				ruff = {},
 				cssls = {},
 				ts_ls = {},
-				-- nil_ls = {},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -427,6 +426,7 @@ require("lazy").setup({
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },
+        -- TODO: move these into their own language files, see how with nix, json, yaml
 				lua = { "stylua" },
 				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 				javascript = { { "prettierd", "prettier" } },
@@ -440,7 +440,6 @@ require("lazy").setup({
 				markdown = { "markdownlint-cli2" },
 				sh = { "shellcheck", "shfmt" },
 				css = { "stylelint" },
-				yaml = { "yq" },
 			},
 		},
 	},
