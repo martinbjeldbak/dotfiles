@@ -235,11 +235,11 @@ require("lazy").setup({
 		opts = {
 			library = {
 				-- Load luvit types when the `vim.uv` word is found
-				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				{ path = "snacks.nvim", words = { "Snacks" } },
 			},
 		},
 	},
-	{ "Bilal2453/luvit-meta", lazy = true },
 	{
 		-- Main LSP Configuration
 		"neovim/nvim-lspconfig",
@@ -334,13 +334,8 @@ require("lazy").setup({
 				lemminx = {},
 				terraformls = {},
 				tflint = {},
-				docker_compose_language_service = {},
-				dockerls = {},
 				html = {},
 				jsonnet_ls = {},
-				-- yamlls = {
-				-- 	filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.ghaction" },
-				-- },
 				taplo = {},
 				bashls = {},
 				astro = {},
@@ -426,7 +421,7 @@ require("lazy").setup({
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },
-        -- TODO: move these into their own language files, see how with nix, json, yaml
+				-- TODO: move these into their own language files, see how with nix, json, yaml
 				lua = { "stylua" },
 				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 				javascript = { { "prettierd", "prettier" } },
@@ -491,6 +486,7 @@ require("lazy").setup({
 			require("mini.comment").setup()
 
 			require("mini.align").setup()
+
 
 			-- Simple and easy statusline.
 			--  You could remove this setup call if you don't like it,
