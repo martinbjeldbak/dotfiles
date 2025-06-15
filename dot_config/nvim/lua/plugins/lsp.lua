@@ -231,7 +231,6 @@ return {
       -- 	jsonnet_ls = {},
       -- 	taplo = {},
       -- 	bashls = {},
-      -- 	astro = {},
       -- 	marksman = {},
       -- 	sqlls = {},
       -- 	ruff = {},
