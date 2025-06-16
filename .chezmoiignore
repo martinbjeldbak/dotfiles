@@ -19,3 +19,5 @@ empty_dot_hushlogin
 .config/xsettingsd/**
 .config/uwsm/**
 {{- end }}
+
+.config/streamlink/**
