@@ -11,6 +11,7 @@ return {
       -- make sure mason installs the server
       servers = {
         yamlls = {
+          filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.ghaction" },
           -- Have to add this for yamlls to understand that we support line folding
           capabilities = {
             textDocument = {
@@ -50,6 +51,18 @@ return {
     opts = {
       formatters_by_ft = {
         yaml = { 'yq' },
+      },
+    },
+  },
+  {
+    'mason-org/mason.nvim',
+    opts = { ensure_installed = { 'yamllint' } },
+  },
+  {
+    'mfussenegger/nvim-lint',
+    opts = {
+      linters_by_ft = {
+        yaml = { 'yamllint' },
       },
     },
   },

@@ -19,8 +19,8 @@ return {
     'mfussenegger/nvim-lint',
     opts = {
       linters_by_ft = {
-        terraform = { 'terraform_validate' },
-        tf = { 'terraform_validate' },
+        terraform = { 'terraform_validate, tflint' },
+        tf = { 'terraform_validate, tflint' },
       },
     },
   },
