@@ -6,7 +6,10 @@ return {
       -- Event to trigger linters
       events = { 'BufWritePost', 'BufReadPost', 'InsertLeave' },
       linters_by_ft = {
-        ['zsh'] = { 'zsh' },
+        make = { 'checkmake' },
+        zsh = { 'zsh' },
+        sh = { 'shellcheck', 'zsh' },
+        ghaction = { 'actionlint' },
         ['*'] = { 'typos' },
       },
       linters = {},
@@ -77,22 +80,16 @@ return {
 
     -- TODO: move thse to language-specific files
     -- lint.linters_by_ft = {
-    --   make = { 'checkmake' },
     --   eruby = { 'erb_lint' },
     --   ruby = { 'ruby', 'rubocop' },
-    --   dockerfile = { 'hadolint' },
     --   proto = { 'buf_lint' },
-    --   sh = { 'shellcheck', 'zsh' },
     --   -- lua = { "selene" },
     --   python = { 'ruff' },
     --   sql = { 'sqlfluff' },
     --   css = { 'stylelint' },
-    --   tf = { 'tflint', 'trivy' },
-    --   yaml = { 'yamllint' },
     --   go = { 'golangcilint' },
     --   dotenv = { 'dotenv_linter' },
     --   gitcommit = { 'commitlint' },
-    --   ghaction = { 'actionlint' },
     --   ledger = { 'hledger' },
     -- }
   },
