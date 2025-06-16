@@ -9,7 +9,7 @@ return {
         make = { 'checkmake' },
         zsh = { 'zsh' },
         sh = { 'shellcheck', 'zsh' },
-        ghaction = { 'actionlint' },
+        ["yaml.ghaction"] = { 'actionlint' },
         ['*'] = { 'typos' },
       },
       linters = {},
