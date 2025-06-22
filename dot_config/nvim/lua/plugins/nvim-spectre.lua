@@ -15,7 +15,7 @@ return -- search/replace in multiple files
   },
   keys = {
     {
-      '<leader>sR',
+      '<leader>sr',
       function()
         require('spectre').open()
       end,
