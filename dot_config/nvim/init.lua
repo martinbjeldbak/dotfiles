@@ -179,6 +179,20 @@ require('lazy').setup({
       return {
         'default-title',
         fzf_colors = true,
+        defaults = {
+          formatter = 'path.dirname_first',
+        },
+        winopts = {
+          width = 0.8,
+          height = 0.8,
+          row = 0.5,
+          col = 0.5,
+          preview = {
+            scrollchars = { "┃", "" },
+            hidden = true,
+            layout = "vertical",
+          },
+        },
       }
     end,
     keys = {
