@@ -49,10 +49,6 @@ FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 export PATH="$PATH:/Users/madsenm1/.local/bin"
 {{- end }}
 
-# fzf completion and key-bindings
-zi for \
-    https://github.com/junegunn/fzf/raw/master/shell/{'completion','key-bindings'}.zsh
-
 # Load completions
 autoload -U compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
@@ -121,6 +117,5 @@ if [[ "$TERM" == (Eterm*|alacritty*|aterm*|foot*|gnome*|konsole*|kterm*|putty*|r
 fi
 
 # Shell integrations
-eval "$(fzf --zsh)"
 eval "$(zoxide init zsh --cmd cd)"
 eval "$(atuin init zsh)"
