@@ -5,6 +5,14 @@
     stripComponents = 1
     refreshPeriod = "168h"
 
+[".config/atuin/themes"]
+    type = "archive"
+    url = "https://github.com/catppuccin/atuin/archive/main.zip"
+    exact = true
+    stripComponents = 2
+    refreshPeriod = "168h"
+    include = ["*/themes/**"]
+
 [".config/bat/themes"]
     type = "archive"
     url = "https://github.com/catppuccin/bat/archive/main.tar.gz"
@@ -49,3 +57,4 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
+
