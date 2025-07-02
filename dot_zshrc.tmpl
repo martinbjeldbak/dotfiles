@@ -35,6 +35,8 @@ zinit snippet OMZL::key-bindings.zsh
 zinit snippet OMZL::functions.zsh
 zinit snippet OMZL::termsupport.zsh
 
+zinit load atuinsh/atuin
+
 zinit wait lucid for \
   atinit"zicompinit; zicdreplay"  \
       OMZP::colored-man-pages \
@@ -61,6 +63,7 @@ zinit cdreplay -q
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+
 
 # History
 HISTSIZE=5000
@@ -120,3 +123,4 @@ fi
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh --cmd cd)"
+eval "$(atuin init zsh)"
