@@ -303,14 +303,6 @@ require('lazy').setup({
         which_key = true,
       },
     },
-    specs = {
-      {
-        'akinsho/bufferline.nvim',
-        opts = function(_, opts)
-          opts.highlights = require('catppuccin.groups.integrations.bufferline').get()
-        end,
-      },
-    },
   },
 
   -- Highlight todo, notes, etc in comments

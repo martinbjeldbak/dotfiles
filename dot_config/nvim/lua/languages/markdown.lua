@@ -48,7 +48,6 @@ return {
     },
   },
 
-  -- Markdown preview
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
