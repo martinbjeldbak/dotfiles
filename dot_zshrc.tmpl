@@ -120,3 +120,8 @@ export ANTHROPIC_API_KEY={{ onepasswordRead "op://private/anthropic api key/cred
 eval "$(zoxide init zsh --cmd cd)"
 eval "$(atuin init zsh)"
 eval "$(mise activate zsh)"
+
+{{- if eq .chezmoi.os "linux" }}
+# https://nix.dev/manual/nix/2.30/nix-2.30.html
+source  /etc/profile.d/nix-daemon.sh
+{{ end }}
