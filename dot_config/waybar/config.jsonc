@@ -1,0 +1,411 @@
+{
+  // ─────────────────────────────────────────────────────────────┤ header ├───
+  "layer": "top",
+  "position": "top",
+  "mode": "dock",
+  "reload_style_on_change": true,
+  "gtk-layer-shell": true,
+  // ──────────────────────────────────────────────────────────┤ positions ├───
+  "modules-left": [
+    "hyprland/workspaces", // workspaces
+    "custom/right1",
+    "custom/paddw",
+    "hyprland/window" // window title
+  ],
+  "modules-center": [
+    "custom/paddc",
+    "custom/left2",
+    "custom/temperature", // temperature
+    "custom/left3",
+    "memory", // memory
+    "custom/left4",
+    "cpu", // cpu
+    "custom/leftin1",
+    "custom/left5",
+    "custom/distro", // distro icon
+    "custom/right2",
+    "custom/rightin1",
+    "idle_inhibitor", // idle inhibitor
+    "clock#time", // time
+    "custom/right3",
+    "clock#date", // date
+    "custom/right4",
+    "bluetooth", // bluetooth
+    "custom/update", // system update
+    "hyprland/language",
+    "custom/right5"
+  ],
+  "modules-right": [
+    "mpris", // media info
+    "custom/left6",
+    "tray",
+    "custom/left7",
+    "pulseaudio", // output device
+    "custom/left8",
+    "backlight", // brightness
+    "custom/leftin2",
+    "custom/power" // power button
+  ],
+  // ─────────────────────────────────────────────────────┤ theme switcher ├───
+  "custom/theme": {
+    "exec": "~/.config/waybar/scripts/current-theme.sh",
+    "return-type": "json",
+    "format": " 󰤕 ",
+    "on-click": "~/.config/waybar/scripts/theme-switcher.sh",
+    "min-length": 3,
+    "max-length": 3
+  },
+  // ─────────────────────────────────────────────────────────┤ workspaces ├───
+  "hyprland/workspaces": {
+    "on-scroll-up": "hyprctl dispatch workspace -1",
+    "on-scroll-down": "hyprctl dispatch workspace +1",
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
+    }
+  },
+  // ─────────────────────────────────────────────────────────────┤ window ├───
+  "hyprland/window": {
+    "format": "{}",
+    "tooltip": false,
+    "min-length": 5,
+    "rewrite": {
+      // ────────────────────────────────────────────────────────── desktop ───
+      "": "<span foreground='#8caaee'> </span> Hyprland",
+      // ───────────────────────────────────────────────────────── terminal ───
+      "~": "  Terminal",
+      "zsh": "  Terminal",
+      "kitty": "  Terminal",
+      "tmux(.*)": "<span foreground='#a6d189'> </span> Tmux",
+      // ────────────────────────────────────────────────────────── browser ───
+      "(.*)Mozilla Firefox": "<span foreground='#e78284'>󰈹 </span> Firefox",
+      "(.*) — Mozilla Firefox": "<span foreground='#e78284'>󰈹 </span> $1",
+      "(.*)Zen Browser": "<span foreground='#ef9f76'>󰺕 </span> Zen Browser",
+      "(.*) — Zen Browser": "<span foreground='#ef9f76'>󰺕 </span> $1",
+      // ────────────────────────────────────────────────────── development ───
+      "(.*) - Visual Studio Code": "<span foreground='#8caaee'>󰨞 </span> $1",
+      "(.*)Visual Studio Code": "<span foreground='#8caaee'>󰨞 </span> Visual Studio Code",
+      "nvim": "<span foreground='#a6d189'> </span> Neovim",
+      "nvim (.*)": "<span foreground='#a6d189'> </span> $1",
+      "vim": "<span foreground='#a6d189'> </span> Vim",
+      "vim (.*)": "<span foreground='#a6d189'> </span> $1",
+      // ──────────────────────────────────────────────────────────── media ───
+      "(.*)Spotify": "<span foreground='#a6d189'> </span> Spotify",
+      "(.*)Spotify Premium": "<span foreground='#a6d189'> </span> Spotify Premium",
+      "OBS(.*)": "<span foreground='#a5adce'>󰻃 </span> OBS Studio",
+      "VLC media player": "<span foreground='#ef9f76'>󰕼 </span> VLC Media Player",
+      "(.*) - VLC media player": "<span foreground='#ef9f76'>󰕼 </span> $1",
+      "(.*) - mpv": "<span foreground='#ca9ee6'> </span> $1",
+      "qView": "󰋩  qView",
+      "(.*).jpg": "󰋩  $1.jpg",
+      "(.*).png": "󰋩  $1.png",
+      "(.*).svg": "󰋩  $1.svg",
+      // ─────────────────────────────────────────────────────────── social ───
+      "• Discord(.*)": "Discord$1",
+      "(.*)Discord(.*)": "<span foreground='#8caaee'> </span> $1Discord$2",
+      "vesktop": "<span foreground='#8caaee'> </span> Discord",
+      // ──────────────────────────────────────────────────────── documents ───
+      "ONLYOFFICE Desktop Editors": "<span foreground='#e78284'> </span> OnlyOffice Desktop",
+      "(.*).docx": "<span foreground='#8caaee'>󰈭 </span> $1.docx",
+      "(.*).xlsx": "<span foreground='#a6d189'>󰈜 </span> $1.xlsx",
+      "(.*).pptx": "<span foreground='#ef9f76'>󰈨 </span> $1.pptx",
+      "(.*).pdf": "<span foreground='#e78284'> </span> $1.pdf",
+      // ─────────────────────────────────────────────────────────── system ───
+      "Authenticate": "  Authenticate"
+    }
+  },
+  // ────────────────────────────────────────────────────────┤ temperature ├───
+  "custom/temperature": {
+    "exec": "~/.config/waybar/scripts/cpu-temp.sh",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 5,
+    "min-length": 8,
+    "max-length": 8
+  },
+  // ─────────────────────────────────────────────────────────────┤ memory ├───
+  "memory": {
+    "states": {
+      "warning": 75,
+      "critical": 90
+    },
+    "format": "󰘚 {percentage}%",
+    "format-critical": "󰀦 {percentage}%",
+    "tooltip": false,
+    // "tooltip-format": "Memory Used: {used:0.1f} GB / {total:0.1f} GB",
+    "interval": 5,
+    "min-length": 7,
+    "max-length": 7
+  },
+  // ────────────────────────────────────────────────────────────────┤ cpu ├───
+  "cpu": {
+    "format": "󰍛 {usage}%",
+    "tooltip": false,
+    "interval": 5,
+    "min-length": 6,
+    "max-length": 6
+  },
+  // ─────────────────────────────────────────────────────────────┤ distro ├───
+  "custom/distro": {
+    "format": " ",
+    "tooltip": false
+  },
+  // ─────────────────────────────────────────────────────┤ idle inhibitor ├───
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰈈 ",
+      "deactivated": "󰈉 "
+    },
+    "tooltip-format-activated": "Presentation Mode",
+    "tooltip-format-deactivated": "Idle Mode",
+    "start-activated": false
+  },
+  // ───────────────────────────────────────────────────────────────┤ time ├───
+  "clock#time": {
+    "format": "{:%H:%M}",
+    "tooltip": false,
+    // "tooltip-format": "Standard Time: {:%I:%M %p}",
+    "min-length": 6,
+    "max-length": 6
+  },
+  // ───────────────────────────────────────────────────────────────┤ date ├───
+  "clock#date": {
+    "format": "󰸗 {:%m-%d}",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 6,
+      "on-click-right": "mode",
+      "format": {
+        "months": "<span color='#babbf1'><b>{}</b></span>",
+        "weekdays": "<span color='#a5adce' font='7'>{}</span>",
+        "today": "<span color='#e78284'><b>{}</b></span>"
+      }
+    },
+    "actions": {
+      "on-click": "mode",
+      "on-click-right": "mode"
+    },
+    "min-length": 8,
+    "max-length": 8
+  },
+  // ──────────────────────────────────────────────────────────────┤ wi-fi ├───
+  "custom/wifi": {
+    "exec": "~/.config/waybar/scripts/wifi-status.sh",
+    "return-type": "json",
+    "format": "{}",
+    "on-click": "~/.config/waybar/scripts/wifi-menu.sh",
+    "on-click-right": "kitty --title '󰤨  Network Manager TUI' bash -c nmtui",
+    "interval": 1,
+    "min-length": 1,
+    "max-length": 1
+  },
+  // ──────────────────────────────────────────────────────────┤ bluetooth ├───
+  "bluetooth": {
+    "format": "󰂰",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "format-connected-battery": "󰂱",
+    "tooltip-format": "{num_connections} connected",
+    "tooltip-format-disabled": "Bluetooth Disabled",
+    "tooltip-format-connected": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": ":: {device_alias}: 󱊣 {device_battery_percentage}%",
+    "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
+    "on-click-right": "kitty --title '󰂯  Bluetooth TUI' bash -c bluetui",
+    "interval": 1,
+    "min-length": 1,
+    "max-length": 1
+  },
+  // ──────────────────────────────────────────────────────┤ system update ├───
+  "custom/update": {
+    "exec": "~/.config/waybar/scripts/system-update.sh",
+    "return-type": "json",
+    "format": "{}",
+    "on-click": "~/.config/waybar/scripts/system-update.sh up",
+    "interval": 30,
+    "min-length": 1,
+    "max-length": 1
+  },
+  // ─────────────────────────────────────────────────────────┤ media info ├───
+  "mpris": {
+    "format": "{player_icon} {title} - {artist}",
+    "format-paused": "{status_icon} {title} - {artist}",
+    "player-icons": {
+      "default": "󰝚 ",
+      "spotify": "<span foreground='#a6d189'>󰓇 </span>",
+      "firefox": "<span foreground='#e78284'>󰗃 </span>"
+    },
+    "status-icons": {
+      "paused": "<span color='#babbf1'>\u200A\u200A󰏤\u2009\u2009</span>"
+    },
+    "tooltip-format": "Playing: {title} - {artist}",
+    "tooltip-format-paused": "Paused: {title} - {artist}",
+    "min-length": 5,
+    "max-length": 35
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  },
+  // ──────────────────────────────────────────────────────┤ output device ├───
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 {volume}%",
+    "format-icons": {
+      "default": [
+        "󰕿",
+        "󰖀",
+        "󰕾"
+      ],
+      "headphone": "󰋋",
+      "headset": "󰋋"
+    },
+    "tooltip-format": "Device: {desc}",
+    "on-click": "~/.config/waybar/scripts/volume-control.sh -o m",
+    "on-scroll-up": "~/.config/waybar/scripts/volume-control.sh -o i",
+    "on-scroll-down": "~/.config/waybar/scripts/volume-control.sh -o d",
+    "min-length": 6,
+    "max-length": 6
+  },
+  // ─────────────────────────────────────────────────────────┤ brightness ├───
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "tooltip": false,
+    "on-scroll-up": "~/.config/waybar/scripts/brightness-control.sh -o i",
+    "on-scroll-down": "~/.config/waybar/scripts/brightness-control.sh -o d",
+    "min-length": 6,
+    "max-length": 6
+  },
+  // ────────────────────────────────────────────────────────────┤ battery ├───
+  "battery": {
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "format": "{icon} {capacity}%",
+    "format-icons": [
+      "󰂎",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ],
+    "format-charging": " {capacity}%",
+    "tooltip-format": "Discharging: {time}",
+    "tooltip-format-charging": "Charging: {time}",
+    "interval": 1,
+    "min-length": 6,
+    "max-length": 6
+  },
+  "hyprland/language": {
+    "format": "Lang: {}",
+    "format-en": "🇺🇸",
+    "format-da": "🇩🇰",
+    "keyboard-name": "at-translated-set-2-keyboard"
+  },
+  // ───────────────────────────────────────────────────────┤ power button ├───
+  "custom/power": {
+    "format": " ",
+    "tooltip": false,
+    // "tooltip-format": "Power Menu",
+    "on-click": "~/.config/waybar/scripts/power-menu.sh"
+  },
+  // ────────────────────────────────────────────────────────────┤ padding ├───
+  "custom/paddw": {
+    "format": " ",
+    "tooltip": false
+  },
+  "custom/paddc": {
+    "format": " ",
+    "tooltip": false
+  },
+  // ────────────────────────────────────────────────────────┤ left arrows ├───
+  "custom/left1": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/left2": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/left3": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/left4": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/left5": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/left6": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/left7": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/left8": {
+    "format": "",
+    "tooltip": false
+  },
+  // ───────────────────────────────────────────────────────┤ right arrows ├───
+  "custom/right1": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/right2": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/right3": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/right4": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/right5": {
+    "format": "",
+    "tooltip": false
+  },
+  // ───────────────────────────────────────────────────────┤ left inverse ├───
+  "custom/leftin1": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/leftin2": {
+    "format": "",
+    "tooltip": false
+  },
+  // ──────────────────────────────────────────────────────┤ right inverse ├───
+  "custom/rightin1": {
+    "format": "",
+    "tooltip": false
+  }
+}

@@ -102,20 +102,21 @@ export GRPC_DEFAULT_SSL_ROOTS_FILE_PATH=${SSL_CERT_FILE}    # GRPC
 export ANTHROPIC_API_KEY={{ onepasswordRead "op://private/anthropic api key/credential" }}
 {{ end }}
 
-# Set terminal title
+# Set tmux terminal title
 # Source: https://wiki.archlinux.org/title/Zsh
-autoload -Uz add-zsh-hook
-function xterm_title_precmd () {
-	print -Pn -- '\e]2;\a'
-}
-function xterm_title_preexec () {
-	print -Pn -- '\e]2;%# ' && print -n -- "${(q)1}\a"
-}
-if [[ "$TERM" == (Eterm*|alacritty*|aterm*|foot*|gnome*|konsole*|kterm*|putty*|rxvt*|screen*|wezterm*|tmux*|xterm*) ]]; then
-	add-zsh-hook -Uz precmd xterm_title_precmd
-	add-zsh-hook -Uz preexec xterm_title_preexec
-fi
+# autoload -Uz add-zsh-hook
+# function xterm_title_precmd () {
+# 	print -Pn -- '\e]2;\a'
+# }
+# function xterm_title_preexec () {
+# 	print -Pn -- '\e]2;%# ' && print -n -- "${(q)1}\a"
+# }
+# if [[ "$TERM" == (Eterm*|alacritty*|aterm*|foot*|gnome*|konsole*|kterm*|putty*|rxvt*|screen*|wezterm*|tmux*|xterm*) ]]; then
+# 	add-zsh-hook -Uz precmd xterm_title_precmd
+# 	add-zsh-hook -Uz preexec xterm_title_preexec
+# fi
 
 # Shell integrations
 eval "$(zoxide init zsh --cmd cd)"
 eval "$(atuin init zsh)"
+eval "$(mise activate zsh)"
