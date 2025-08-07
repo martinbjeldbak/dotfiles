@@ -102,6 +102,15 @@ export GRPC_DEFAULT_SSL_ROOTS_FILE_PATH=${SSL_CERT_FILE}    # GRPC
 export ANTHROPIC_API_KEY={{ onepasswordRead "op://private/anthropic api key/credential" }}
 {{ end }}
 
+# https://yazi-rs.github.io/docs/quick-start#shell-wrapper
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
 # Set tmux terminal title
 # Source: https://wiki.archlinux.org/title/Zsh
 # autoload -Uz add-zsh-hook
@@ -119,7 +128,6 @@ export ANTHROPIC_API_KEY={{ onepasswordRead "op://private/anthropic api key/cred
 # Shell integrations
 eval "$(zoxide init zsh --cmd cd)"
 eval "$(atuin init zsh)"
-eval "$(mise activate zsh)"
 
 {{- if eq .chezmoi.os "linux" }}
 # https://nix.dev/manual/nix/2.30/nix-2.30.html

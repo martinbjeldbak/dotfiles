@@ -6,7 +6,7 @@ export XDG_SESSION_TYPE=wayland
 export GBM_BACKEND=nvidia-drm
 
 ## toolkit-specific scale
-export GDK_SCALE=2
+export GDK_SCALE=1
 
 # Cursors
 export XCURSOR_SIZE=24
