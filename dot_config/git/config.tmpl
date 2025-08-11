@@ -181,13 +181,12 @@
 	gpgsign = true
 [gpg]
 	format = ssh
+[gpg "ssh"]
 {{- if eq .chezmoi.os "darwin" }}
   {{- if ne .work_laptop true }}
-[gpg "ssh"]
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
   {{- end }}
-  {{- else }}
-[gpg "ssh"]
+{{- else }}
   program = /opt/1Password/op-ssh-sign
 {{- end }}
 [color]
