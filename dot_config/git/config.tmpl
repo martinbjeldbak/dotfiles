@@ -179,16 +179,16 @@
 	process = git-lfs filter-process
 [commit]
 	gpgsign = true
-[gui]
 [gpg]
 	format = ssh
 {{- if eq .chezmoi.os "darwin" }}
-{{- if ne .chezmoi.hostname "RV42QFMFQ4" }}
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
-{{- end }}
-{{- else }}
+  {{- if ne .work_laptop true }}
 [gpg "ssh"]
-        program = /opt/1Password/op-ssh-sign
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+  {{- end }}
+  {{- else }}
+[gpg "ssh"]
+  program = /opt/1Password/op-ssh-sign
 {{- end }}
 [color]
 	ui = true
