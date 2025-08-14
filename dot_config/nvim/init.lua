@@ -267,6 +267,7 @@ require('lazy').setup({
       integrations = {
         aerial = true,
         alpha = true,
+        blink = true,
         cmp = true,
         dashboard = true,
         flash = true,
