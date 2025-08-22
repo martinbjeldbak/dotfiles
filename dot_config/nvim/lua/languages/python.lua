@@ -6,7 +6,7 @@ return {
   {
     'neovim/nvim-lspconfig',
     opts = function(_, opts)
-      local servers = { 'basedpyright', 'ruff' }
+      local servers = { 'ty', 'ruff' }
       for _, server in ipairs(servers) do
         opts.servers[server] = opts.servers[server] or {}
         opts.servers[server].enabled = true
