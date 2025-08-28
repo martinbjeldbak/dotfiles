@@ -127,8 +127,8 @@ function y() {
 
 # Shell integrations
 eval "$(zoxide init zsh --cmd cd)"
-eval "$(atuin init zsh)"
 eval "$(fzf --zsh)"
+eval "$(atuin init zsh)"
 
 {{- if eq .chezmoi.os "linux" }}
 # https://nix.dev/manual/nix/2.30/nix-2.30.html
