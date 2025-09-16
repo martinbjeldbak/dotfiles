@@ -193,9 +193,6 @@ require('lazy').setup({
             layout = 'vertical',
           },
         },
-        grep = {
-          hidden = true
-        },
       }
     end,
     keys = {
