@@ -3,3 +3,5 @@ font-size = 18
 window-decoration = false
 macos-titlebar-style = hidden
 link-url = true
+background-opacity = 0.9
+background-blur = true

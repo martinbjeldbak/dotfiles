@@ -264,6 +264,7 @@ require('lazy').setup({
       vim.cmd.colorscheme 'catppuccin-frappe'
     end,
     opts = {
+      transparent_background = true,
       integrations = {
         aerial = true,
         alpha = true,
