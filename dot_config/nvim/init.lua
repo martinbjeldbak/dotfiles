@@ -194,9 +194,6 @@ require('lazy').setup({
             layout = 'vertical',
           },
         },
-        grep = {
-          hidden = true
-        },
       }
     end,
     keys = {
@@ -265,6 +262,7 @@ require('lazy').setup({
       vim.cmd.colorscheme 'catppuccin-frappe'
     end,
     opts = {
+      transparent_background = true,
       integrations = {
         aerial = true,
         alpha = true,
