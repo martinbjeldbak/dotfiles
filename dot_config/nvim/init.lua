@@ -80,6 +80,7 @@ vim.filetype.add {
     ['dot_zshrc.tmpl'] = 'zsh',
     ['.*%.toml%.tmpl'] = 'toml',
     ['.*%.lua%.tmpl'] = 'lua',
+    ['.*.yaml.j2'] = 'yaml',
     ['.*/.github/workflows/.*%.yml'] = 'yaml.ghaction',
     ['.*/.github/workflows/.*%.yaml'] = 'yaml.ghaction',
   },

@@ -49,6 +49,7 @@ return {
         'javascript',
         'json',
         'jsonnet',
+        'just',
         'lua',
         'luadoc',
         'luap',
