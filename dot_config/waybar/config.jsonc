@@ -15,7 +15,7 @@
   "modules-center": [
     "custom/paddc",
     "custom/left2",
-    "custom/temperature", // temperature
+    // "custom/temperature", // temperature
     "custom/left3",
     "memory", // memory
     "custom/left4",
