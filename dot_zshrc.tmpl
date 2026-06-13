@@ -101,6 +101,7 @@ export HTTPLIB2_CA_CERTS=${SSL_CERT_FILE}                   # Python httplib2 li
 export GRPC_DEFAULT_SSL_ROOTS_FILE_PATH=${SSL_CERT_FILE}    # GRPC
 {{ else }}
 export ANTHROPIC_API_KEY={{ onepasswordRead "op://private/anthropic api key/credential" }}
+export OP_SERVICE_ACCOUNT_TOKEN={{ onepasswordRead "op://private/Service Account Auth Token home-ops/credential" }}
 {{ end }}
 
 # https://yazi-rs.github.io/docs/quick-start#shell-wrapper
