@@ -13,10 +13,10 @@ case "$selected_option" in
   loginctl lock-session
   ;;
 *Shutdown)
-  systemctl poweroff
+  hyprshutdown -t 'Shutting down...' -p 'systemctl poweroff'
   ;;
 *Reboot)
-  systemctl reboot
+  hyprshutdown -t 'Restarting...' -p 'systemctl reboot'
   ;;
 *Suspend)
   systemctl suspend
@@ -25,6 +25,6 @@ case "$selected_option" in
   systemctl hibernate
   ;;
 *Logout)
-  loginctl kill-session "$XDG_SESSION_ID"
+  hyprshutdown -t 'Logging out...'
   ;;
 esac
