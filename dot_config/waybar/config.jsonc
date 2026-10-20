@@ -31,7 +31,6 @@
     "clock#date", // date
     "custom/right4",
     "bluetooth", // bluetooth
-    "custom/update", // system update
     "hyprland/language",
     "custom/right5"
   ],
@@ -218,16 +217,6 @@
     "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
     "on-click-right": "kitty --title '󰂯  Bluetooth TUI' bash -c bluetui",
     "interval": 1,
-    "min-length": 1,
-    "max-length": 1
-  },
-  // ──────────────────────────────────────────────────────┤ system update ├───
-  "custom/update": {
-    "exec": "~/.config/waybar/scripts/system-update.sh",
-    "return-type": "json",
-    "format": "{}",
-    "on-click": "~/.config/waybar/scripts/system-update.sh up",
-    "interval": 30,
     "min-length": 1,
     "max-length": 1
   },

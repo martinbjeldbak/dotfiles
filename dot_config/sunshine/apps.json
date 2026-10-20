@@ -1,0 +1,81 @@
+{
+    "apps": [
+        {
+            "auto-detach": "true",
+            "cmd": "lutris lutris:rungame/battlenet",
+            "detached": [
+                "wowup-cf"
+            ],
+            "elevated": "false",
+            "exclude-global-prep-cmd": "false",
+            "exit-timeout": "5",
+            "image-path": "/home/martin/.config/sunshine/covers/battle.net.png",
+            "name": "Battle.net",
+            "output": "",
+            "prep-cmd": [
+                {
+                    "do": "",
+                    "undo": "pkill -f \"lutris-wrapper: Blizzard Battle.net\""
+                }
+            ],
+            "wait-all": "true"
+        },
+        {
+            "auto-detach": "true",
+            "detached": [
+                "xterm"
+            ],
+            "exclude-global-prep-cmd": "",
+            "exit-timeout": "5",
+            "image-path": "desktop.png",
+            "name": "Desktop",
+            "prep-cmd": [
+                {
+                    "do": "/home/martin/.config/sunshine/set-custom-res.sh",
+                    "undo": "/home/martin/.config/sunshine/undo-set-custom-res.sh"
+                }
+            ],
+            "wait-all": "true"
+        },
+        {
+            "auto-detach": true,
+            "cmd": "/usr/bin/es-de",
+            "elevated": false,
+            "exclude-global-prep-cmd": false,
+            "exit-timeout": 5,
+            "image-path": "",
+            "name": "ES-DE",
+            "output": "",
+            "wait-all": true
+        },
+        {
+            "auto-detach": "true",
+            "cmd": "rpcs3",
+            "elevated": "false",
+            "exclude-global-prep-cmd": "false",
+            "exit-timeout": "5",
+            "image-path": "/home/martin/.config/sunshine/covers/rpcs3.png",
+            "name": "PS3 Emulator",
+            "output": "",
+            "prep-cmd": [
+                {
+                    "do": "",
+                    "undo": "pkill rpcs3"
+                }
+            ],
+            "wait-all": "true"
+        },
+        {
+            "auto-detach": "true",
+            "cmd": "steam -gamepadui",
+            "exclude-global-prep-cmd": "false",
+            "exit-timeout": "5",
+            "image-path": "steam.png",
+            "name": "Steam Big Picture",
+            "wait-all": "true"
+        }
+    ],
+    "env": {
+        "PATH": "$(PATH):$(HOME)/.local/bin"
+    }
+}

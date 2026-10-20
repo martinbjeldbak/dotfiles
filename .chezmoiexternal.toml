@@ -45,10 +45,15 @@
     refreshPeriod = "168h"
     include = ["*/basic/.local/share/rofi/themes/**"]
 
-[".config/hypr/frappe.conf"]
-    type = "file"
-    url = "https://raw.githubusercontent.com/catppuccin/hyprland/refs/heads/main/themes/frappe.conf"
+# Catppuccin Hyprland v2.0.0 Lua themes (Hyprland 0.55+).
+# hyprlock still needs hyprlang, so its legacy palette is vendored locally in
+# dot_config/hypr/frappe.conf.
+[".config/hypr/themes"]
+    type = "archive"
+    url = "https://github.com/catppuccin/hyprland/archive/refs/tags/v2.0.0.tar.gz"
+    stripComponents = 2
     refreshPeriod = "168h"
+    include = ["*/themes/*.lua"]
 
 
 [".tmux/plugins/tpm"]

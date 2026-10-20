@@ -100,8 +100,25 @@ export REQUESTS_CA_BUNDLE=${SSL_CERT_FILE}                  # Python requests li
 export HTTPLIB2_CA_CERTS=${SSL_CERT_FILE}                   # Python httplib2 library
 export GRPC_DEFAULT_SSL_ROOTS_FILE_PATH=${SSL_CERT_FILE}    # GRPC
 {{ else }}
-export ANTHROPIC_API_KEY={{ onepasswordRead "op://private/anthropic api key/credential" }}
-export OP_SERVICE_ACCOUNT_TOKEN={{ onepasswordRead "op://private/Service Account Auth Token home-ops/credential" }}
+# OpenCode MCP credentials (untracked, chmod 600)
+[ -f "$HOME/.config/opencode/unifi.env" ] && source "$HOME/.config/opencode/unifi.env"
+
+# Run a command with a 1Password secret in its environment only. Nothing is
+# exported into the interactive shell or written to disk.
+# Usage: with-anthropic <command> [args...]
+with-anthropic() {
+  local key
+  key="$(command env -u OP_SERVICE_ACCOUNT_TOKEN op read 'op://private/anthropic api key/credential')" || return
+  command env -u OP_SERVICE_ACCOUNT_TOKEN ANTHROPIC_API_KEY="$key" "$@"
+}
+
+# Usage: with-op-service <command> [args...]
+# e.g. with-op-service just talos render-config k8s-0
+with-op-service() {
+  local token
+  token="$(command env -u OP_SERVICE_ACCOUNT_TOKEN op read 'op://private/Service Account Auth Token home-ops/credential')" || return
+  command env OP_SERVICE_ACCOUNT_TOKEN="$token" "$@"
+}
 {{ end }}
 
 # https://yazi-rs.github.io/docs/quick-start#shell-wrapper
@@ -135,4 +152,7 @@ eval "$(atuin init zsh)"
 {{- if eq .chezmoi.os "linux" }}
 # https://nix.dev/manual/nix/2.30/nix-2.30.html
 source  /etc/profile.d/nix-daemon.sh
+
+# kubectl krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 {{ end }}
