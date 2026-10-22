@@ -46,9 +46,6 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("wl-paste --type text --watch cliphist store")   -- Stores only text data
   hl.exec_cmd("wl-paste --type image --watch cliphist store")  -- Stores only image data
 
-  -- Source: https://github.com/hyprwm/Hyprland/issues/2319
-  hl.exec_cmd("wl-paste -t text -w sh -c '[ \"$(xclip -selection clipboard -o)\" = \"$(wl-paste -n)\" ] || xclip -selection clipboard'")
-
   -- Get hyprctl working inside tmux
   -- See https://www.reddit.com/r/hyprland/comments/1bvbyz8/hyprland_instance_signature_not_updating_on/?share_id=f7sRUW4vDGBrtB5ITtYEO
   hl.exec_cmd('tmux setenv -g HYPRLAND_INSTANCE_SIGNATURE "$HYPRLAND_INSTANCE_SIGNATURE"')
