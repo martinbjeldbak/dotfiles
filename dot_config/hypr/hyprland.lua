@@ -40,7 +40,6 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("uwsm app -- obsidian", { workspace = "3 silent" })
   hl.exec_cmd("uwsm app -- thunderbird", { workspace = "3 silent" })
   hl.exec_cmd("uwsm app -- vesktop", { workspace = "3 silent" })
-  hl.exec_cmd("uwsm app -- steam -silent", { workspace = "8 silent" })
   hl.exec_cmd("pactl set-default-sink alsa_output.pci-0000_09_00.1.hdmi-stereo.2")
 
   hl.exec_cmd("wl-paste --type text --watch cliphist store")   -- Stores only text data
